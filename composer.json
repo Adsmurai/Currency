@@ -1,0 +1,14 @@
+{
+    "name": "adsmurai/currency",
+    "description": "A small library to handle currencies",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreu Correa",
+            "email": "andreu@adsmurai.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
