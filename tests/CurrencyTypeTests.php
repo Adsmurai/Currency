@@ -14,15 +14,15 @@ class CurrencyTypeTests extends TestCase
     const EURO_NUM_DIGITS = 2;
     const EURO_SYMBOL_PLACEMENT = CurrencyTypeInterface::AFTER_PLACEMENT;
 
+    const USD_ISO_CODE = 'USD';
+    const USD_NAME = 'dollar';
+    const USD_SYMBOL = '$';
+    const USD_NUM_DIGITS = 2;
+    const USD_SYMBOL_PLACEMENT = CurrencyTypeInterface::BEFORE_PLACEMENT;
+
     public function test___construct_with_valid_params()
     {
-        $currencyType = new CurrencyType(
-            self::EURO_ISO_CODE,
-            self::EURO_SYMBOL,
-            self::EURO_NUM_DIGITS,
-            self::EURO_SYMBOL_PLACEMENT,
-            self::EURO_NAME
-        );
+        $currencyType = self::getEuroCurrencyType();
 
         $this->assertInstanceOf(CurrencyTypeInterface::class, $currencyType);
 
@@ -91,6 +91,77 @@ class CurrencyTypeTests extends TestCase
         $currencyType = new CurrencyType(
             self::EURO_ISO_CODE,
             '    ',
+            self::EURO_NUM_DIGITS,
+            self::EURO_SYMBOL_PLACEMENT,
+            self::EURO_NAME
+        );
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\CurrencyType::equals
+     */
+    public function test_equals_with_equal_CurrencyType_instances()
+    {
+        $ct1 = self::getEuroCurrencyType();
+        $ct2 = self::getEuroCurrencyType();
+
+        $this->assertTrue($ct1->equals($ct2));
+        $this->assertTrue($ct2->equals($ct1));
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\CurrencyType::equals
+     */
+    public function test_equals_with_same_CurrencyType_instances()
+    {
+        $ct1 = self::getEuroCurrencyType();
+
+        $this->assertTrue($ct1->equals($ct1));
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\CurrencyType::equals
+     */
+    public function test_equals_with_different_CurrencyType_instances()
+    {
+        $ct1 = self::getEuroCurrencyType();
+
+        $ct2 = new CurrencyType(
+            self::USD_ISO_CODE,
+            self::USD_SYMBOL,
+            self::USD_NUM_DIGITS,
+            self::USD_SYMBOL_PLACEMENT,
+            self::USD_NAME
+        );
+
+        $this->assertFalse($ct1->equals($ct2));
+        $this->assertFalse($ct2->equals($ct1));
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\CurrencyType::equals
+     * @expectedException \Adsmurai\Currency\Errors\InconsistentCurrencyTypesError
+     */
+    public function test_equals_with_ambiguously_similar_CurrencyType_instances()
+    {
+        $ct1 = self::getEuroCurrencyType();
+
+        $ct2 = new CurrencyType(
+            self::EURO_ISO_CODE,
+            self::EURO_SYMBOL,
+            4,
+            self::EURO_SYMBOL_PLACEMENT,
+            self::EURO_NAME
+        );
+
+        $ct1->equals($ct2);
+    }
+
+    public static function getEuroCurrencyType(): CurrencyType
+    {
+        return new CurrencyType(
+            self::EURO_ISO_CODE,
+            self::EURO_SYMBOL,
             self::EURO_NUM_DIGITS,
             self::EURO_SYMBOL_PLACEMENT,
             self::EURO_NAME

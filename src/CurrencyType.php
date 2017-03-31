@@ -2,10 +2,11 @@
 
 namespace Adsmurai\Currency;
 
+use Adsmurai\Currency\Errors\InconsistentCurrencyTypesError;
 use Adsmurai\Currency\Interfaces\CurrencyType as CurrencyTypeInterface;
 use InvalidArgumentException;
 
-class CurrencyType implements CurrencyTypeInterface
+final class CurrencyType implements CurrencyTypeInterface
 {
     private $ISOCode;
 
@@ -70,5 +71,27 @@ class CurrencyType implements CurrencyTypeInterface
     public function getSymbolPlacement(): int
     {
         return $this->symbolPlacement;
+    }
+
+    public function equals(CurrencyTypeInterface $currencyType): bool
+    {
+        if ($this === $currencyType) {
+            return true;
+        }
+
+        if ($currencyType->getISOCode() !== $this->ISOCode) {
+            return false;
+        }
+
+        if (!(
+            $currencyType->getName() === $this->name &&
+            $currencyType->getSymbol() === $this->symbol &&
+            $currencyType->getNumFractionalDigits() === $this->numFractionalDigits &&
+            $currencyType->getSymbolPlacement() === $this->symbolPlacement
+        )) {
+            throw new InconsistentCurrencyTypesError($this, $currencyType);
+        }
+
+        return true;
     }
 }

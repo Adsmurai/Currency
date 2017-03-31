@@ -16,4 +16,6 @@ interface CurrencyType
     public function getNumFractionalDigits(): int;
 
     public function getSymbolPlacement(): int;
+
+    public function equals(CurrencyType $currencyType): bool;
 }
