@@ -141,6 +141,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\CurrencyType::equals
      * @expectedException \Adsmurai\Currency\Errors\InconsistentCurrencyTypesError
+     * @expectedExceptionMessage Same ISO currency code but different currency settings
      */
     public function test_equals_with_ambiguously_similar_CurrencyType_instances()
     {
@@ -157,7 +158,7 @@ class CurrencyTypeTests extends TestCase
         $ct1->equals($ct2);
     }
 
-    public static function getEuroCurrencyType(): CurrencyType
+    private static function getEuroCurrencyType(): CurrencyType
     {
         return new CurrencyType(
             self::EURO_ISO_CODE,

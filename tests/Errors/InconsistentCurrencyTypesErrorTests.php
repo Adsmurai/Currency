@@ -2,9 +2,10 @@
 
 namespace Adsmurai\Currency\Tests\Errors;
 
-use Adsmurai\Currency\CurrencyType;
 use Adsmurai\Currency\Errors\InconsistentCurrencyTypesError;
-use Adsmurai\Currency\Tests\CurrencyTypeTests;
+use Adsmurai\Currency\Interfaces\CurrencyType;
+
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class InconsistentCurrencyTypesErrorTests extends TestCase
@@ -14,21 +15,10 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
      */
     public function test___construct_with_valid_params()
     {
-        $ct1 = new CurrencyType(
-            CurrencyTypeTests::EURO_ISO_CODE,
-            CurrencyTypeTests::EURO_SYMBOL,
-            CurrencyTypeTests::EURO_NUM_DIGITS,
-            CurrencyTypeTests::EURO_SYMBOL_PLACEMENT,
-            CurrencyTypeTests::EURO_NAME
-        );
-
-        $ct2 = new CurrencyType(
-            CurrencyTypeTests::EURO_ISO_CODE,
-            CurrencyTypeTests::EURO_SYMBOL,
-            4,
-            CurrencyTypeTests::EURO_SYMBOL_PLACEMENT,
-            CurrencyTypeTests::EURO_NAME
-        );
+        /** @var CurrencyType $ct1 */
+        $ct1 = Mockery::mock(CurrencyType::class);
+        /** @var CurrencyType $ct2 */
+        $ct2 = Mockery::mock(CurrencyType::class);
 
         $e = new InconsistentCurrencyTypesError($ct1, $ct2);
 
@@ -44,13 +34,8 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
      */
     public function test___construct_with_invalid_params()
     {
-        $ct1 = new CurrencyType(
-            CurrencyTypeTests::EURO_ISO_CODE,
-            CurrencyTypeTests::EURO_SYMBOL,
-            CurrencyTypeTests::EURO_NUM_DIGITS,
-            CurrencyTypeTests::EURO_SYMBOL_PLACEMENT,
-            CurrencyTypeTests::EURO_NAME
-        );
+        /** @var CurrencyType $ct1 */
+        $ct1 = Mockery::mock(CurrencyType::class);
 
         $e = new InconsistentCurrencyTypesError($ct1, $ct1);
     }
