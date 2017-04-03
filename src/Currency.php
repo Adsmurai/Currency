@@ -5,6 +5,9 @@ namespace Adsmurai\Currency;
 use Adsmurai\Currency\Interfaces\Currency  as CurrencyInterface;
 use Adsmurai\Currency\Interfaces\CurrencyType;
 use InvalidArgumentException;
+use Litipk\BigNumbers\Decimal;
+use Litipk\BigNumbers\Errors\InfiniteInputError;
+use Litipk\BigNumbers\Errors\NaNInputError;
 
 final class Currency implements CurrencyInterface
 {
@@ -13,8 +16,7 @@ final class Currency implements CurrencyInterface
     const FLOAT_MULTIPLIER = 10 ** self::INNER_FRACTIONAL_DIGITS;
 
     /**
-     * Represented as a number of fractional units (1/10⁸)
-     * @var int
+     * @var Decimal
      */
     private $amount;
 
@@ -22,12 +24,12 @@ final class Currency implements CurrencyInterface
     private $currencyType;
 
     /**
-     * @param int $amount Measured in number of fractional units (1/10⁸)
+     * @param Decimal $amount
      * @param CurrencyType $currencyType
      */
-    private function __construct(int $amount, CurrencyType $currencyType)
+    private function __construct(Decimal $amount, CurrencyType $currencyType)
     {
-        if (0 > $amount) {
+        if ($amount->isNegative()) {
             throw new InvalidArgumentException('Currency amounts must be positive');
         }
 
@@ -37,43 +39,45 @@ final class Currency implements CurrencyInterface
 
     public static function fromFloat(float $amount, CurrencyType $currencyType): Currency
     {
-        if (\is_infinite($amount)) {
-            throw new InvalidArgumentException('Currency amounts must be finite');
-        } elseif (\is_nan($amount)) {
-            throw new InvalidArgumentException('Currency amounts must be numbers');
+        try {
+            return new self(
+                Decimal::fromFloat($amount, self::INNER_FRACTIONAL_DIGITS),
+                $currencyType
+            );
+        } catch (InfiniteInputError $e) {
+            throw new InvalidArgumentException('Currency amounts must be finite', 0, $e);
+        } catch (NaNInputError $e) {
+            throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
         }
-
-        return new self(
-            (int)\round($amount * self::FLOAT_MULTIPLIER),
-            $currencyType
-        );
     }
 
     public static function fromFractionalUnits(int $amount, CurrencyType $currencyType): Currency
     {
-        $multiplier = (int)\pow(
-            10,
-            self::INNER_FRACTIONAL_DIGITS - $currencyType->getNumFractionalDigits()
-        );
-
         return new self(
-            (int)\round($amount * $multiplier),
+            Decimal::fromInteger($amount)
+                ->div(
+                    Decimal::fromInteger(10 ** $currencyType->getNumFractionalDigits()),
+                    self::INNER_FRACTIONAL_DIGITS
+                ),
+            $currencyType
+        );
+    }
+
+    public static function fromString(string $amount, CurrencyType $currencyType): Currency
+    {
+        return new self(
+            Decimal::fromString($amount, self::INNER_FRACTIONAL_DIGITS),
             $currencyType
         );
     }
 
     public function getCurrencyType(): CurrencyType
     {
-        // TODO: Implement getCurrencyType() method.
+        return $this->currencyType;
     }
 
     /**
-     * WARNING: This method is not meant to be used in currency formatting code nor currency representation code.
-     *
-     * This method returns the monetary amount as a string representing a decimal number. Its meant to be used in
-     * fixed precision mathematical operations, like the ones that can be done with libraries like BCMath.
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getAmountAsString(): string
     {
@@ -81,17 +85,7 @@ final class Currency implements CurrencyInterface
     }
 
     /**
-     * WARNING: This method is not meant to be used in currency formatting code nor currency representation code.
-     *
-     * Every currency has a minimum fractional unit that can be used for commercial transactions. Examples:
-     *  - euros (EUR)           1/100   = 0.01
-     *  - bahraini dinars (BHD) 1/1000  = 0.001.
-     *
-     * This method returns the monetary amount measured in currency's minimum fractional units. Examples:
-     *  - 171.43 €   ->  17143
-     *  - 56.611 BD  ->  56611
-     *
-     * @return int
+     * @inheritdoc
      */
     public function getAmountAsFractionalUnits(): int
     {
@@ -99,23 +93,15 @@ final class Currency implements CurrencyInterface
     }
 
     /**
-     * Use this method to represent monetary amounts as strings.
-     *
-     * @param string $decimalsSeparator
-     * @param string $thousandsSeparator
-     * @return string
+     * @inheritdoc
      */
-    public function format(string $decimalsSeparator = '.', $thousandsSeparator = ''): string
+    public function format(string $decimalsSeparator='.', $thousandsSeparator='', int $extraPrecision=0): string
     {
         // TODO: Implement format() method.
     }
 
     /**
-     * Use this method to compare currency values.
-     * It will return false if the amount or the currency types don't match.
-     *
-     * @param CurrencyInterface $currency
-     * @return bool
+     * @inheritdoc
      */
     public function equals(CurrencyInterface $currency): bool
     {

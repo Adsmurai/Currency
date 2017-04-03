@@ -8,16 +8,16 @@ use Adsmurai\Currency\Interfaces\CurrencyType;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
-class fromFractionalUnitsTests extends TestCase
+class fromStringTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromFractionalUnits
+     * @covers \Adsmurai\Currency\Currency::fromString
      * @covers \Adsmurai\Currency\Currency::__construct
      */
-    public function test_with_valid_params(int $amount, CurrencyType $currencyType)
+    public function test_with_valid_params(string $amount, CurrencyType $currencyType)
     {
-        $currency = Currency::fromFractionalUnits($amount, $currencyType);
+        $currency = Currency::fromString($amount, $currencyType);
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency);
         $this->assertInstanceOf(Currency::class, $currency);
@@ -25,33 +25,33 @@ class fromFractionalUnitsTests extends TestCase
 
     /**
      * @dataProvider negativeParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromFractionalUnits
+     * @covers \Adsmurai\Currency\Currency::fromString
      * @covers \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be positive
      */
-    public function test_with_negative_params(int $amount, CurrencyType $currencyType)
+    public function test_with_negative_params(string $amount, CurrencyType $currencyType)
     {
-        $currency = Currency::fromFractionalUnits($amount, $currencyType);
+        $currency = Currency::fromString($amount, $currencyType);
     }
 
     public function validParamsProvider(): array
     {
         return [
-            [3476, $this->getTwoDecimalDigitsCurrencyType()],
-            [10000, $this->getTwoDecimalDigitsCurrencyType()],
-            [1, $this->getTwoDecimalDigitsCurrencyType()],
-            [1234567850, $this->getTwoDecimalDigitsCurrencyType()]
+            ['34.76', $this->getTwoDecimalDigitsCurrencyType()],
+            ['100', $this->getTwoDecimalDigitsCurrencyType()],
+            ['0.01', $this->getTwoDecimalDigitsCurrencyType()],
+            ['12345678.50', $this->getTwoDecimalDigitsCurrencyType()]
         ];
     }
 
     public function negativeParamsProvider(): array
     {
         return [
-            [-3476, $this->getTwoDecimalDigitsCurrencyType()],
-            [-10000, $this->getTwoDecimalDigitsCurrencyType()],
-            [-1, $this->getTwoDecimalDigitsCurrencyType()],
-            [-1234567850, $this->getTwoDecimalDigitsCurrencyType()]
+            ['-34.76', $this->getTwoDecimalDigitsCurrencyType()],
+            ['-100', $this->getTwoDecimalDigitsCurrencyType()],
+            ['-0.01', $this->getTwoDecimalDigitsCurrencyType()],
+            ['-12345678.50', $this->getTwoDecimalDigitsCurrencyType()]
         ];
     }
 
