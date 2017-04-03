@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
@@ -71,6 +72,14 @@ final class Currency implements CurrencyInterface
         );
     }
 
+    public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency
+    {
+        return new self(
+            Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
+            $currencyType
+        );
+    }
+
     public function getCurrencyType(): CurrencyType
     {
         return $this->currencyType;
@@ -79,9 +88,9 @@ final class Currency implements CurrencyInterface
     /**
      * @inheritdoc
      */
-    public function getAmountAsString(): string
+    public function getAmountAsDecimal(): Decimal
     {
-        // TODO: Implement getAmountAsString() method.
+        return $this->amount;
     }
 
     /**
@@ -89,7 +98,12 @@ final class Currency implements CurrencyInterface
      */
     public function getAmountAsFractionalUnits(): int
     {
-        // TODO: Implement getAmountAsFractionalUnits() method.
+        return $this->amount
+            ->mul(
+                Decimal::fromInteger(10 ** $this->currencyType->getNumFractionalDigits()),
+                self::INNER_FRACTIONAL_DIGITS
+            )
+            ->asInteger();
     }
 
     /**
@@ -97,7 +111,16 @@ final class Currency implements CurrencyInterface
      */
     public function format(string $decimalsSeparator='.', $thousandsSeparator='', int $extraPrecision=0): string
     {
-        // TODO: Implement format() method.
+        $nDecimals = $this->currencyType->getNumFractionalDigits() + $extraPrecision;
+        $amount = Decimal::fromDecimal($this->amount, $nDecimals);
+
+        $number = ('' === $thousandsSeparator)
+            ? \str_replace('.', $decimalsSeparator, $amount->__toString())  // This is safer!
+            : \number_format($amount->asFloat(), $nDecimals, $decimalsSeparator, $thousandsSeparator);
+
+        return ($this->currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
+            ? $this->currencyType->getSymbol() . $number
+            : $number . $this->currencyType->getSymbol();
     }
 
     /**
@@ -105,6 +128,9 @@ final class Currency implements CurrencyInterface
      */
     public function equals(CurrencyInterface $currency): bool
     {
-        // TODO: Implement equals() method.
+        return (
+            $this->amount->equals($currency->getAmountAsDecimal()) &&
+            $this->currencyType->equals($currency->getCurrencyType())
+        );
     }
 }

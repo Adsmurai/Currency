@@ -2,6 +2,8 @@
 
 namespace Adsmurai\Currency\Interfaces;
 
+use Litipk\BigNumbers\Decimal;
+
 interface Currency
 {
     public function getCurrencyType(): CurrencyType;
@@ -12,9 +14,9 @@ interface Currency
      * This method returns the monetary amount as a string representing a decimal number. Its meant to be used in
      * fixed precision mathematical operations, like the ones that can be done with libraries like BCMath.
      *
-     * @return string
+     * @return Decimal
      */
-    public function getAmountAsString(): string;
+    public function getAmountAsDecimal(): Decimal;
 
     /**
      * WARNING: This method is not meant to be used in currency formatting code nor currency representation code.
