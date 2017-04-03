@@ -14,8 +14,6 @@ final class Currency implements CurrencyInterface
 {
     const INNER_FRACTIONAL_DIGITS = 8;
 
-    const FLOAT_MULTIPLIER = 10 ** self::INNER_FRACTIONAL_DIGITS;
-
     /**
      * @var Decimal
      */
@@ -66,10 +64,14 @@ final class Currency implements CurrencyInterface
 
     public static function fromString(string $amount, CurrencyType $currencyType): Currency
     {
-        return new self(
-            Decimal::fromString($amount, self::INNER_FRACTIONAL_DIGITS),
-            $currencyType
-        );
+        try {
+            return new self(
+                Decimal::fromString($amount, self::INNER_FRACTIONAL_DIGITS),
+                $currencyType
+            );
+        } catch (NaNInputError $e) {
+            throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
+        }
     }
 
     public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency

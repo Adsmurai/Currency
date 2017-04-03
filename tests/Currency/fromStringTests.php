@@ -35,6 +35,18 @@ class fromStringTests extends TestCase
         $currency = Currency::fromString($amount, $currencyType);
     }
 
+    /**
+     * @dataProvider notNumericParamsProvider
+     * @covers \Adsmurai\Currency\Currency::fromString
+     * @covers \Adsmurai\Currency\Currency::__construct
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Currency amounts must be numbers
+     */
+    public function test_with_not_numeric_param(string $amount, CurrencyType $currencyType)
+    {
+        $currency = Currency::fromString('hello world', $this->getTwoDecimalDigitsCurrencyType());
+    }
+
     public function validParamsProvider(): array
     {
         return [
@@ -52,6 +64,16 @@ class fromStringTests extends TestCase
             ['-100', $this->getTwoDecimalDigitsCurrencyType()],
             ['-0.01', $this->getTwoDecimalDigitsCurrencyType()],
             ['-12345678.50', $this->getTwoDecimalDigitsCurrencyType()]
+        ];
+    }
+
+    public function notNumericParamsProvider(): array
+    {
+        return [
+            ['', $this->getTwoDecimalDigitsCurrencyType()],
+            ['hello world', $this->getTwoDecimalDigitsCurrencyType()],
+            ['45.035,56', $this->getTwoDecimalDigitsCurrencyType()],
+            ['45,035.56', $this->getTwoDecimalDigitsCurrencyType()]
         ];
     }
 
