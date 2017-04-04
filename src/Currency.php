@@ -130,7 +130,7 @@ final class Currency implements CurrencyInterface
      */
     public function equals(CurrencyInterface $currency): bool
     {
-        return (
+        return $currency === $this || (
             $this->amount->equals($currency->getAmountAsDecimal()) &&
             $this->currencyType->equals($currency->getCurrencyType())
         );

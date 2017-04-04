@@ -36,6 +36,8 @@ interface Currency
     /**
      * Use this method to represent monetary amounts as strings.
      *
+     * TODO: Pass something like CurrencyFormat with more flexible settings.
+     *
      * @param string $decimalsSeparator
      * @param string $thousandsSeparator
      * @param int $extraPrecision Use this parameter to represent monetary amounts below the currency precision.
