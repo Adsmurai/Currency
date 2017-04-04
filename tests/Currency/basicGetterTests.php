@@ -10,6 +10,10 @@ use PHPUnit\Framework\TestCase;
 
 class basicGetterTests extends TestCase
 {
+    /**
+     * @covers \Adsmurai\Currency\Currency::getAmountAsDecimal
+     * @covers \Adsmurai\Currency\Currency::getCurrencyType
+     */
     public function test_basic_getters()
     {
         // TODO: Improve the test to decouple from Decimal. It requires refactoring Decimal.
