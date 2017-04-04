@@ -76,6 +76,15 @@ class formatTests extends TestCase
             ['100', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), '$100.000'],
             ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), '$0.010'],
             ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), '$12345678.500'],
+
+            ['34.761', $this->getNDecimalDigitsCurrencyType(), '34.76€'],
+            ['34.766', $this->getNDecimalDigitsCurrencyType(), '34.77€'],
+            ['100.002', $this->getNDecimalDigitsCurrencyType(), '100.00€'],
+            ['100.008', $this->getNDecimalDigitsCurrencyType(), '100.01€'],
+            ['0.014', $this->getNDecimalDigitsCurrencyType(), '0.01€'],
+            ['0.017', $this->getNDecimalDigitsCurrencyType(), '0.02€'],
+            ['12345678.503', $this->getNDecimalDigitsCurrencyType(), '12345678.50€'],
+            ['12345678.509', $this->getNDecimalDigitsCurrencyType(), '12345678.51€'],
         ];
     }
 
