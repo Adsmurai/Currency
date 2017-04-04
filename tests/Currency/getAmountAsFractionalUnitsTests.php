@@ -4,19 +4,28 @@ namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Interfaces\CurrencyType;
-use Litipk\BigNumbers\Decimal;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class getAmountAsFractionalUnitsTests extends TestCase
 {
     /**
-     * @dataProvider validParamsProvider
+     * @dataProvider stringParamsProvider
      * @covers \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
      */
     public function test_from_string(string $amount, CurrencyType $currencyType, int $numFractionalUnits)
     {
         $currency = Currency::fromString($amount, $currencyType);
+        $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
+    }
+
+    /**
+     * @dataProvider floatParamsProvider
+     * @covers \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     */
+    public function test_from_float(float $amount, CurrencyType $currencyType, int $numFractionalUnits)
+    {
+        $currency = Currency::fromFloat($amount, $currencyType);
         $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
     }
 
@@ -30,7 +39,7 @@ class getAmountAsFractionalUnitsTests extends TestCase
         $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
     }
 
-    public function validParamsProvider(): array
+    public function stringParamsProvider(): array
     {
         return [
             ['34.76', $this->getNDecimalDigitsCurrencyType(2), 3476],
@@ -41,6 +50,20 @@ class getAmountAsFractionalUnitsTests extends TestCase
             ['100', $this->getNDecimalDigitsCurrencyType(3), 100000],
             ['0.01', $this->getNDecimalDigitsCurrencyType(3), 10],
             ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 12345678500]
+        ];
+    }
+
+    public function floatParamsProvider(): array
+    {
+        return [
+            [34.76, $this->getNDecimalDigitsCurrencyType(2), 3476],
+            [100, $this->getNDecimalDigitsCurrencyType(2), 10000],
+            [0.01, $this->getNDecimalDigitsCurrencyType(2), 1],
+            [12345678.50, $this->getNDecimalDigitsCurrencyType(2), 1234567850],
+            [34.76, $this->getNDecimalDigitsCurrencyType(3), 34760],
+            [100, $this->getNDecimalDigitsCurrencyType(3), 100000],
+            [0.01, $this->getNDecimalDigitsCurrencyType(3), 10],
+            [12345678.50, $this->getNDecimalDigitsCurrencyType(3), 12345678500]
         ];
     }
 
