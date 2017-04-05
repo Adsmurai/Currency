@@ -12,7 +12,7 @@ class getCurrencyTypeTests extends TestCase
      * @dataProvider commonCurrenciesProvider
      * @covers \Adsmurai\Currency\CurrencyTypeFactory
      */
-    public function test_getCurrencyType_with_common_currencies(string $ISOCode)
+    public function test_with_common_currencies(string $ISOCode)
     {
         /** @var array $currencyData */
         $currencyData = $this->getCurrenciesData()[$ISOCode];
@@ -25,6 +25,20 @@ class getCurrencyTypeTests extends TestCase
         $this->assertEquals($currencyData['symbol'], $currencyType->getSymbol());
         $this->assertEquals($currencyData['symbolPlacement'], $currencyType->getSymbolPlacement());
         $this->assertEquals($currencyData['numFractionalDigits'], $currencyType->getNumFractionalDigits());
+    }
+
+    /**
+     * @dataProvider commonCurrenciesProvider
+     * @covers \Adsmurai\Currency\CurrencyTypeFactory
+     */
+    public function test_that_there_are_no_multiple_instances_for_same_currency_type(string $ISOCode)
+    {
+        $currencyTypeFactory = CurrencyTypeFactory::fromDataPath();
+
+        $currencyTypeA = $currencyTypeFactory->getCurrencyType($ISOCode);
+        $currencyTypeB = $currencyTypeFactory->getCurrencyType($ISOCode);
+
+        $this->assertSame($currencyTypeA, $currencyTypeB);
     }
 
     public function commonCurrenciesProvider(): array

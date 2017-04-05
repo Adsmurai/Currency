@@ -37,15 +37,19 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 
     public function getCurrencyType(string $ISOCode): CurrencyTypeInterface
     {
-        return new CurrencyType(
-            $ISOCode,
-            $this->data[$ISOCode]['symbol'],
-            $this->data[$ISOCode]['numFractionalDigits'],
-            $this->data[$ISOCode]['symbolPlacement'],
-            (isset($this->data[$ISOCode]['symbolPlacement']) && !empty($this->data[$ISOCode]['symbolPlacement']))
-                ? $this->data[$ISOCode]['symbolPlacement']
-                : ''
-        );
+        if (!isset($this->currencyTypes[$ISOCode])) {
+            $this->currencyTypes[$ISOCode] = new CurrencyType(
+                $ISOCode,
+                $this->data[$ISOCode]['symbol'],
+                $this->data[$ISOCode]['numFractionalDigits'],
+                $this->data[$ISOCode]['symbolPlacement'],
+                (isset($this->data[$ISOCode]['symbolPlacement']) && !empty($this->data[$ISOCode]['symbolPlacement']))
+                    ? $this->data[$ISOCode]['symbolPlacement']
+                    : ''
+            );
+        }
+
+        return $this->currencyTypes[$ISOCode];
     }
 
     /**
