@@ -1,33 +1,13 @@
 <?php
 
-namespace Adsmurai\Currency\Tests;
+namespace Adsmurai\Currency\Tests\CurrenCyTypeFactory;
 
 use Adsmurai\Currency\CurrencyTypeFactory;
-use Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError;
 use Adsmurai\Currency\Interfaces\CurrencyType;
 use PHPUnit\Framework\TestCase;
 
-class CurrencyTypeFactoryTests extends TestCase
+class fromDataArrayTests extends TestCase
 {
-    /**
-     * @dataProvider commonCurrenciesProvider
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory
-     */
-    public function test_getCurrencyType_with_common_currencies(string $ISOCode)
-    {
-        /** @var array $currencyData */
-        $currencyData = $this->getCurrenciesData()[$ISOCode];
-        $currencyTypeFactory = CurrencyTypeFactory::fromDataPath();
-
-        $currencyType = $currencyTypeFactory->getCurrencyType($ISOCode);
-
-        $this->assertInstanceOf(CurrencyType::class, $currencyType);
-        $this->assertEquals($ISOCode, $currencyType->getISOCode());
-        $this->assertEquals($currencyData['symbol'], $currencyType->getSymbol());
-        $this->assertEquals($currencyData['symbolPlacement'], $currencyType->getSymbolPlacement());
-        $this->assertEquals($currencyData['numFractionalDigits'], $currencyType->getNumFractionalDigits());
-    }
-
     /**
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
@@ -35,7 +15,7 @@ class CurrencyTypeFactoryTests extends TestCase
      */
     public function test_fromDataArray_with_empty_array()
     {
-        $currencyTypeFactory = CurrencyTypeFactory::fromDataArray([]);
+        CurrencyTypeFactory::fromDataArray([]);
     }
 
     /**
@@ -45,7 +25,7 @@ class CurrencyTypeFactoryTests extends TestCase
      */
     public function test_fromDataArray_with_invalid_ISO_codes()
     {
-        $currencyTypeFactory = CurrencyTypeFactory::fromDataArray([
+        CurrencyTypeFactory::fromDataArray([
             'EUR' => [
                 'numFractionalDigits' => 2,
                 'symbol' => '€',
@@ -67,7 +47,7 @@ class CurrencyTypeFactoryTests extends TestCase
      */
     public function test_fromDataArray_with_missing_currency_data(array $incompleteCurrencyInfo)
     {
-        $currencyTypeFactory = CurrencyTypeFactory::fromDataArray($incompleteCurrencyInfo);
+        CurrencyTypeFactory::fromDataArray($incompleteCurrencyInfo);
     }
 
     /**
@@ -78,17 +58,7 @@ class CurrencyTypeFactoryTests extends TestCase
      */
     public function test_fromDataArray_with_incorrectly_typed_currency_data(array $invalidCurrencyInfo)
     {
-        $currencyTypeFactory = CurrencyTypeFactory::fromDataArray($invalidCurrencyInfo);
-    }
-
-    public function commonCurrenciesProvider(): array
-    {
-        return \array_map(
-            function (string $ISOCode) {
-                return [$ISOCode];
-            },
-            \array_keys($this->getCurrenciesData())
-        );
+        CurrencyTypeFactory::fromDataArray($invalidCurrencyInfo);
     }
 
     public function missingCurrencyInfoProvider(): array
@@ -194,13 +164,5 @@ class CurrencyTypeFactoryTests extends TestCase
                 ],
             ]],
         ];
-    }
-
-    private function getCurrenciesData(): array
-    {
-        /** @var array $currenciesData */
-        $currenciesData = include __DIR__ . '/../src/Data/CurrencyTypes.php';
-
-        return $currenciesData;
     }
 }
