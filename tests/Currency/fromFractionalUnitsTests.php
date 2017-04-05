@@ -32,7 +32,7 @@ class fromFractionalUnitsTests extends TestCase
      */
     public function test_with_negative_params(int $amount, CurrencyType $currencyType)
     {
-        $currency = Currency::fromFractionalUnits($amount, $currencyType);
+        Currency::fromFractionalUnits($amount, $currencyType);
     }
 
     public function validParamsProvider(): array

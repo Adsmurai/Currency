@@ -33,7 +33,7 @@ class fromDecimalTests extends TestCase
      */
     public function test_with_negative_params(Decimal $amount, CurrencyType $currencyType)
     {
-        $currency = Currency::fromDecimal($amount, $currencyType);
+        Currency::fromDecimal($amount, $currencyType);
     }
 
     public function validParamsProvider(): array

@@ -32,7 +32,7 @@ class fromStringTests extends TestCase
      */
     public function test_with_negative_params(string $amount, CurrencyType $currencyType)
     {
-        $currency = Currency::fromString($amount, $currencyType);
+        Currency::fromString($amount, $currencyType);
     }
 
     /**
@@ -44,7 +44,7 @@ class fromStringTests extends TestCase
      */
     public function test_with_not_numeric_param(string $amount, CurrencyType $currencyType)
     {
-        $currency = Currency::fromString('hello world', $this->getTwoDecimalDigitsCurrencyType());
+        Currency::fromString($amount, $currencyType);
     }
 
     public function validParamsProvider(): array

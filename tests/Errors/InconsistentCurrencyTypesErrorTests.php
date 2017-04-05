@@ -37,6 +37,6 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
         /** @var CurrencyType $ct1 */
         $ct1 = Mockery::mock(CurrencyType::class);
 
-        $e = new InconsistentCurrencyTypesError($ct1, $ct1);
+        new InconsistentCurrencyTypesError($ct1, $ct1);
     }
 }

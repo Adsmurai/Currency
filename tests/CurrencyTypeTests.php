@@ -40,7 +40,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test__construct_with_negative_num_of_fractional_digits()
     {
-        $currencyType = new CurrencyType(
+        new CurrencyType(
             self::EURO_ISO_CODE,
             '',
             -1,
@@ -56,7 +56,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test__construct_with_invalid_symbol_placement()
     {
-        $currencyType = new CurrencyType(
+        new CurrencyType(
             self::EURO_ISO_CODE,
             '',
             self::EURO_NUM_DIGITS,
@@ -72,7 +72,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test__construct_with_empty_symbol()
     {
-        $currencyType = new CurrencyType(
+        new CurrencyType(
             self::EURO_ISO_CODE,
             '',
             self::EURO_NUM_DIGITS,
@@ -88,7 +88,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test__construct_with_almost_empty_symbol()
     {
-        $currencyType = new CurrencyType(
+        new CurrencyType(
             self::EURO_ISO_CODE,
             '    ',
             self::EURO_NUM_DIGITS,
