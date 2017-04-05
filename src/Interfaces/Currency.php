@@ -43,7 +43,7 @@ interface Currency
      * @param int $extraPrecision Use this parameter to represent monetary amounts below the currency precision.
      * @return string
      */
-    public function format(string $decimalsSeparator='.', $thousandsSeparator='', int $extraPrecision=0): string;
+    public function format(string $decimalsSeparator='.', string $thousandsSeparator='', int $extraPrecision=0): string;
 
     /**
      * Use this method to compare currency values.

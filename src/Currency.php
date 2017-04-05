@@ -109,7 +109,7 @@ final class Currency implements CurrencyInterface
     /**
      * @inheritdoc
      */
-    public function format(string $decimalsSeparator='.', $thousandsSeparator='', int $extraPrecision=0): string
+    public function format(string $decimalsSeparator='.', string $thousandsSeparator='', int $extraPrecision=0): string
     {
         $nDecimals = $this->currencyType->getNumFractionalDigits() + $extraPrecision;
         $amount = Decimal::fromDecimal($this->amount, $nDecimals);
