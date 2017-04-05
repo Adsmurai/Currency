@@ -18,7 +18,7 @@ class getCurrencyTypeTests extends TestCase
         $currencyData = $this->getCurrenciesData()[$ISOCode];
         $currencyTypeFactory = CurrencyTypeFactory::fromDataPath();
 
-        $currencyType = $currencyTypeFactory->getCurrencyType($ISOCode);
+        $currencyType = $currencyTypeFactory->buildFromISOCode($ISOCode);
 
         $this->assertInstanceOf(CurrencyType::class, $currencyType);
         $this->assertEquals($ISOCode, $currencyType->getISOCode());
@@ -35,8 +35,8 @@ class getCurrencyTypeTests extends TestCase
     {
         $currencyTypeFactory = CurrencyTypeFactory::fromDataPath();
 
-        $currencyTypeA = $currencyTypeFactory->getCurrencyType($ISOCode);
-        $currencyTypeB = $currencyTypeFactory->getCurrencyType($ISOCode);
+        $currencyTypeA = $currencyTypeFactory->buildFromISOCode($ISOCode);
+        $currencyTypeB = $currencyTypeFactory->buildFromISOCode($ISOCode);
 
         $this->assertSame($currencyTypeA, $currencyTypeB);
     }

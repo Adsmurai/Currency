@@ -4,5 +4,5 @@ namespace Adsmurai\Currency\Interfaces;
 
 interface CurrencyTypeFactory
 {
-    public function getCurrencyType(string $ISOCode): CurrencyType;
+    public function buildFromISOCode(string $ISOCode): CurrencyType;
 }

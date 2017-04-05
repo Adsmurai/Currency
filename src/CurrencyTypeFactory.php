@@ -36,7 +36,7 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
         return self::fromDataArray($data);
     }
 
-    public function getCurrencyType(string $ISOCode): CurrencyTypeInterface
+    public function buildFromISOCode(string $ISOCode): CurrencyTypeInterface
     {
         if (!isset($this->currencyTypes[$ISOCode])) {
             $this->currencyTypes[$ISOCode] = new CurrencyType(
