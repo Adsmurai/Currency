@@ -14,9 +14,7 @@ final class Currency implements CurrencyInterface
 {
     const INNER_FRACTIONAL_DIGITS = 8;
 
-    /**
-     * @var Decimal
-     */
+    /** @var Decimal */
     private $amount;
 
     /** @var CurrencyType */
