@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
@@ -43,8 +44,8 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
                 $this->data[$ISOCode]['symbol'],
                 $this->data[$ISOCode]['numFractionalDigits'],
                 $this->data[$ISOCode]['symbolPlacement'],
-                (isset($this->data[$ISOCode]['symbolPlacement']) && !empty($this->data[$ISOCode]['symbolPlacement']))
-                    ? $this->data[$ISOCode]['symbolPlacement']
+                (isset($this->data[$ISOCode]['name']) && !empty($this->data[$ISOCode]['name']))
+                    ? $this->data[$ISOCode]['name']
                     : ''
             );
         }
