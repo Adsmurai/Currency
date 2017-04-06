@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\CurrenCyTypeFactory;
@@ -30,12 +31,12 @@ class fromDataArrayTests extends TestCase
             'EUR' => [
                 'numFractionalDigits' => 2,
                 'symbol' => '€',
-                'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
             ],
             23 => [
                 'numFractionalDigits' => 2,
                 'symbol' => '$',
-                'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT
+                'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
             ],
         ]);
     }
@@ -69,33 +70,33 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
-                    'symbol' => '$'
+                    'symbol' => '$',
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT
+                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'symbol' => '$',
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT
+                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
                 ],
             ]],
         ];
@@ -108,60 +109,60 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '$',
-                    'symbolPlacement' => 'hello world'
+                    'symbolPlacement' => 'hello world',
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '$',
-                    'symbolPlacement' => 23
+                    'symbolPlacement' => 23,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
                     'symbol' => 23,
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT
+                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '',
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT
+                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT
+                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 'hello world',
                     'symbol' => '$',
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT
+                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
                 ],
             ]],
         ];

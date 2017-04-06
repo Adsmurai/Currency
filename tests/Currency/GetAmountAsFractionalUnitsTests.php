@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
@@ -50,7 +51,7 @@ class getAmountAsFractionalUnitsTests extends TestCase
             ['34.76', $this->getNDecimalDigitsCurrencyType(3), 34760],
             ['100', $this->getNDecimalDigitsCurrencyType(3), 100000],
             ['0.01', $this->getNDecimalDigitsCurrencyType(3), 10],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 12345678500]
+            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 12345678500],
         ];
     }
 
@@ -64,7 +65,7 @@ class getAmountAsFractionalUnitsTests extends TestCase
             [34.76, $this->getNDecimalDigitsCurrencyType(3), 34760],
             [100, $this->getNDecimalDigitsCurrencyType(3), 100000],
             [0.01, $this->getNDecimalDigitsCurrencyType(3), 10],
-            [12345678.50, $this->getNDecimalDigitsCurrencyType(3), 12345678500]
+            [12345678.50, $this->getNDecimalDigitsCurrencyType(3), 12345678500],
         ];
     }
 
@@ -78,7 +79,7 @@ class getAmountAsFractionalUnitsTests extends TestCase
             [$this->getNDecimalDigitsCurrencyType(3), 3476],
             [$this->getNDecimalDigitsCurrencyType(3), 10000],
             [$this->getNDecimalDigitsCurrencyType(3), 1],
-            [$this->getNDecimalDigitsCurrencyType(3), 1234567850]
+            [$this->getNDecimalDigitsCurrencyType(3), 1234567850],
         ];
     }
 

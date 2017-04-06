@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
@@ -43,7 +44,7 @@ class fromDecimalTests extends TestCase
             [Decimal::fromString('34.76'), $this->getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('100'), $this->getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('0.01'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('12345678.50'), $this->getTwoDecimalDigitsCurrencyType()]
+            [Decimal::fromString('12345678.50'), $this->getTwoDecimalDigitsCurrencyType()],
         ];
     }
 
@@ -53,7 +54,7 @@ class fromDecimalTests extends TestCase
             [Decimal::fromString('-34.76'), $this->getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('-100'), $this->getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('-0.01'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-12345678.50'), $this->getTwoDecimalDigitsCurrencyType()]
+            [Decimal::fromString('-12345678.50'), $this->getTwoDecimalDigitsCurrencyType()],
         ];
     }
 

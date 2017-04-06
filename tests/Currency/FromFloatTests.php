@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
@@ -65,7 +66,7 @@ class fromFloatTests extends TestCase
             [34.76, $this->getTwoDecimalDigitsCurrencyType()],
             [100, $this->getTwoDecimalDigitsCurrencyType()],
             [0.01, $this->getTwoDecimalDigitsCurrencyType()],
-            [12345678.50, $this->getTwoDecimalDigitsCurrencyType()]
+            [12345678.50, $this->getTwoDecimalDigitsCurrencyType()],
         ];
     }
 
@@ -75,7 +76,7 @@ class fromFloatTests extends TestCase
             [-34.76, $this->getTwoDecimalDigitsCurrencyType()],
             [-100, $this->getTwoDecimalDigitsCurrencyType()],
             [-0.01, $this->getTwoDecimalDigitsCurrencyType()],
-            [-12345678.50, $this->getTwoDecimalDigitsCurrencyType()]
+            [-12345678.50, $this->getTwoDecimalDigitsCurrencyType()],
         ];
     }
 

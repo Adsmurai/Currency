@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\CurrenCyTypeFactory;
@@ -55,7 +56,7 @@ class getCurrencyTypeTests extends TestCase
     private function getCurrenciesData(): array
     {
         /** @var array $currenciesData */
-        $currenciesData = include __DIR__ . '/../../src/Data/CurrencyTypes.php';
+        $currenciesData = include __DIR__.'/../../src/Data/CurrencyTypes.php';
 
         return $currenciesData;
     }

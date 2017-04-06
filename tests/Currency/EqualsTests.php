@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
@@ -35,20 +36,20 @@ class equalsTests extends TestCase
         return [
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFloat(34.75, $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromFloat(34.75, $this->getTwoDecimalDigitsCurrencyType()),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFractionalUnits(3475, $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromFractionalUnits(3475, $this->getTwoDecimalDigitsCurrencyType()),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromDecimal(Decimal::fromString('34.75'), $this->getTwoDecimalDigitsCurrencyType())
-            ]
+                Currency::fromDecimal(Decimal::fromString('34.75'), $this->getTwoDecimalDigitsCurrencyType()),
+            ],
         ];
     }
 
@@ -57,37 +58,37 @@ class equalsTests extends TestCase
         return [
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromString('34.76', $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromString('34.76', $this->getTwoDecimalDigitsCurrencyType()),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFloat(34.76, $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromFloat(34.76, $this->getTwoDecimalDigitsCurrencyType()),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFractionalUnits(3476, $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromFractionalUnits(3476, $this->getTwoDecimalDigitsCurrencyType()),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromDecimal(Decimal::fromString('34.76'), $this->getTwoDecimalDigitsCurrencyType())
+                Currency::fromDecimal(Decimal::fromString('34.76'), $this->getTwoDecimalDigitsCurrencyType()),
             ],
 
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false))
+                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromFloat(34.75, $this->getTwoDecimalDigitsCurrencyType(false))
+                Currency::fromFloat(34.75, $this->getTwoDecimalDigitsCurrencyType(false)),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromFractionalUnits(3475, $this->getTwoDecimalDigitsCurrencyType(false))
+                Currency::fromFractionalUnits(3475, $this->getTwoDecimalDigitsCurrencyType(false)),
             ],
             [
                 Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromDecimal(Decimal::fromString('34.75'), $this->getTwoDecimalDigitsCurrencyType(false))
-            ]
+                Currency::fromDecimal(Decimal::fromString('34.75'), $this->getTwoDecimalDigitsCurrencyType(false)),
+            ],
         ];
     }
 
