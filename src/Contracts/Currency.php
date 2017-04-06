@@ -40,16 +40,18 @@ interface Currency
      *
      * @param string $decimalsSeparator
      * @param string $thousandsSeparator
-     * @param int $extraPrecision Use this parameter to represent monetary amounts below the currency precision.
+     * @param int    $extraPrecision     use this parameter to represent monetary amounts below the currency precision
+     *
      * @return string
      */
-    public function format(string $decimalsSeparator='.', string $thousandsSeparator='', int $extraPrecision=0): string;
+    public function format(string $decimalsSeparator = '.', string $thousandsSeparator = '', int $extraPrecision = 0): string;
 
     /**
      * Use this method to compare currency values.
      * It will return false if the amount or the currency types don't match.
      *
      * @param Currency $currency
+     *
      * @return bool
      */
     public function equals(Currency $currency): bool;

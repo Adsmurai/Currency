@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency;
@@ -21,7 +22,7 @@ final class Currency implements CurrencyInterface
     private $currencyType;
 
     /**
-     * @param Decimal $amount
+     * @param Decimal      $amount
      * @param CurrencyType $currencyType
      */
     private function __construct(Decimal $amount, CurrencyType $currencyType)
@@ -85,7 +86,7 @@ final class Currency implements CurrencyInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAmountAsDecimal(): Decimal
     {
@@ -93,7 +94,7 @@ final class Currency implements CurrencyInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAmountAsFractionalUnits(): int
     {
@@ -106,9 +107,9 @@ final class Currency implements CurrencyInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function format(string $decimalsSeparator='.', string $thousandsSeparator='', int $extraPrecision=0): string
+    public function format(string $decimalsSeparator = '.', string $thousandsSeparator = '', int $extraPrecision = 0): string
     {
         $nDecimals = $this->currencyType->getNumFractionalDigits() + $extraPrecision;
         $amount = Decimal::fromDecimal($this->amount, $nDecimals);
@@ -118,12 +119,12 @@ final class Currency implements CurrencyInterface
             : \number_format($amount->asFloat(), $nDecimals, $decimalsSeparator, $thousandsSeparator);
 
         return ($this->currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
-            ? $this->currencyType->getSymbol() . $number
-            : $number . $this->currencyType->getSymbol();
+            ? $this->currencyType->getSymbol().$number
+            : $number.$this->currencyType->getSymbol();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function equals(CurrencyInterface $currency): bool
     {

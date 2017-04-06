@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Adsmurai\Currency;
@@ -9,7 +10,7 @@ use Adsmurai\Currency\Contracts\CurrencyTypeFactory as CurrencyTypeFactoryInterf
 
 class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 {
-    const DEFAULT_DATA_PATH = __DIR__ . '/Data/CurrencyTypes.php';
+    const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
     /** @var array */
     private $data;
@@ -26,13 +27,15 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
     public static function fromDataArray(array $data): CurrencyTypeFactory
     {
         self::validateCurrenciesData($data);
+
         return new self($data);
     }
 
     public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyTypeFactory
     {
         /** @var array $data */
-        $data = include($dataPath);
+        $data = include $dataPath;
+
         return self::fromDataArray($data);
     }
 
@@ -55,6 +58,7 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 
     /**
      * @param array $currenciesData
+     *
      * @throws InvalidCurrencyTypesDataError
      */
     private static function validateCurrenciesData(array $currenciesData)
@@ -77,35 +81,35 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 
     private static function hasValidISOCode($ISOCode): bool
     {
-        return (\is_string($ISOCode) && !empty($ISOCode));
+        return \is_string($ISOCode) && !empty($ISOCode);
     }
 
     private static function hasValidSymbol(array $currencyData): bool
     {
-        return (
+        return
             isset($currencyData['symbol'])
             && \is_string($currencyData['symbol'])
             && !empty($currencyData['symbol'])
-        );
+        ;
     }
 
     private static function hasValidSymbolPlacement(array $currencyData): bool
     {
-        return (
+        return
             isset($currencyData['symbolPlacement'])
             && \is_int($currencyData['symbolPlacement'])
             && \in_array(
                 $currencyData['symbolPlacement'],
                 [
                     CurrencyTypeInterface::BEFORE_PLACEMENT,
-                    CurrencyTypeInterface::AFTER_PLACEMENT
+                    CurrencyTypeInterface::AFTER_PLACEMENT,
                 ]
             )
-        );
+        ;
     }
 
     private static function hasValidNumFractionalDigits(array $currencyData): bool
     {
-        return (isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']));
+        return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
     }
 }
