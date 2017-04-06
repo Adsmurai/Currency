@@ -9,7 +9,7 @@ use Litipk\BigNumbers\Decimal;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
-class basicGetterTests extends TestCase
+class BasicGetterTests extends TestCase
 {
     /**
      * @covers \Adsmurai\Currency\Currency::getAmountAsDecimal
@@ -17,7 +17,7 @@ class basicGetterTests extends TestCase
      */
     public function test_basic_getters()
     {
-        // TODO: Improve the test to decouple from Decimal. It requires refactoring Decimal.
+        // @todo: Improve the test to decouple from Decimal. It requires refactoring Decimal.
 
         $amount = Decimal::fromString('34.56');
         $currencyType = $this->getTwoDecimalDigitsCurrencyType();
