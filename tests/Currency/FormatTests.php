@@ -18,8 +18,7 @@ class formatTests extends TestCase
         string $amount,
         CurrencyType $currencyType,
         string $formattedCurrency
-    )
-    {
+    ) {
         $currency = Currency::fromString($amount, $currencyType);
         $this->assertEquals($formattedCurrency, $currency->format());
     }
@@ -34,8 +33,7 @@ class formatTests extends TestCase
         string $decimalsSeparator,
         string $thousandsSeparator,
         string $formattedCurrency
-    )
-    {
+    ) {
         $currency = Currency::fromString($amount, $currencyType);
         $this->assertEquals($formattedCurrency, $currency->format($decimalsSeparator, $thousandsSeparator));
     }
@@ -49,8 +47,7 @@ class formatTests extends TestCase
         CurrencyType $currencyType,
         int $extraPrecision,
         string $formattedCurrency
-    )
-    {
+    ) {
         $currency = Currency::fromString($amount, $currencyType);
         $this->assertEquals($formattedCurrency, $currency->format('.', '', $extraPrecision));
     }
@@ -143,8 +140,7 @@ class formatTests extends TestCase
         int $n = 2,
         string $symbol = '€',
         int $symbolPlacement = CurrencyType::AFTER_PLACEMENT
-    ): CurrencyType
-    {
+    ): CurrencyType {
         /** @var CurrencyType|MockInterface $currencyType */
         $currencyType = \Mockery::mock(CurrencyType::class);
 

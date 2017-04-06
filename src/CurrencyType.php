@@ -25,8 +25,7 @@ final class CurrencyType implements CurrencyTypeInterface
         int $numFractionalDigits,
         int $symbolPlacement = self::AFTER_PLACEMENT,
         string $name = ''
-    )
-    {
+    ) {
         $symbol = \trim($symbol);
         $name = \trim($name);
 

@@ -32,7 +32,7 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
     public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyTypeFactory
     {
         /** @var array $data */
-        $data = include ($dataPath);
+        $data = include($dataPath);
         return self::fromDataArray($data);
     }
 
@@ -77,7 +77,7 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 
     private static function hasValidISOCode($ISOCode): bool
     {
-        return ( \is_string($ISOCode) && !empty($ISOCode) );
+        return (\is_string($ISOCode) && !empty($ISOCode));
     }
 
     private static function hasValidSymbol(array $currencyData): bool
@@ -106,6 +106,6 @@ class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 
     private static function hasValidNumFractionalDigits(array $currencyData): bool
     {
-        return ( isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']) );
+        return (isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']));
     }
 }
