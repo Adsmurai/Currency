@@ -50,14 +50,13 @@ final class Currency implements CurrencyInterface
 
     public static function fromFractionalUnits(int $amount, CurrencyType $currencyType): Currency
     {
-        return new self(
-            Decimal::fromInteger($amount)
-                ->div(
-                    Decimal::fromInteger(10 ** $currencyType->getNumFractionalDigits()),
-                    self::INNER_FRACTIONAL_DIGITS
-                ),
-            $currencyType
-        );
+        $decimalAmount = Decimal::fromInteger($amount)
+            ->div(
+                Decimal::fromInteger(10 ** $currencyType->getNumFractionalDigits()),
+                self::INNER_FRACTIONAL_DIGITS
+            );
+
+        return new self($decimalAmount, $currencyType);
     }
 
     public static function fromString(string $amount, CurrencyType $currencyType): Currency
