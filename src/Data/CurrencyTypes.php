@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Data;
 
-use Adsmurai\Currency\Interfaces\CurrencyType;
+use Adsmurai\Currency\Contracts\CurrencyType;
 
 /**
  * IMPORTANT:

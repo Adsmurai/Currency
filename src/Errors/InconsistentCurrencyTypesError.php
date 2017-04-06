@@ -2,8 +2,8 @@
 
 namespace Adsmurai\Currency\Errors;
 
-use Adsmurai\Currency\Interfaces\CurrencyError;
-use Adsmurai\Currency\Interfaces\CurrencyType;
+use Adsmurai\Currency\Contracts\CurrencyError;
+use Adsmurai\Currency\Contracts\CurrencyType;
 use LogicException;
 
 final class InconsistentCurrencyTypesError extends LogicException implements CurrencyError

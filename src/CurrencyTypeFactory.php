@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Adsmurai\Currency;
 
 use Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError;
-use Adsmurai\Currency\Interfaces\CurrencyType as CurrencyTypeInterface;
-use Adsmurai\Currency\Interfaces\CurrencyTypeFactory as CurrencyTypeFactoryInterface;
+use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
+use Adsmurai\Currency\Contracts\CurrencyTypeFactory as CurrencyTypeFactoryInterface;
 
 class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 {

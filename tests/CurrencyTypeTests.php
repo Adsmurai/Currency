@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Adsmurai\Currency\Tests;
 
 use Adsmurai\Currency\CurrencyType;
-use Adsmurai\Currency\Interfaces\CurrencyType as CurrencyTypeInterface;
+use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
 use PHPUnit\Framework\TestCase;
 
 class CurrencyTypeTests extends TestCase

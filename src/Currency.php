@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Interfaces\Currency  as CurrencyInterface;
-use Adsmurai\Currency\Interfaces\CurrencyType;
+use Adsmurai\Currency\Contracts\Currency  as CurrencyInterface;
+use Adsmurai\Currency\Contracts\CurrencyType;
 use InvalidArgumentException;
 use Litipk\BigNumbers\Decimal;
 use Litipk\BigNumbers\Errors\InfiniteInputError;

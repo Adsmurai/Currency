@@ -3,7 +3,7 @@
 namespace Adsmurai\Currency\Tests\Errors;
 
 use Adsmurai\Currency\Errors\InconsistentCurrencyTypesError;
-use Adsmurai\Currency\Interfaces\CurrencyType;
+use Adsmurai\Currency\Contracts\CurrencyType;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;

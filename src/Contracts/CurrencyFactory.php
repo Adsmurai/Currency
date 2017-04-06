@@ -1,6 +1,6 @@
 <?php
 
-namespace Adsmurai\Currency\Interfaces;
+namespace Adsmurai\Currency\Contracts;
 
 use Litipk\BigNumbers\Decimal;
 

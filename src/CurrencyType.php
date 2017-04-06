@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Adsmurai\Currency;
 
 use Adsmurai\Currency\Errors\InconsistentCurrencyTypesError;
-use Adsmurai\Currency\Interfaces\CurrencyType as CurrencyTypeInterface;
+use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
 use InvalidArgumentException;
 
 final class CurrencyType implements CurrencyTypeInterface

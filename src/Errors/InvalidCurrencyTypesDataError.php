@@ -2,7 +2,7 @@
 
 namespace Adsmurai\Currency\Errors;
 
-use Adsmurai\Currency\Interfaces\CurrencyError;
+use Adsmurai\Currency\Contracts\CurrencyError;
 use LogicException;
 
 final class InvalidCurrencyTypesDataError extends LogicException implements CurrencyError

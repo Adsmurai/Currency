@@ -1,6 +1,6 @@
 <?php
 
-namespace Adsmurai\Currency\Interfaces;
+namespace Adsmurai\Currency\Contracts;
 
 use Litipk\BigNumbers\Decimal;
 
@@ -36,7 +36,7 @@ interface Currency
     /**
      * Use this method to represent monetary amounts as strings.
      *
-     * TODO: Pass something like CurrencyFormat with more flexible settings.
+     * @todo: Pass something like CurrencyFormat with more flexible settings.
      *
      * @param string $decimalsSeparator
      * @param string $thousandsSeparator

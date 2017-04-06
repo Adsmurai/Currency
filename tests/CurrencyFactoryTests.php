@@ -5,8 +5,8 @@ namespace Adsmurai\Currency\Tests;
 
 use Adsmurai\Currency\CurrencyFactory;
 use Adsmurai\Currency\CurrencyTypeFactory;
-use Adsmurai\Currency\Interfaces\Currency;
-use Adsmurai\Currency\Interfaces\CurrencyType;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\Contracts\CurrencyType;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
