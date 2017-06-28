@@ -70,7 +70,7 @@ final class Currency implements CurrencyInterface
 
     private static function extractNumericAmount(string $amount, CurrencyType $currencyType): Decimal
     {
-        $amountParts = \preg_split("/\\s+/", $amount);
+        $amountParts = \preg_split("/\\s+/", \trim($amount));
         $numParts = \count($amountParts);
 
         if (0 === $numParts || $numParts > 2) {

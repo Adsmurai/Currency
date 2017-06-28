@@ -12,8 +12,11 @@ use PHPUnit\Framework\TestCase;
 
 class fromStringTests extends TestCase
 {
+    const TEST_ISO_CODE = 'EUR';
+
     /**
      * @dataProvider validParamsProvider
+     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
      * @covers \Adsmurai\Currency\Currency::fromString
      * @covers \Adsmurai\Currency\Currency::__construct
      */
@@ -23,6 +26,28 @@ class fromStringTests extends TestCase
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency);
         $this->assertInstanceOf(Currency::class, $currency);
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\Currency::fromString
+     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid currency ISO code, expected EUR, but received USD
+     */
+    public function test_with_invalid_isoCode_suffix()
+    {
+        Currency::fromString('100 USD', $this->getTwoDecimalDigitsCurrencyType());
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\Currency::fromString
+     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Invalid currency value
+     */
+    public function test_with_valid_currency_value_plus_noise()
+    {
+        Currency::fromString('100 EUR USD', $this->getTwoDecimalDigitsCurrencyType());
     }
 
     /**
@@ -41,6 +66,7 @@ class fromStringTests extends TestCase
      * @dataProvider notNumericParamsProvider
      * @covers \Adsmurai\Currency\Currency::fromString
      * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be numbers
      */
@@ -56,10 +82,10 @@ class fromStringTests extends TestCase
             ['100', $this->getTwoDecimalDigitsCurrencyType()],
             ['0.01', $this->getTwoDecimalDigitsCurrencyType()],
             ['12345678.50', $this->getTwoDecimalDigitsCurrencyType()],
-            ['34.76 EUR', $this->getTwoDecimalDigitsCurrencyType()],
-            ['100 EUR', $this->getTwoDecimalDigitsCurrencyType()],
-            ['0.01 EUR', $this->getTwoDecimalDigitsCurrencyType()],
-            ['12345678.50 EUR', $this->getTwoDecimalDigitsCurrencyType()],
+            ['34.76 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
+            ['100 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
+            ['0.01 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
+            ['12345678.50 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
         ];
     }
 
@@ -94,7 +120,7 @@ class fromStringTests extends TestCase
 
         $currencyType
             ->shouldReceive('getISOCode')
-            ->andReturn('EUR');
+            ->andReturn(self::TEST_ISO_CODE);
 
         return $currencyType;
     }
