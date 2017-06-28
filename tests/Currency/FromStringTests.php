@@ -56,6 +56,10 @@ class fromStringTests extends TestCase
             ['100', $this->getTwoDecimalDigitsCurrencyType()],
             ['0.01', $this->getTwoDecimalDigitsCurrencyType()],
             ['12345678.50', $this->getTwoDecimalDigitsCurrencyType()],
+            ['34.76 EUR', $this->getTwoDecimalDigitsCurrencyType()],
+            ['100 EUR', $this->getTwoDecimalDigitsCurrencyType()],
+            ['0.01 EUR', $this->getTwoDecimalDigitsCurrencyType()],
+            ['12345678.50 EUR', $this->getTwoDecimalDigitsCurrencyType()],
         ];
     }
 
@@ -87,6 +91,10 @@ class fromStringTests extends TestCase
         $currencyType
             ->shouldReceive('getNumFractionalDigits')
             ->andReturn(2);
+
+        $currencyType
+            ->shouldReceive('getISOCode')
+            ->andReturn('EUR');
 
         return $currencyType;
     }
