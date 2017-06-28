@@ -62,14 +62,37 @@ final class Currency implements CurrencyInterface
 
     public static function fromString(string $amount, CurrencyType $currencyType): Currency
     {
+        return new self(
+            self::extractNumericAmount($amount, $currencyType),
+            $currencyType
+        );
+    }
+
+    private static function extractNumericAmount(string $amount, CurrencyType $currencyType): Decimal
+    {
+        $amountParts = \preg_split("/\\s+/", \trim($amount));
+        $numParts = \count($amountParts);
+
+        if (0 === $numParts || $numParts > 2) {
+            throw new InvalidArgumentException('Invalid currency value');
+        }
+
         try {
-            return new self(
-                Decimal::fromString($amount, self::INNER_FRACTIONAL_DIGITS),
-                $currencyType
-            );
+            $numericAmount = Decimal::fromString($amountParts[0], self::INNER_FRACTIONAL_DIGITS);
         } catch (NaNInputError $e) {
             throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
         }
+
+        if (2 === $numParts) {
+            if ($amountParts[1] !== $currencyType->getISOCode()) {
+                throw new InvalidArgumentException(
+                    'Invalid currency ISO code, expected ' . $currencyType->getISOCode() .
+                    ', but received ' . $amountParts[1]
+                );
+            }
+        }
+
+        return $numericAmount;
     }
 
     public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency
