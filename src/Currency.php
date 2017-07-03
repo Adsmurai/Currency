@@ -10,9 +10,13 @@ use InvalidArgumentException;
 use Litipk\BigNumbers\Decimal;
 use Litipk\BigNumbers\Errors\InfiniteInputError;
 use Litipk\BigNumbers\Errors\NaNInputError;
+use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
 final class Currency implements CurrencyInterface
 {
+    const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9][0-9]*|[0-9])(\.[0-9]+)?))';
+    const SIMPLE_CURRENCY_PATTERN = '/^' . self::DECIMAL_NUMBER_REGEXP . '$/x';
+
     const INNER_FRACTIONAL_DIGITS = 8;
 
     /** @var Decimal */
@@ -70,29 +74,19 @@ final class Currency implements CurrencyInterface
 
     private static function extractNumericAmount(string $amount, CurrencyType $currencyType): Decimal
     {
-        $amountParts = \preg_split("/\\s+/", \trim($amount));
-        $numParts = \count($amountParts);
-
-        if (0 === $numParts || $numParts > 2) {
-            throw new InvalidArgumentException('Invalid currency value');
-        }
-
         try {
-            $numericAmount = Decimal::fromString($amountParts[0], self::INNER_FRACTIONAL_DIGITS);
+            if (
+                1 === \preg_match(self::SIMPLE_CURRENCY_PATTERN, $amount, $matches) ||
+                1 === \preg_match(self::getAmountPlusIsoCodePattern($currencyType), $amount, $matches) ||
+                1 === \preg_match(self::getAmountPlusSymbolPattern($currencyType), $amount, $matches)
+            ) {
+                return Decimal::fromString($matches['amount'], self::INNER_FRACTIONAL_DIGITS);
+            } else {
+                throw new InvalidArgumentException('Invalid currency value');
+            }
         } catch (NaNInputError $e) {
             throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
         }
-
-        if (2 === $numParts) {
-            if ($amountParts[1] !== $currencyType->getISOCode()) {
-                throw new InvalidArgumentException(
-                    'Invalid currency ISO code, expected ' . $currencyType->getISOCode() .
-                    ', but received ' . $amountParts[1]
-                );
-            }
-        }
-
-        return $numericAmount;
     }
 
     public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency
@@ -101,6 +95,25 @@ final class Currency implements CurrencyInterface
             Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
             $currencyType
         );
+    }
+
+    private static function getAmountPlusSymbolPattern(CurrencyType $currencyType): string
+    {
+        $escapedSymbol = \preg_quote($currencyType->getSymbol());
+
+        return ($currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
+            ? '/^' . $escapedSymbol . '\s*' . self::DECIMAL_NUMBER_REGEXP . '$/x'
+            : '/^' . self::DECIMAL_NUMBER_REGEXP . '\s*' . $escapedSymbol . '$/x';
+    }
+
+    /**
+     * @param CurrencyType $currencyType
+     * @return string
+     */
+    private static function getAmountPlusIsoCodePattern(CurrencyType $currencyType): string
+    {
+        $amountPlusIsoCodePattern = '/^' . self::DECIMAL_NUMBER_REGEXP . '\s*' . $currencyType->getISOCode() . '$/x';
+        return $amountPlusIsoCodePattern;
     }
 
     public function getCurrencyType(): CurrencyType

@@ -44,54 +44,42 @@ class getAmountAsFractionalUnitsTests extends TestCase
     public function stringParamsProvider(): array
     {
         return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(2), 3476],
-            ['100', $this->getNDecimalDigitsCurrencyType(2), 10000],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(2), 1],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(2), 1234567850],
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), 34760],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), 100000],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), 10],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 12345678500],
+            ['34.76', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476],
+            ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000],
+            ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1],
+            ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850],
+            ['34.76', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 34760],
+            ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000],
+            ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10],
+            ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500],
         ];
     }
 
     public function floatParamsProvider(): array
     {
         return [
-            [34.76, $this->getNDecimalDigitsCurrencyType(2), 3476],
-            [100, $this->getNDecimalDigitsCurrencyType(2), 10000],
-            [0.01, $this->getNDecimalDigitsCurrencyType(2), 1],
-            [12345678.50, $this->getNDecimalDigitsCurrencyType(2), 1234567850],
-            [34.76, $this->getNDecimalDigitsCurrencyType(3), 34760],
-            [100, $this->getNDecimalDigitsCurrencyType(3), 100000],
-            [0.01, $this->getNDecimalDigitsCurrencyType(3), 10],
-            [12345678.50, $this->getNDecimalDigitsCurrencyType(3), 12345678500],
+            [34.76, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476],
+            [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000],
+            [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1],
+            [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850],
+            [34.76, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 34760],
+            [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000],
+            [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10],
+            [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500],
         ];
     }
 
     public function fractionalUnitsProvider(): array
     {
         return [
-            [$this->getNDecimalDigitsCurrencyType(2), 3476],
-            [$this->getNDecimalDigitsCurrencyType(2), 10000],
-            [$this->getNDecimalDigitsCurrencyType(2), 1],
-            [$this->getNDecimalDigitsCurrencyType(2), 1234567850],
-            [$this->getNDecimalDigitsCurrencyType(3), 3476],
-            [$this->getNDecimalDigitsCurrencyType(3), 10000],
-            [$this->getNDecimalDigitsCurrencyType(3), 1],
-            [$this->getNDecimalDigitsCurrencyType(3), 1234567850],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 3476],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10000],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 1],
+            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 1234567850],
         ];
-    }
-
-    private static function getNDecimalDigitsCurrencyType(int $n = 2): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')
-            ->andReturn($n);
-
-        return $currencyType;
     }
 }

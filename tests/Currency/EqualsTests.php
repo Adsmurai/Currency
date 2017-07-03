@@ -35,20 +35,23 @@ class equalsTests extends TestCase
     {
         return [
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFloat(34.75, $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFractionalUnits(3475, $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromFractionalUnits(3475, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromDecimal(Decimal::fromString('34.75'), $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromDecimal(
+                    Decimal::fromString('34.75'),
+                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
+                ),
             ],
         ];
     }
@@ -57,50 +60,47 @@ class equalsTests extends TestCase
     {
         return [
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromString('34.76', $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.76', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFloat(34.76, $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromFloat(34.76, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromFractionalUnits(3476, $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromFractionalUnits(3476, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType()),
-                Currency::fromDecimal(Decimal::fromString('34.76'), $this->getTwoDecimalDigitsCurrencyType()),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Currency::fromDecimal(
+                    Decimal::fromString('34.76'),
+                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
+                ),
             ],
 
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromFloat(34.75, $this->getTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromFractionalUnits(3475, $this->getTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromFractionalUnits(
+                    3475,
+                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
+                ),
             ],
             [
-                Currency::fromString('34.75', $this->getTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromDecimal(Decimal::fromString('34.75'), $this->getTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Currency::fromDecimal(
+                    Decimal::fromString('34.75'),
+                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
+                ),
             ],
         ];
-    }
-
-    private function getTwoDecimalDigitsCurrencyType(bool $equals = true): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')->andReturn(2)
-            ->shouldReceive('equals')->andReturn($equals);
-
-        return $currencyType;
     }
 }

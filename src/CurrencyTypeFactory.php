@@ -8,7 +8,7 @@ use Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError;
 use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
 use Adsmurai\Currency\Contracts\CurrencyTypeFactory as CurrencyTypeFactoryInterface;
 
-class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
+final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 {
     const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 

@@ -41,32 +41,20 @@ class fromDecimalTests extends TestCase
     public function validParamsProvider(): array
     {
         return [
-            [Decimal::fromString('34.76'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('100'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('0.01'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('12345678.50'), $this->getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
         ];
     }
 
     public function negativeParamsProvider(): array
     {
         return [
-            [Decimal::fromString('-34.76'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-100'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-0.01'), $this->getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-12345678.50'), $this->getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('-34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('-100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('-0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [Decimal::fromString('-12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
         ];
-    }
-
-    private static function getTwoDecimalDigitsCurrencyType(): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')
-            ->andReturn(2);
-
-        return $currencyType;
     }
 }

@@ -9,7 +9,7 @@ use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryInterface;
 use Adsmurai\Currency\Contracts\CurrencyType;
 use Litipk\BigNumbers\Decimal;
 
-class CurrencyFactory implements CurrencyFactoryInterface
+final class CurrencyFactory implements CurrencyFactoryInterface
 {
     /** @var CurrencyType */
     private $currencyType;

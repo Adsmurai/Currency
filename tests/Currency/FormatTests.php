@@ -148,7 +148,8 @@ class formatTests extends TestCase
         $currencyType
             ->shouldReceive('getNumFractionalDigits')->andReturn($n)
             ->shouldReceive('getSymbol')->andReturn($symbol)
-            ->shouldReceive('getSymbolPlacement')->andReturn($symbolPlacement);
+            ->shouldReceive('getSymbolPlacement')->andReturn($symbolPlacement)
+            ->shouldReceive('getISOCode')->andReturn('EUR');
 
         return $currencyType;
     }
