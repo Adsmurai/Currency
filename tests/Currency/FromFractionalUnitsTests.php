@@ -40,32 +40,20 @@ class fromFractionalUnitsTests extends TestCase
     public function validParamsProvider(): array
     {
         return [
-            [3476, $this->getTwoDecimalDigitsCurrencyType()],
-            [10000, $this->getTwoDecimalDigitsCurrencyType()],
-            [1, $this->getTwoDecimalDigitsCurrencyType()],
-            [1234567850, $this->getTwoDecimalDigitsCurrencyType()],
+            [3476, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [10000, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [1, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [1234567850, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
         ];
     }
 
     public function negativeParamsProvider(): array
     {
         return [
-            [-3476, $this->getTwoDecimalDigitsCurrencyType()],
-            [-10000, $this->getTwoDecimalDigitsCurrencyType()],
-            [-1, $this->getTwoDecimalDigitsCurrencyType()],
-            [-1234567850, $this->getTwoDecimalDigitsCurrencyType()],
+            [-3476, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [-10000, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [-1, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
+            [-1234567850, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
         ];
-    }
-
-    private static function getTwoDecimalDigitsCurrencyType(): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')
-            ->andReturn(2);
-
-        return $currencyType;
     }
 }

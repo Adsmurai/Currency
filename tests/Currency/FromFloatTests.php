@@ -57,42 +57,34 @@ class fromFloatTests extends TestCase
      */
     public function test_with_nan_amount()
     {
-        Currency::fromFloat(\NAN, $this->getTwoDecimalDigitsCurrencyType());
+        Currency::fromFloat(\NAN, CurrencyTypeMocks::getCurrencyTypeDummyMock());
     }
 
     public function validParamsProvider(): array
     {
         return [
-            [34.76, $this->getTwoDecimalDigitsCurrencyType()],
-            [100, $this->getTwoDecimalDigitsCurrencyType()],
-            [0.01, $this->getTwoDecimalDigitsCurrencyType()],
-            [12345678.50, $this->getTwoDecimalDigitsCurrencyType()],
+            [34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [100, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
         ];
     }
 
     public function negativeParamsProvider(): array
     {
         return [
-            [-34.76, $this->getTwoDecimalDigitsCurrencyType()],
-            [-100, $this->getTwoDecimalDigitsCurrencyType()],
-            [-0.01, $this->getTwoDecimalDigitsCurrencyType()],
-            [-12345678.50, $this->getTwoDecimalDigitsCurrencyType()],
+            [-34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [-100, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [-0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [-12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
         ];
     }
 
     public function infiniteParamsProvider(): array
     {
         return [
-            [-INF, $this->getTwoDecimalDigitsCurrencyType()],
-            [+INF, $this->getTwoDecimalDigitsCurrencyType()],
+            [-INF, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
+            [+INF, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
         ];
-    }
-
-    private function getTwoDecimalDigitsCurrencyType(): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        return $currencyType;
     }
 }

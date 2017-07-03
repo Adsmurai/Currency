@@ -21,23 +21,11 @@ class BasicGetterTests extends TestCase
         // @todo: Improve the test to decouple from Decimal. It requires refactoring Decimal.
 
         $amount = Decimal::fromString('34.56');
-        $currencyType = $this->getTwoDecimalDigitsCurrencyType();
+        $currencyType = CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType();
 
         $currency = Currency::fromDecimal($amount, $currencyType);
 
         $this->assertSame($amount, $currency->getAmountAsDecimal());
         $this->assertSame($currencyType, $currency->getCurrencyType());
-    }
-
-    private static function getTwoDecimalDigitsCurrencyType(): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')
-            ->andReturn(2);
-
-        return $currencyType;
     }
 }

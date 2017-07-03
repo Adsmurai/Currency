@@ -12,12 +12,12 @@ use PHPUnit\Framework\TestCase;
 
 class fromStringTests extends TestCase
 {
-    const TEST_ISO_CODE = 'EUR';
-
     /**
      * @dataProvider validParamsProvider
-     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
      * @covers \Adsmurai\Currency\Currency::fromString
+     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
+     * @covers \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
+     * @covers \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
      * @covers \Adsmurai\Currency\Currency::__construct
      */
     public function test_with_valid_params(string $amount, CurrencyType $currencyType)
@@ -28,100 +28,113 @@ class fromStringTests extends TestCase
         $this->assertInstanceOf(Currency::class, $currency);
     }
 
-    /**
-     * @covers \Adsmurai\Currency\Currency::fromString
-     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid currency ISO code, expected EUR, but received USD
-     */
-    public function test_with_invalid_isoCode_suffix()
+    public function validParamsProvider(): array
     {
-        Currency::fromString('100 USD', $this->getTwoDecimalDigitsCurrencyType());
+        $eurCurrencyType = CurrencyTypeMocks::getEuroCurrencyType();
+        $usdCurrencyType = CurrencyTypeMocks::getUsDollarCurrencyType();
+
+        return [
+            ['34.76', $eurCurrencyType],
+            ['100', $eurCurrencyType],
+            ['0.01', $eurCurrencyType],
+            ['12345678.50', $eurCurrencyType],
+
+            ['34.76', $usdCurrencyType],
+            ['100', $usdCurrencyType],
+            ['0.01', $usdCurrencyType],
+            ['12345678.50', $usdCurrencyType],
+
+            ['34.76 EUR', $eurCurrencyType],
+            ['100 EUR', $eurCurrencyType],
+            ['0.01 EUR', $eurCurrencyType],
+            ['12345678.50 EUR', $eurCurrencyType],
+
+            ['34.76 USD', $usdCurrencyType],
+            ['100 USD', $usdCurrencyType],
+            ['0.01 USD', $usdCurrencyType],
+            ['12345678.50 USD', $usdCurrencyType],
+
+            ['34.76 €', $eurCurrencyType],
+            ['100 €', $eurCurrencyType],
+            ['0.01 €', $eurCurrencyType],
+            ['12345678.50 €', $eurCurrencyType],
+
+            ['34.76€', $eurCurrencyType],
+            ['100€', $eurCurrencyType],
+            ['0.01€', $eurCurrencyType],
+            ['12345678.50€', $eurCurrencyType],
+
+            ['$ 34.76', $usdCurrencyType],
+            ['$ 100', $usdCurrencyType],
+            ['$ 0.01', $usdCurrencyType],
+            ['$ 12345678.50', $usdCurrencyType],
+
+            ['$34.76', $usdCurrencyType],
+            ['$100', $usdCurrencyType],
+            ['$0.01', $usdCurrencyType],
+            ['$12345678.50', $usdCurrencyType],
+        ];
     }
 
     /**
+     * @dataProvider invalidParamsProvider
      * @covers \Adsmurai\Currency\Currency::fromString
      * @covers \Adsmurai\Currency\Currency::extractNumericAmount
+     * @covers \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
+     * @covers \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid currency value
      */
-    public function test_with_valid_currency_value_plus_noise()
-    {
-        Currency::fromString('100 EUR USD', $this->getTwoDecimalDigitsCurrencyType());
-    }
-
-    /**
-     * @dataProvider negativeParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromString
-     * @covers \Adsmurai\Currency\Currency::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Currency amounts must be positive
-     */
-    public function test_with_negative_params(string $amount, CurrencyType $currencyType)
+    public function test_with_invalid_params(string $amount, CurrencyType $currencyType)
     {
         Currency::fromString($amount, $currencyType);
     }
 
-    /**
-     * @dataProvider notNumericParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromString
-     * @covers \Adsmurai\Currency\Currency::__construct
-     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Currency amounts must be numbers
-     */
-    public function test_with_not_numeric_param(string $amount, CurrencyType $currencyType)
+    public function invalidParamsProvider(): array
     {
-        Currency::fromString($amount, $currencyType);
-    }
+        $eurCurrencyType = CurrencyTypeMocks::getEuroCurrencyType();
+        $usdCurrencyType = CurrencyTypeMocks::getUsDollarCurrencyType();
 
-    public function validParamsProvider(): array
-    {
         return [
-            ['34.76', $this->getTwoDecimalDigitsCurrencyType()],
-            ['100', $this->getTwoDecimalDigitsCurrencyType()],
-            ['0.01', $this->getTwoDecimalDigitsCurrencyType()],
-            ['12345678.50', $this->getTwoDecimalDigitsCurrencyType()],
-            ['34.76 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
-            ['100 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
-            ['0.01 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
-            ['12345678.50 '.self::TEST_ISO_CODE, $this->getTwoDecimalDigitsCurrencyType()],
+            ['-34.76', $eurCurrencyType],
+            ['-100', $eurCurrencyType],
+            ['-0.01', $eurCurrencyType],
+            ['-12345678.50', $eurCurrencyType],
+
+            ['-34.76', $usdCurrencyType],
+            ['-100', $usdCurrencyType],
+            ['-0.01', $usdCurrencyType],
+            ['-12345678.50', $usdCurrencyType],
+
+            ['', $eurCurrencyType],
+            ['hello world', $eurCurrencyType],
+            ['45.035,56', $eurCurrencyType],
+            ['45,035.56', $eurCurrencyType],
+
+            ['', $usdCurrencyType],
+            ['hello world', $usdCurrencyType],
+            ['45.035,56', $usdCurrencyType],
+            ['45,035.56', $usdCurrencyType],
+
+            ['34.76 EUR', $usdCurrencyType],
+            ['100 EUR', $usdCurrencyType],
+            ['0.01 EUR', $usdCurrencyType],
+            ['12345678.50 EUR', $usdCurrencyType],
+
+            ['34.76 USD', $eurCurrencyType],
+            ['100 USD', $eurCurrencyType],
+            ['0.01 USD', $eurCurrencyType],
+            ['12345678.50 USD', $eurCurrencyType],
+
+            ['34.76 €', $usdCurrencyType],
+            ['100 €', $usdCurrencyType],
+            ['0.01 €', $usdCurrencyType],
+            ['12345678.50 €', $usdCurrencyType],
+
+            ['34.76 $', $eurCurrencyType],
+            ['100 $', $eurCurrencyType],
+            ['0.01 $', $eurCurrencyType],
+            ['12345678.50 $', $eurCurrencyType],
         ];
-    }
-
-    public function negativeParamsProvider(): array
-    {
-        return [
-            ['-34.76', $this->getTwoDecimalDigitsCurrencyType()],
-            ['-100', $this->getTwoDecimalDigitsCurrencyType()],
-            ['-0.01', $this->getTwoDecimalDigitsCurrencyType()],
-            ['-12345678.50', $this->getTwoDecimalDigitsCurrencyType()],
-        ];
-    }
-
-    public function notNumericParamsProvider(): array
-    {
-        return [
-            ['', $this->getTwoDecimalDigitsCurrencyType()],
-            ['hello world', $this->getTwoDecimalDigitsCurrencyType()],
-            ['45.035,56', $this->getTwoDecimalDigitsCurrencyType()],
-            ['45,035.56', $this->getTwoDecimalDigitsCurrencyType()],
-        ];
-    }
-
-    private static function getTwoDecimalDigitsCurrencyType(): CurrencyType
-    {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')
-            ->andReturn(2);
-
-        $currencyType
-            ->shouldReceive('getISOCode')
-            ->andReturn(self::TEST_ISO_CODE);
-
-        return $currencyType;
     }
 }
