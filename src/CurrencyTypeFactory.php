@@ -7,6 +7,7 @@ namespace Adsmurai\Currency;
 use Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError;
 use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
 use Adsmurai\Currency\Contracts\CurrencyTypeFactory as CurrencyTypeFactoryInterface;
+use Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError;
 
 final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 {
@@ -41,6 +42,10 @@ final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
 
     public function buildFromISOCode(string $ISOCode): CurrencyTypeInterface
     {
+        if (!isset($this->data[$ISOCode])) {
+            throw new UnsupportedCurrencyISOCodeError($ISOCode);
+        }
+
         if (!isset($this->currencyTypes[$ISOCode])) {
             $this->currencyTypes[$ISOCode] = new CurrencyType(
                 $ISOCode,
