@@ -8,7 +8,7 @@ use Adsmurai\Currency\CurrencyTypeFactory;
 use Adsmurai\Currency\Contracts\CurrencyType;
 use PHPUnit\Framework\TestCase;
 
-class getCurrencyTypeTests extends TestCase
+class BuildFromISOCodeTests extends TestCase
 {
     /**
      * @dataProvider commonCurrenciesProvider
@@ -41,6 +41,22 @@ class getCurrencyTypeTests extends TestCase
         $currencyTypeB = $currencyTypeFactory->buildFromISOCode($ISOCode);
 
         $this->assertSame($currencyTypeA, $currencyTypeB);
+    }
+
+    /**
+     * @covers \Adsmurai\Currency\CurrencyTypeFactory::buildFromISOCode
+     * @expectedException \Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError
+     * @expectedExceptionMessage Unsupported currency ISO code (USD)
+     */
+    public function test_that_an_exception_is_thrown_when_we_try_to_build_a_not_defined_currency_type()
+    {
+        $currencyTypeFactory = CurrencyTypeFactory::fromDataArray(['EUR' => [
+            'numFractionalDigits' => 2,
+            'symbol' => '€',
+            'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+        ]]);
+
+        $currencyTypeFactory->buildFromISOCode('USD');
     }
 
     public function commonCurrenciesProvider(): array
