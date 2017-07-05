@@ -31,4 +31,10 @@ final class CurrencyFactoriesLocator implements CurrencyFactoriesLocatorInterfac
 
         return $this->currencyFactories[$isoCode];
     }
+
+    /** @return string[] */
+    public function getSupportedCurrencyISOCodes(): array
+    {
+        return $this->currencyTypeFactory->getSupportedCurrencyISOCodes();
+    }
 }

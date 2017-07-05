@@ -37,6 +37,7 @@ to the `composer.json`'s `respositories` key:
 <?php
 
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\CurrencyFactoriesLocator;
 use Adsmurai\Currency\CurrencyFactory;
 use Adsmurai\Currency\CurrencyTypeFactory;
 
@@ -63,6 +64,18 @@ $currencyTypeFactory = CurrencyTypeFactory::fromDataArray([
 $currencyFactory = new CurrencyFactory(
     $currencyTypeFactory->buildFromISOCode('EUR')
 );
+
+// In fact, to avoid introducing hard dependencies on the factory implementation
+// through the instantiation (via the `new` operator), we recommend to obtain
+// the `CurrencyFactory` instances through the `CurrencyFactoriesLocator`.
+//
+// This will have some advantages:
+//   * We can inject instances of the `CurrencyFactoriesLocator` contract in our
+//     domain logic without having to rely on specific implementations.
+//   * We can avoid `CurrencyFactory` instances proliferation, since this
+//     factories locator keeps one single instances per currency ISO code.
+$currencyFactoriesLocator = new CurrencyFactoriesLocator($currencyTypeFactory);
+$currencyFactory = $currencyFactoriesLocator->getCurrencyFactory('EUR');
 
 // We have many ways to construct Currency objects, depending on the data we
 // have at the time.

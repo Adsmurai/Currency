@@ -117,4 +117,10 @@ final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
     {
         return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
     }
+
+    /** @return string[] */
+    public function getSupportedCurrencyISOCodes(): array
+    {
+        return \array_keys($this->data);
+    }
 }
