@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adsmurai\Currency\Tests\CurrenCyTypeFactory;
+namespace Adsmurai\Currency\Tests\CurrencyTypeFactory;
 
 use Adsmurai\Currency\CurrencyTypeFactory;
 use Adsmurai\Currency\Contracts\CurrencyType;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Adsmurai\Currency\Tests;
+namespace Adsmurai\Currency\Tests\CurrencyFactoriesLocator;
 
 use Adsmurai\Currency\Contracts\CurrencyFactory;
 use Adsmurai\Currency\Contracts\CurrencyType;
@@ -10,7 +10,7 @@ use Adsmurai\Currency\Contracts\CurrencyTypeFactory;
 use Adsmurai\Currency\CurrencyFactoriesLocator;
 use PHPUnit\Framework\TestCase;
 
-class CurrencyFactoriesLocatorTests extends TestCase
+class GetCurrencyFactoryTests extends TestCase
 {
     /**
      * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::__construct
