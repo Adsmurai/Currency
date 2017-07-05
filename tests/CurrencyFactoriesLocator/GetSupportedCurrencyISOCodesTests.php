@@ -13,7 +13,7 @@ class GetSupportedCurrencyISOCodesTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::getSupportedCurrencyISOCodes
      */
-    public function test()
+    public function test_that_returns_the_supported_currency_iso_codes()
     {
         /** @var \Mockery\MockInterface|CurrencyTypeFactory $currencyTypeFactory */
         $currencyTypeFactory = \Mockery::mock(CurrencyTypeFactory::class);
