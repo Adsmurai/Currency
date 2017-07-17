@@ -18,19 +18,6 @@ Install it through composer, that's it:
 composer install adsmurai/currency
 ```
 
-Meanwhile this project is closed source, you'll need to add the repository data
-to the `composer.json`'s `respositories` key:
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@bitbucket.org:adsmurai/currency.git"
-    }
-  ]
-}
-```
-
 ## Code examples
 
 ```php
