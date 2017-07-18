@@ -6,18 +6,15 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/php:7.1.5-browsers
-      
-      # Specify service dependencies here if necessary
+      - image: circleci/php:7.0-cli
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mysql:9.4
 
     working_directory: ~/repo
 
     steps:
       - checkout
+      - run: composer self-update
 
       # Download and cache dependencies
       - restore_cache:
