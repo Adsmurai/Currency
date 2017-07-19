@@ -6,6 +6,7 @@ namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\CurrencyFormat;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +37,8 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $this->assertEquals($formattedCurrency, $currency->format($decimalsSeparator, $thousandsSeparator));
+        $currencyFormat = new CurrencyFormat($decimalsSeparator, $thousandsSeparator);
+        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
@@ -50,7 +52,8 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $this->assertEquals($formattedCurrency, $currency->format('.', '', $extraPrecision));
+        $currencyFormat = new CurrencyFormat('.', '', $extraPrecision);
+        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
     public function simpleParamsProvider(): array

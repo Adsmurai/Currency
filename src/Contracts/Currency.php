@@ -36,15 +36,11 @@ interface Currency
     /**
      * Use this method to represent monetary amounts as strings.
      *
-     * @todo: Pass something like CurrencyFormat with more flexible settings.
-     *
-     * @param string $decimalsSeparator
-     * @param string $thousandsSeparator
-     * @param int    $extraPrecision     use this parameter to represent monetary amounts below the currency precision
+     * @param CurrencyFormat $currencyFormat
      *
      * @return string
      */
-    public function format(string $decimalsSeparator = '.', string $thousandsSeparator = '', int $extraPrecision = 0): string;
+    public function format(CurrencyFormat $currencyFormat = null): string;
 
     /**
      * Use this method to compare currency values.

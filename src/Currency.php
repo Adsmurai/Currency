@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Adsmurai\Currency;
 
 use Adsmurai\Currency\Contracts\Currency  as CurrencyInterface;
+use Adsmurai\Currency\Contracts\CurrencyFormat as CurrencyFormatInterface;
 use Adsmurai\Currency\Contracts\CurrencyType;
 use InvalidArgumentException;
 use Litipk\BigNumbers\Decimal;
@@ -146,14 +147,23 @@ final class Currency implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function format(string $decimalsSeparator = '.', string $thousandsSeparator = '', int $extraPrecision = 0): string
+    public function format(CurrencyFormatInterface $currencyFormat = null): string
     {
-        $nDecimals = $this->currencyType->getNumFractionalDigits() + $extraPrecision;
+        if (is_null($currencyFormat)) {
+            $currencyFormat = new CurrencyFormat();
+        }
+
+        $nDecimals = $this->currencyType->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
         $amount = Decimal::fromDecimal($this->amount, $nDecimals);
 
-        $number = ('' === $thousandsSeparator)
-            ? \str_replace('.', $decimalsSeparator, $amount->__toString())  // This is safer!
-            : \number_format($amount->asFloat(), $nDecimals, $decimalsSeparator, $thousandsSeparator);
+        $number = ('' === $currencyFormat->getThousandsSeparator())
+            ? \str_replace('.', $currencyFormat->getDecimalsSeparator(), $amount->__toString())  // This is safer!
+            : \number_format(
+                $amount->asFloat(),
+                $nDecimals,
+                $currencyFormat->getDecimalsSeparator(),
+                $currencyFormat->getThousandsSeparator()
+            );
 
         return ($this->currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
             ? $this->currencyType->getSymbol().$number
