@@ -1,6 +1,7 @@
 {
     "name": "adsmurai/currency",
-    "description": "A small library to handle currencies",
+    "description": "A small library to handle currencies and money values",
+    "keywords": ["currency", "money", "money pattern", "value object", "vo"],
     "type": "library",
     "license": "MIT",
     "authors": [
