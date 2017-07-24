@@ -6,9 +6,7 @@ namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyType;
 use Litipk\BigNumbers\Decimal;
-use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class equalsTests extends TestCase

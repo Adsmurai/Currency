@@ -6,7 +6,6 @@ namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\CurrencyType;
-use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class getAmountAsFractionalUnitsTests extends TestCase

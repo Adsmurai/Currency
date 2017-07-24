@@ -10,12 +10,11 @@ use InvalidArgumentException;
 use Litipk\BigNumbers\Decimal;
 use Litipk\BigNumbers\Errors\InfiniteInputError;
 use Litipk\BigNumbers\Errors\NaNInputError;
-use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
 final class Currency implements CurrencyInterface
 {
     const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9][0-9]*|[0-9])(\.[0-9]+)?))';
-    const SIMPLE_CURRENCY_PATTERN = '/^' . self::DECIMAL_NUMBER_REGEXP . '$/x';
+    const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
 
     const INNER_FRACTIONAL_DIGITS = 8;
 
@@ -102,17 +101,19 @@ final class Currency implements CurrencyInterface
         $escapedSymbol = \preg_quote($currencyType->getSymbol());
 
         return ($currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
-            ? '/^' . $escapedSymbol . '\s*' . self::DECIMAL_NUMBER_REGEXP . '$/x'
-            : '/^' . self::DECIMAL_NUMBER_REGEXP . '\s*' . $escapedSymbol . '$/x';
+            ? '/^'.$escapedSymbol.'\s*'.self::DECIMAL_NUMBER_REGEXP.'$/x'
+            : '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$escapedSymbol.'$/x';
     }
 
     /**
      * @param CurrencyType $currencyType
+     *
      * @return string
      */
     private static function getAmountPlusIsoCodePattern(CurrencyType $currencyType): string
     {
-        $amountPlusIsoCodePattern = '/^' . self::DECIMAL_NUMBER_REGEXP . '\s*' . $currencyType->getISOCode() . '$/x';
+        $amountPlusIsoCodePattern = '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currencyType->getISOCode().'$/x';
+
         return $amountPlusIsoCodePattern;
     }
 
