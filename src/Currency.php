@@ -145,6 +145,7 @@ final class Currency implements CurrencyInterface
     }
 
     /**
+     * @todo Use method getDecorationType() when decorating the result
      * {@inheritdoc}
      */
     public function format(CurrencyFormatInterface $currencyFormat = null): string
@@ -153,7 +154,12 @@ final class Currency implements CurrencyInterface
             $currencyFormat = new CurrencyFormat();
         }
 
-        $nDecimals = $this->currencyType->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
+        $precision = $currencyFormat->getPrecision();
+        if (is_null($precision)) {
+            $precision = $this->currencyType->getNumFractionalDigits();
+        }
+        $nDecimals = $precision + $currencyFormat->getExtraPrecision();
+
         $amount = Decimal::fromDecimal($this->amount, $nDecimals);
 
         $number = ('' === $currencyFormat->getThousandsSeparator())

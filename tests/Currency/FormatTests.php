@@ -56,6 +56,21 @@ class formatTests extends TestCase
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
+    /**
+     * @dataProvider precisionParamsProvider
+     * @covers \Adsmurai\Currency\Currency::format
+     */
+    public function test_format_with_custom_precision(
+        string $amount,
+        CurrencyType $currencyType,
+        int $extraPrecision,
+        string $formattedCurrency
+    ) {
+        $currency = Currency::fromString($amount, $currencyType);
+        $currencyFormat = new CurrencyFormat('.', '', 0, 0, $extraPrecision);
+        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+    }
+
     public function simpleParamsProvider(): array
     {
         return [
@@ -137,6 +152,31 @@ class formatTests extends TestCase
             ['100', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$100.00000'],
             ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$0.01000'],
             ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$12345678.50000'],
+        ];
+    }
+
+    public function precisionParamsProvider(): array
+    {
+        return [
+            ['34.76', $this->getNDecimalDigitsCurrencyType(), 2, '34.76€'],
+            ['100', $this->getNDecimalDigitsCurrencyType(), 2, '100.00€'],
+            ['0.01', $this->getNDecimalDigitsCurrencyType(), 2, '0.01€'],
+            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), 2, '12345678.50€'],
+
+            ['34.76', $this->getNDecimalDigitsCurrencyType(3), 2, '34.76€'],
+            ['100', $this->getNDecimalDigitsCurrencyType(3), 2, '100.00€'],
+            ['0.01', $this->getNDecimalDigitsCurrencyType(3), 2, '0.01€'],
+            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 2, '12345678.50€'],
+
+            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '34.76$'],
+            ['100', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '100.00$'],
+            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '0.01$'],
+            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '12345678.50$'],
+
+            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$34.76'],
+            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$100.00'],
+            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$0.01'],
+            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', CurrencyType::BEFORE_PLACEMENT), 2, '$12345678.50'],
         ];
     }
 

@@ -18,12 +18,27 @@ class CurrencyFormat implements CurrencyFormatInterface
      * @var int
      */
     private $extraPrecision;
+    /**
+     * @var int
+     */
+    private $decorationType;
+    /**
+     * @var int
+     */
+    private $precision;
 
-    public function __construct(string $decimalsSeparator = '.', string $thousandsSeparator = '', int $extraPrecision = 0)
-    {
+    public function __construct(
+        string $decimalsSeparator = '.',
+        string $thousandsSeparator = '',
+        int $extraPrecision = 0,
+        int $decorationType = self::DECORATION_NO_DECORATION,
+        int $precision = null
+    ) {
         $this->decimalsSeparator = $decimalsSeparator;
         $this->thousandsSeparator = $thousandsSeparator;
         $this->extraPrecision = $extraPrecision;
+        $this->decorationType = $decorationType;
+        $this->precision = $precision;
     }
 
     /**
@@ -48,5 +63,21 @@ class CurrencyFormat implements CurrencyFormatInterface
     public function getExtraPrecision(): int
     {
         return $this->extraPrecision;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDecorationType(): int
+    {
+        return $this->decorationType;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPrecision()
+    {
+        return $this->precision;
     }
 }
