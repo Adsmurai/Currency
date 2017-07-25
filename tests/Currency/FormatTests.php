@@ -67,7 +67,7 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = new CurrencyFormat('.', '', 0, 0, $extraPrecision);
+        $currencyFormat = new CurrencyFormat('.', '', 3, 0, $extraPrecision);
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 

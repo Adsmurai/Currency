@@ -154,11 +154,10 @@ final class Currency implements CurrencyInterface
             $currencyFormat = new CurrencyFormat();
         }
 
-        $precision = $currencyFormat->getPrecision();
-        if (is_null($precision)) {
-            $precision = $this->currencyType->getNumFractionalDigits();
+        $nDecimals = $currencyFormat->getPrecision();
+        if (is_null($nDecimals)) {
+            $nDecimals = $this->currencyType->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
         }
-        $nDecimals = $precision + $currencyFormat->getExtraPrecision();
 
         $amount = Decimal::fromDecimal($this->amount, $nDecimals);
 
