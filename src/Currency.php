@@ -145,7 +145,6 @@ final class Currency implements CurrencyInterface
     }
 
     /**
-     * @todo Use method getDecorationType() when decorating the result
      * {@inheritdoc}
      */
     public function format(CurrencyFormatInterface $currencyFormat = null): string
@@ -170,9 +169,29 @@ final class Currency implements CurrencyInterface
                 $currencyFormat->getThousandsSeparator()
             );
 
-        return ($this->currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
-            ? $this->currencyType->getSymbol().$number
-            : $number.$this->currencyType->getSymbol();
+        return $this->decorate($number, $currencyFormat);
+    }
+
+    /**
+     * @param string                  $number
+     * @param CurrencyFormatInterface $currencyFormat
+     *
+     * @return string
+     */
+    private function decorate(string $number, CurrencyFormatInterface $currencyFormat): string
+    {
+        switch ($currencyFormat->getDecorationType()) {
+            case CurrencyFormat::DECORATION_NO_DECORATION:
+                return $number;
+                break;
+            case CurrencyFormat::DECORATION_ISO_CODE:
+                return $number.$this->currencyType->getISOCode();
+                break;
+            default:
+                return ($this->currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
+                    ? $this->currencyType->getSymbol().$number
+                    : $number.$this->currencyType->getSymbol();
+        }
     }
 
     /**

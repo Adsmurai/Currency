@@ -31,7 +31,7 @@ class CurrencyFormat implements CurrencyFormatInterface
         string $decimalsSeparator = '.',
         string $thousandsSeparator = '',
         int $extraPrecision = 0,
-        int $decorationType = self::DECORATION_NO_DECORATION,
+        int $decorationType = self::DECORATION_SYMBOL,
         int $precision = null
     ) {
         $this->decimalsSeparator = $decimalsSeparator;
