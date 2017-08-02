@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Currency  as CurrencyInterface;
+use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
 use Adsmurai\Currency\Contracts\CurrencyFormat as CurrencyFormatInterface;
 use Adsmurai\Currency\Contracts\CurrencyType;
 use InvalidArgumentException;
@@ -16,7 +16,6 @@ final class Currency implements CurrencyInterface
 {
     const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9][0-9]*|[0-9])(\.[0-9]+)?))';
     const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
-
     const INNER_FRACTIONAL_DIGITS = 8;
 
     /** @var Decimal */
@@ -89,23 +88,6 @@ final class Currency implements CurrencyInterface
         }
     }
 
-    public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency
-    {
-        return new self(
-            Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
-            $currencyType
-        );
-    }
-
-    private static function getAmountPlusSymbolPattern(CurrencyType $currencyType): string
-    {
-        $escapedSymbol = \preg_quote($currencyType->getSymbol());
-
-        return ($currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
-            ? '/^'.$escapedSymbol.'\s*'.self::DECIMAL_NUMBER_REGEXP.'$/x'
-            : '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$escapedSymbol.'$/x';
-    }
-
     /**
      * @param CurrencyType $currencyType
      *
@@ -116,6 +98,23 @@ final class Currency implements CurrencyInterface
         $amountPlusIsoCodePattern = '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currencyType->getISOCode().'$/x';
 
         return $amountPlusIsoCodePattern;
+    }
+
+    private static function getAmountPlusSymbolPattern(CurrencyType $currencyType): string
+    {
+        $escapedSymbol = \preg_quote($currencyType->getSymbol());
+
+        return (CurrencyType::BEFORE_PLACEMENT === $currencyType->getSymbolPlacement())
+            ? '/^'.$escapedSymbol.'\s*'.self::DECIMAL_NUMBER_REGEXP.'$/x'
+            : '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$escapedSymbol.'$/x';
+    }
+
+    public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency
+    {
+        return new self(
+            Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
+            $currencyType
+        );
     }
 
     public function getCurrencyType(): CurrencyType
@@ -150,7 +149,7 @@ final class Currency implements CurrencyInterface
     public function format(CurrencyFormatInterface $currencyFormat = null): string
     {
         if (is_null($currencyFormat)) {
-            $currencyFormat = new CurrencyFormat();
+            $currencyFormat = CurrencyFormat::defaultFormatting();
         }
 
         $nDecimals = $currencyFormat->getPrecision();
@@ -180,17 +179,21 @@ final class Currency implements CurrencyInterface
      */
     private function decorate(string $number, CurrencyFormatInterface $currencyFormat): string
     {
+        $separator = '';
+        if (CurrencyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace()) {
+            $separator = ' ';
+        }
         switch ($currencyFormat->getDecorationType()) {
             case CurrencyFormat::DECORATION_NO_DECORATION:
                 return $number;
                 break;
             case CurrencyFormat::DECORATION_ISO_CODE:
-                return $number.$this->currencyType->getISOCode();
+                return $number.$separator.$this->currencyType->getISOCode();
                 break;
             default:
-                return ($this->currencyType->getSymbolPlacement() === CurrencyType::BEFORE_PLACEMENT)
-                    ? $this->currencyType->getSymbol().$number
-                    : $number.$this->currencyType->getSymbol();
+                return (CurrencyType::BEFORE_PLACEMENT === $this->currencyType->getSymbolPlacement())
+                    ? $this->currencyType->getSymbol().$separator.$number
+                    : $number.$separator.$this->currencyType->getSymbol();
         }
     }
 
@@ -200,8 +203,8 @@ final class Currency implements CurrencyInterface
     public function equals(CurrencyInterface $currency): bool
     {
         return $currency === $this || (
-            $this->amount->equals($currency->getAmountAsDecimal()) &&
-            $this->currencyType->equals($currency->getCurrencyType())
-        );
+                $this->amount->equals($currency->getAmountAsDecimal()) &&
+                $this->currencyType->equals($currency->getCurrencyType())
+            );
     }
 }

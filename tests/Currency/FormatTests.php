@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\CurrencyFormat;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +14,7 @@ class formatTests extends TestCase
 {
     /**
      * @dataProvider simpleParamsProvider
-     * @covers \Adsmurai\Currency\Currency::format
+     * @covers       \Adsmurai\Currency\Currency::format
      */
     public function test_format_without_custom_parameters(
         string $amount,
@@ -27,7 +27,7 @@ class formatTests extends TestCase
 
     /**
      * @dataProvider customizedParamsProvider
-     * @covers \Adsmurai\Currency\Currency::format
+     * @covers       \Adsmurai\Currency\Currency::format
      */
     public function test_format_with_custom_separators(
         string $amount,
@@ -37,13 +37,13 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = new CurrencyFormat($decimalsSeparator, $thousandsSeparator);
+        $currencyFormat = CurrencyFormat::fromParameters($decimalsSeparator, $thousandsSeparator);
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
      * @dataProvider extraPrecisionParamsProvider
-     * @covers \Adsmurai\Currency\Currency::format
+     * @covers       \Adsmurai\Currency\Currency::format
      */
     public function test_format_with_extra_precision(
         string $amount,
@@ -52,28 +52,41 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = new CurrencyFormat('.', '', $extraPrecision);
+        $currencyFormat = CurrencyFormat::fromParameters(
+            '.',
+            '',
+            CurrencyFormat::DECORATION_SYMBOL,
+            CurrencyFormat::DECORATION_WITHOUT_SPACE,
+            $extraPrecision
+        );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
      * @dataProvider precisionParamsProvider
-     * @covers \Adsmurai\Currency\Currency::format
+     * @covers       \Adsmurai\Currency\Currency::format
      */
     public function test_format_with_custom_precision(
         string $amount,
         CurrencyType $currencyType,
-        int $extraPrecision,
+        int $precision,
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = new CurrencyFormat('.', '', 3, 1, $extraPrecision);
+        $currencyFormat = CurrencyFormat::fromParameters(
+            '.',
+            '',
+            CurrencyFormat::DECORATION_SYMBOL,
+            CurrencyFormat::DECORATION_WITHOUT_SPACE,
+            3,
+            $precision
+        );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
      * @dataProvider noDecorationParamsProvider
-     * @covers \Adsmurai\Currency\Currency::format
+     * @covers       \Adsmurai\Currency\Currency::format
      */
     public function test_format_with_no_decoration(
         string $amount,
@@ -82,13 +95,18 @@ class formatTests extends TestCase
     ) {
         //$this->markTestSkipped();
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = new CurrencyFormat('.', '', 0, CurrencyFormat::DECORATION_NO_DECORATION);
+        $currencyFormat = CurrencyFormat::fromParameters(
+            '.',
+            '',
+            CurrencyFormat::DECORATION_NO_DECORATION,
+            CurrencyFormat::DECORATION_WITHOUT_SPACE
+        );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
      * @dataProvider isoCodeDecorationParamsProvider
-     * @covers \Adsmurai\Currency\Currency::format
+     * @covers       \Adsmurai\Currency\Currency::format
      */
     public function test_format_with_decoration_iso_code(
         string $amount,
@@ -96,7 +114,33 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = new CurrencyFormat('.', '', 0, CurrencyFormat::DECORATION_ISO_CODE);
+        $currencyFormat = CurrencyFormat::fromParameters(
+            '.',
+            '',
+            CurrencyFormat::DECORATION_ISO_CODE,
+            CurrencyFormat::DECORATION_WITHOUT_SPACE
+        );
+        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+    }
+
+    /**
+     * @dataProvider spaceDecorationParamsProvider
+     * @covers       \Adsmurai\Currency\Currency::format
+     */
+    public function test_format_with_separator(
+        string $amount,
+        CurrencyType $currencyType,
+        string $formattedCurrency,
+        int $decorationSpace,
+        int $decorationType
+    ) {
+        $currency = Currency::fromString($amount, $currencyType);
+        $currencyFormat = CurrencyFormat::fromParameters(
+            '.',
+            '',
+            $decorationType,
+            $decorationSpace
+        );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
@@ -132,6 +176,24 @@ class formatTests extends TestCase
             ['12345678.503', $this->getNDecimalDigitsCurrencyType(), '12345678.50€'],
             ['12345678.509', $this->getNDecimalDigitsCurrencyType(), '12345678.51€'],
         ];
+    }
+
+    private static function getNDecimalDigitsCurrencyType(
+        int $n = 2,
+        string $symbol = '€',
+        int $symbolPlacement = CurrencyType::AFTER_PLACEMENT,
+        string $isoCode = 'EUR'
+    ): CurrencyType {
+        /** @var CurrencyType|MockInterface $currencyType */
+        $currencyType = \Mockery::mock(CurrencyType::class);
+
+        $currencyType
+            ->shouldReceive('getNumFractionalDigits')->andReturn($n)
+            ->shouldReceive('getSymbol')->andReturn($symbol)
+            ->shouldReceive('getSymbolPlacement')->andReturn($symbolPlacement)
+            ->shouldReceive('getISOCode')->andReturn($isoCode);
+
+        return $currencyType;
     }
 
     public function customizedParamsProvider(): array
@@ -277,21 +339,51 @@ class formatTests extends TestCase
         ];
     }
 
-    private static function getNDecimalDigitsCurrencyType(
-        int $n = 2,
-        string $symbol = '€',
-        int $symbolPlacement = CurrencyType::AFTER_PLACEMENT,
-        string $isoCode = 'EUR'
-    ): CurrencyType {
-        /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
-
-        $currencyType
-            ->shouldReceive('getNumFractionalDigits')->andReturn($n)
-            ->shouldReceive('getSymbol')->andReturn($symbol)
-            ->shouldReceive('getSymbolPlacement')->andReturn($symbolPlacement)
-            ->shouldReceive('getISOCode')->andReturn($isoCode);
-
-        return $currencyType;
+    public function spaceDecorationParamsProvider(): array
+    {
+        return [
+            [
+                '34.76',
+                $this->getNDecimalDigitsCurrencyType(),
+                '34.76 €',
+                CurrencyFormat::DECORATION_WITH_SPACE,
+                CurrencyFormat::DECORATION_SYMBOL,
+            ],
+            [
+                '34.76',
+                $this->getNDecimalDigitsCurrencyType(),
+                '34.76€',
+                CurrencyFormat::DECORATION_WITHOUT_SPACE,
+                CurrencyFormat::DECORATION_SYMBOL,
+            ],
+            [
+                '34.76',
+                $this->getNDecimalDigitsCurrencyType(),
+                '34.76 EUR',
+                CurrencyFormat::DECORATION_WITH_SPACE,
+                CurrencyFormat::DECORATION_ISO_CODE,
+            ],
+            [
+                '34.76',
+                $this->getNDecimalDigitsCurrencyType(),
+                '34.76EUR',
+                CurrencyFormat::DECORATION_WITHOUT_SPACE,
+                CurrencyFormat::DECORATION_ISO_CODE,
+            ],
+            [
+                '34.76',
+                $this->getNDecimalDigitsCurrencyType(2, '€', CurrencyType::BEFORE_PLACEMENT),
+                '€ 34.76',
+                CurrencyFormat::DECORATION_WITH_SPACE,
+                CurrencyFormat::DECORATION_SYMBOL,
+            ],
+            [
+                '34.76',
+                $this->getNDecimalDigitsCurrencyType(2, '€', CurrencyType::BEFORE_PLACEMENT),
+                '€34.76',
+                CurrencyFormat::DECORATION_WITHOUT_SPACE,
+                CurrencyFormat::DECORATION_SYMBOL,
+            ],
+        ];
     }
 }
