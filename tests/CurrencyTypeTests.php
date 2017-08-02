@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests;
 
-use Adsmurai\Currency\CurrencyType;
 use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
+use Adsmurai\Currency\CurrencyType;
 use PHPUnit\Framework\TestCase;
 
 class CurrencyTypeTests extends TestCase
@@ -33,6 +33,17 @@ class CurrencyTypeTests extends TestCase
         $this->assertEquals(self::EURO_NAME, $currencyType->getName());
         $this->assertEquals(self::EURO_NUM_DIGITS, $currencyType->getNumFractionalDigits());
         $this->assertEquals(self::EURO_SYMBOL_PLACEMENT, $currencyType->getSymbolPlacement());
+    }
+
+    private static function getEuroCurrencyType(): CurrencyType
+    {
+        return new CurrencyType(
+            self::EURO_ISO_CODE,
+            self::EURO_SYMBOL,
+            self::EURO_NUM_DIGITS,
+            self::EURO_SYMBOL_PLACEMENT,
+            self::EURO_NAME
+        );
     }
 
     /**
@@ -158,16 +169,5 @@ class CurrencyTypeTests extends TestCase
         );
 
         $ct1->equals($ct2);
-    }
-
-    private static function getEuroCurrencyType(): CurrencyType
-    {
-        return new CurrencyType(
-            self::EURO_ISO_CODE,
-            self::EURO_SYMBOL,
-            self::EURO_NUM_DIGITS,
-            self::EURO_SYMBOL_PLACEMENT,
-            self::EURO_NAME
-        );
     }
 }

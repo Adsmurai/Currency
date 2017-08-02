@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Currency;
 use PHPUnit\Framework\TestCase;
 
 class fromStringTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromString
-     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
-     * @covers \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
-     * @covers \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
-     * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Currency::fromString
+     * @covers       \Adsmurai\Currency\Currency::extractNumericAmount
+     * @covers       \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
+     * @covers       \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
+     * @covers       \Adsmurai\Currency\Currency::__construct
      */
     public function test_with_valid_params(string $amount, CurrencyType $currencyType)
     {
@@ -77,10 +77,10 @@ class fromStringTests extends TestCase
 
     /**
      * @dataProvider invalidParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromString
-     * @covers \Adsmurai\Currency\Currency::extractNumericAmount
-     * @covers \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
-     * @covers \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
+     * @covers       \Adsmurai\Currency\Currency::fromString
+     * @covers       \Adsmurai\Currency\Currency::extractNumericAmount
+     * @covers       \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
+     * @covers       \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid currency value
      */

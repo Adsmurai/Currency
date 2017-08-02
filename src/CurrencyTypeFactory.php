@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError;
 use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
 use Adsmurai\Currency\Contracts\CurrencyTypeFactory as CurrencyTypeFactoryInterface;
+use Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError;
 use Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError;
 
 final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
@@ -25,6 +25,14 @@ final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
         $this->currencyTypes = [];
     }
 
+    public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyTypeFactory
+    {
+        /** @var array $data */
+        $data = include $dataPath;
+
+        return self::fromDataArray($data);
+    }
+
     public static function fromDataArray(array $data): CurrencyTypeFactory
     {
         self::validateCurrenciesData($data);
@@ -32,12 +40,59 @@ final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
         return new self($data);
     }
 
-    public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyTypeFactory
+    /**
+     * @param array $currenciesData
+     *
+     * @throws InvalidCurrencyTypesDataError
+     */
+    private static function validateCurrenciesData(array $currenciesData)
     {
-        /** @var array $data */
-        $data = include $dataPath;
+        if (empty($currenciesData)) {
+            throw new InvalidCurrencyTypesDataError();
+        }
 
-        return self::fromDataArray($data);
+        foreach ($currenciesData as $ISOCode => $currencyData) {
+            if (
+                !self::hasValidISOCode($ISOCode)
+                || !self::hasValidSymbol($currencyData)
+                || !self::hasValidSymbolPlacement($currencyData)
+                || !self::hasValidNumFractionalDigits($currencyData)
+            ) {
+                throw new InvalidCurrencyTypesDataError();
+            }
+        }
+    }
+
+    private static function hasValidISOCode($ISOCode): bool
+    {
+        return \is_string($ISOCode) && !empty($ISOCode);
+    }
+
+    private static function hasValidSymbol(array $currencyData): bool
+    {
+        return
+            isset($currencyData['symbol'])
+            && \is_string($currencyData['symbol'])
+            && !empty($currencyData['symbol']);
+    }
+
+    private static function hasValidSymbolPlacement(array $currencyData): bool
+    {
+        return
+            isset($currencyData['symbolPlacement'])
+            && \is_int($currencyData['symbolPlacement'])
+            && \in_array(
+                $currencyData['symbolPlacement'],
+                [
+                    CurrencyTypeInterface::BEFORE_PLACEMENT,
+                    CurrencyTypeInterface::AFTER_PLACEMENT,
+                ]
+            );
+    }
+
+    private static function hasValidNumFractionalDigits(array $currencyData): bool
+    {
+        return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
     }
 
     public function buildFromISOCode(string $ISOCode): CurrencyTypeInterface
@@ -59,63 +114,6 @@ final class CurrencyTypeFactory implements CurrencyTypeFactoryInterface
         }
 
         return $this->currencyTypes[$ISOCode];
-    }
-
-    /**
-     * @param array $currenciesData
-     *
-     * @throws InvalidCurrencyTypesDataError
-     */
-    private static function validateCurrenciesData(array $currenciesData)
-    {
-        if (empty($currenciesData)) {
-            throw new InvalidCurrencyTypesDataError();
-        }
-
-        foreach ($currenciesData as $ISOCode => $currencyData) {
-            if (
-                   !self::hasValidISOCode($ISOCode)
-                || !self::hasValidSymbol($currencyData)
-                || !self::hasValidSymbolPlacement($currencyData)
-                || !self::hasValidNumFractionalDigits($currencyData)
-            ) {
-                throw new InvalidCurrencyTypesDataError();
-            }
-        }
-    }
-
-    private static function hasValidISOCode($ISOCode): bool
-    {
-        return \is_string($ISOCode) && !empty($ISOCode);
-    }
-
-    private static function hasValidSymbol(array $currencyData): bool
-    {
-        return
-            isset($currencyData['symbol'])
-            && \is_string($currencyData['symbol'])
-            && !empty($currencyData['symbol'])
-        ;
-    }
-
-    private static function hasValidSymbolPlacement(array $currencyData): bool
-    {
-        return
-            isset($currencyData['symbolPlacement'])
-            && \is_int($currencyData['symbolPlacement'])
-            && \in_array(
-                $currencyData['symbolPlacement'],
-                [
-                    CurrencyTypeInterface::BEFORE_PLACEMENT,
-                    CurrencyTypeInterface::AFTER_PLACEMENT,
-                ]
-            )
-        ;
-    }
-
-    private static function hasValidNumFractionalDigits(array $currencyData): bool
-    {
-        return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
     }
 
     /** @return string[] */

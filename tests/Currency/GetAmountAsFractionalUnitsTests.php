@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Currency;
 use PHPUnit\Framework\TestCase;
 
 class getAmountAsFractionalUnitsTests extends TestCase
 {
     /**
      * @dataProvider stringParamsProvider
-     * @covers \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     * @covers       \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
      */
     public function test_from_string(string $amount, CurrencyType $currencyType, int $numFractionalUnits)
     {
@@ -22,7 +22,7 @@ class getAmountAsFractionalUnitsTests extends TestCase
 
     /**
      * @dataProvider floatParamsProvider
-     * @covers \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     * @covers       \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
      */
     public function test_from_float(float $amount, CurrencyType $currencyType, int $numFractionalUnits)
     {
@@ -32,7 +32,7 @@ class getAmountAsFractionalUnitsTests extends TestCase
 
     /**
      * @dataProvider fractionalUnitsProvider
-     * @covers \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     * @covers       \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
      */
     public function test_from_fractional_units(CurrencyType $currencyType, int $numFractionalUnits)
     {

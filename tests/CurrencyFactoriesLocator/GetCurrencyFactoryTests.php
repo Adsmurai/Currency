@@ -25,6 +25,19 @@ class GetCurrencyFactoryTests extends TestCase
     }
 
     /**
+     * @return CurrencyTypeFactory|\Mockery\MockInterface
+     */
+    private function getCurrencyTypeFactoryMock()
+    {
+        /** @var CurrencyTypeFactory|\Mockery\MockInterface $currencyTypeFactory */
+        $currencyTypeFactory = \Mockery::mock(CurrencyTypeFactory::class);
+        $currencyTypeFactory
+            ->shouldReceive('buildFromISOCode')->andReturn(\Mockery::mock(CurrencyType::class));
+
+        return $currencyTypeFactory;
+    }
+
+    /**
      * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::__construct
      * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::getCurrencyFactory
      */
@@ -36,18 +49,5 @@ class GetCurrencyFactoryTests extends TestCase
         $currencyFactoryB = $currencyFactoriesLocator->getCurrencyFactory('EUR');
 
         $this->assertSame($currencyFactoryA, $currencyFactoryB);
-    }
-
-    /**
-     * @return CurrencyTypeFactory|\Mockery\MockInterface
-     */
-    private function getCurrencyTypeFactoryMock()
-    {
-        /** @var CurrencyTypeFactory|\Mockery\MockInterface $currencyTypeFactory */
-        $currencyTypeFactory = \Mockery::mock(CurrencyTypeFactory::class);
-        $currencyTypeFactory
-            ->shouldReceive('buildFromISOCode')->andReturn(\Mockery::mock(CurrencyType::class));
-
-        return $currencyTypeFactory;
     }
 }

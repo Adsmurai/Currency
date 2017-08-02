@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\CurrencyTypeFactory;
 
-use Adsmurai\Currency\CurrencyTypeFactory;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\CurrencyTypeFactory;
 use PHPUnit\Framework\TestCase;
 
 class BuildFromISOCodeTests extends TestCase
 {
     /**
      * @dataProvider commonCurrenciesProvider
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory
+     * @covers       \Adsmurai\Currency\CurrencyTypeFactory
      */
     public function test_with_common_currencies(string $ISOCode)
     {
@@ -29,9 +29,17 @@ class BuildFromISOCodeTests extends TestCase
         $this->assertEquals($currencyData['numFractionalDigits'], $currencyType->getNumFractionalDigits());
     }
 
+    private function getCurrenciesData(): array
+    {
+        /** @var array $currenciesData */
+        $currenciesData = include __DIR__.'/../../src/Data/CurrencyTypes.php';
+
+        return $currenciesData;
+    }
+
     /**
      * @dataProvider commonCurrenciesProvider
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory
+     * @covers       \Adsmurai\Currency\CurrencyTypeFactory
      */
     public function test_that_there_are_no_multiple_instances_for_same_currency_type(string $ISOCode)
     {
@@ -67,13 +75,5 @@ class BuildFromISOCodeTests extends TestCase
             },
             \array_keys($this->getCurrenciesData())
         );
-    }
-
-    private function getCurrenciesData(): array
-    {
-        /** @var array $currenciesData */
-        $currenciesData = include __DIR__.'/../../src/Data/CurrencyTypes.php';
-
-        return $currenciesData;
     }
 }

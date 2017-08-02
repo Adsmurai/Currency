@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests;
 
-use Adsmurai\Currency\CurrencyFactory;
-use Adsmurai\Currency\CurrencyTypeFactory;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\CurrencyFactory;
+use Adsmurai\Currency\CurrencyTypeFactory;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
@@ -25,6 +25,11 @@ class CurrencyFactoryTests extends TestCase
 
         $this->assertInstanceOf(Currency::class, $currency);
         $this->assertSame($currencyType, $currency->getCurrencyType());
+    }
+
+    private function getCurrencyType(): CurrencyType
+    {
+        return CurrencyTypeFactory::fromDataPath()->buildFromISOCode('EUR');
     }
 
     /**
@@ -67,10 +72,5 @@ class CurrencyFactoryTests extends TestCase
 
         $this->assertInstanceOf(Currency::class, $currency);
         $this->assertSame($currencyType, $currency->getCurrencyType());
-    }
-
-    private function getCurrencyType(): CurrencyType
-    {
-        return CurrencyTypeFactory::fromDataPath()->buildFromISOCode('EUR');
     }
 }

@@ -290,8 +290,8 @@ return [
         'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
     ],
     'LKR' => [
-      'numFractionalDigits' => 2,
-      'symbol' => 'Rs',
-      'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+        'numFractionalDigits' => 2,
+        'symbol' => 'Rs',
+        'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
     ],
 ];

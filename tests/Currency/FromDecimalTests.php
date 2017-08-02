@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Currency;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
@@ -14,8 +14,8 @@ class fromDecimalTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromDecimal
-     * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Currency::fromDecimal
+     * @covers       \Adsmurai\Currency\Currency::__construct
      */
     public function test_with_valid_params(Decimal $amount, CurrencyType $currencyType)
     {
@@ -27,8 +27,8 @@ class fromDecimalTests extends TestCase
 
     /**
      * @dataProvider negativeParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromDecimal
-     * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Currency::fromDecimal
+     * @covers       \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be positive
      */
