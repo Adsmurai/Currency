@@ -47,7 +47,7 @@ final class CurrencyFormat implements CurrencyFormatInterface
         $this->decorationSpace = $decorationSpace;
     }
 
-    public static function defaultFormatting(): CurrencyFormatInterface
+    public static function default(): CurrencyFormatInterface
     {
         return new self();
     }

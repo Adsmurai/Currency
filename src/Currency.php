@@ -149,7 +149,7 @@ final class Currency implements CurrencyInterface
     public function format(CurrencyFormatInterface $currencyFormat = null): string
     {
         if (is_null($currencyFormat)) {
-            $currencyFormat = CurrencyFormat::defaultFormatting();
+            $currencyFormat = CurrencyFormat::default();
         }
 
         $nDecimals = $currencyFormat->getPrecision();
