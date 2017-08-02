@@ -56,17 +56,46 @@ final class CurrencyFormat implements CurrencyFormatInterface
         string $decimalsSeparator = '.',
         string $thousandsSeparator = '',
         int $decorationType = self::DECORATION_SYMBOL,
-        int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
-        int $extraPrecision = 0,
-        int $precision = null
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE
+    ): CurrencyFormatInterface {
+        return new self(
+            $decimalsSeparator,
+            $thousandsSeparator,
+            $decorationType,
+            $decorationSpace
+        );
+    }
+
+    public static function fromParametersWithPrecision(
+        int $precision,
+        string $decimalsSeparator = '.',
+        string $thousandsSeparator = '',
+        int $decorationType = self::DECORATION_SYMBOL,
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE
     ): CurrencyFormatInterface {
         return new self(
             $decimalsSeparator,
             $thousandsSeparator,
             $decorationType,
             $decorationSpace,
-            $extraPrecision,
+            0,
             $precision
+        );
+    }
+
+    public static function fromParametersWithExtraPrecision(
+        int $extraPrecision,
+        string $decimalsSeparator = '.',
+        string $thousandsSeparator = '',
+        int $decorationType = self::DECORATION_SYMBOL,
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE
+    ): CurrencyFormatInterface {
+        return new self(
+            $decimalsSeparator,
+            $thousandsSeparator,
+            $decorationType,
+            $decorationSpace,
+            $extraPrecision
         );
     }
 

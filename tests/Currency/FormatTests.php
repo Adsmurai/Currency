@@ -52,13 +52,7 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = CurrencyFormat::fromParameters(
-            '.',
-            '',
-            CurrencyFormat::DECORATION_SYMBOL,
-            CurrencyFormat::DECORATION_WITHOUT_SPACE,
-            $extraPrecision
-        );
+        $currencyFormat = CurrencyFormat::fromParametersWithExtraPrecision($extraPrecision);
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
@@ -73,14 +67,7 @@ class formatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Currency::fromString($amount, $currencyType);
-        $currencyFormat = CurrencyFormat::fromParameters(
-            '.',
-            '',
-            CurrencyFormat::DECORATION_SYMBOL,
-            CurrencyFormat::DECORATION_WITHOUT_SPACE,
-            3,
-            $precision
-        );
+        $currencyFormat = CurrencyFormat::fromParametersWithPrecision($precision);
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
@@ -98,8 +85,7 @@ class formatTests extends TestCase
         $currencyFormat = CurrencyFormat::fromParameters(
             '.',
             '',
-            CurrencyFormat::DECORATION_NO_DECORATION,
-            CurrencyFormat::DECORATION_WITHOUT_SPACE
+            CurrencyFormat::DECORATION_NO_DECORATION
         );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
@@ -117,8 +103,7 @@ class formatTests extends TestCase
         $currencyFormat = CurrencyFormat::fromParameters(
             '.',
             '',
-            CurrencyFormat::DECORATION_ISO_CODE,
-            CurrencyFormat::DECORATION_WITHOUT_SPACE
+            CurrencyFormat::DECORATION_ISO_CODE
         );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
