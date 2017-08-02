@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
 use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Currency;
 use PHPUnit\Framework\TestCase;
 
 class fromFloatTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromFloat
-     * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Currency::fromFloat
+     * @covers       \Adsmurai\Currency\Currency::__construct
      */
     public function test_with_valid_params(float $amount, CurrencyType $currencyType)
     {
@@ -26,8 +26,8 @@ class fromFloatTests extends TestCase
 
     /**
      * @dataProvider negativeParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromFloat
-     * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Currency::fromFloat
+     * @covers       \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be positive
      */
@@ -38,8 +38,8 @@ class fromFloatTests extends TestCase
 
     /**
      * @dataProvider infiniteParamsProvider
-     * @covers \Adsmurai\Currency\Currency::fromFloat
-     * @covers \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Currency::fromFloat
+     * @covers       \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be finite
      */

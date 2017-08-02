@@ -10,12 +10,19 @@ use Mockery\MockInterface;
 final class CurrencyTypeMocks
 {
     /**  @return CurrencyType|MockInterface */
-    public static function getCurrencyTypeDummyMock(): CurrencyType
+    public static function getComparableTwoDecimalDigitsCurrencyType(bool $equals = true): CurrencyType
     {
         /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = \Mockery::mock(CurrencyType::class);
+        $currencyType = self::getTwoDecimalDigitsCurrencyType();
+        $currencyType->shouldReceive('equals')->andReturn($equals);
 
         return $currencyType;
+    }
+
+    /**  @return CurrencyType|MockInterface */
+    public static function getTwoDecimalDigitsCurrencyType(): CurrencyType
+    {
+        return self::getNDecimalDigitsCurrencyType(2);
     }
 
     /**  @return CurrencyType|MockInterface */
@@ -30,17 +37,10 @@ final class CurrencyTypeMocks
     }
 
     /**  @return CurrencyType|MockInterface */
-    public static function getTwoDecimalDigitsCurrencyType(): CurrencyType
-    {
-        return self::getNDecimalDigitsCurrencyType(2);
-    }
-
-    /**  @return CurrencyType|MockInterface */
-    public static function getComparableTwoDecimalDigitsCurrencyType(bool $equals = true): CurrencyType
+    public static function getCurrencyTypeDummyMock(): CurrencyType
     {
         /** @var CurrencyType|MockInterface $currencyType */
-        $currencyType = self::getTwoDecimalDigitsCurrencyType();
-        $currencyType->shouldReceive('equals')->andReturn($equals);
+        $currencyType = \Mockery::mock(CurrencyType::class);
 
         return $currencyType;
     }

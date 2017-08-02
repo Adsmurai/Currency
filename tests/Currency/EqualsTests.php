@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
 use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
+use Adsmurai\Currency\Currency;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
