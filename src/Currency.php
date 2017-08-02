@@ -179,10 +179,9 @@ final class Currency implements CurrencyInterface
      */
     private function decorate(string $number, CurrencyFormatInterface $currencyFormat): string
     {
-        $separator = '';
-        if (CurrencyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace()) {
-            $separator = ' ';
-        }
+        $separator = (CurrencyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace())
+            ? ' '
+            : '';
         switch ($currencyFormat->getDecorationType()) {
             case CurrencyFormat::DECORATION_NO_DECORATION:
                 return $number;
