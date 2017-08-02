@@ -9,6 +9,8 @@ interface CurrencyFormat
     const DECORATION_ISO_CODE = 2;
     const DECORATION_WITH_SPACE = 1;
     const DECORATION_WITHOUT_SPACE = 0;
+    const DEFAULT_DECIMALS_SEPARATOR = '.';
+    const DEFAULT_THOUSANDS_SEPARATOR = '';
 
     public function getDecimalsSeparator(): string;
 

@@ -32,8 +32,8 @@ final class CurrencyFormat implements CurrencyFormatInterface
     private $decorationSpace;
 
     private function __construct(
-        string $decimalsSeparator = '.',
-        string $thousandsSeparator = '',
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
         int $extraPrecision = 0,
@@ -53,8 +53,8 @@ final class CurrencyFormat implements CurrencyFormatInterface
     }
 
     public static function fromParameters(
-        string $decimalsSeparator = '.',
-        string $thousandsSeparator = '',
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE
     ): CurrencyFormatInterface {
@@ -68,8 +68,8 @@ final class CurrencyFormat implements CurrencyFormatInterface
 
     public static function fromParametersWithPrecision(
         int $precision,
-        string $decimalsSeparator = '.',
-        string $thousandsSeparator = '',
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE
     ): CurrencyFormatInterface {
@@ -85,8 +85,8 @@ final class CurrencyFormat implements CurrencyFormatInterface
 
     public static function fromParametersWithExtraPrecision(
         int $extraPrecision,
-        string $decimalsSeparator = '.',
-        string $thousandsSeparator = '',
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE
     ): CurrencyFormatInterface {

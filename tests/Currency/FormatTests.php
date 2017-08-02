@@ -83,8 +83,8 @@ class formatTests extends TestCase
         //$this->markTestSkipped();
         $currency = Currency::fromString($amount, $currencyType);
         $currencyFormat = CurrencyFormat::fromParameters(
-            '.',
-            '',
+            CurrencyFormat::DEFAULT_DECIMALS_SEPARATOR,
+            CurrencyFormat::DEFAULT_THOUSANDS_SEPARATOR,
             CurrencyFormat::DECORATION_NO_DECORATION
         );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
@@ -101,8 +101,8 @@ class formatTests extends TestCase
     ) {
         $currency = Currency::fromString($amount, $currencyType);
         $currencyFormat = CurrencyFormat::fromParameters(
-            '.',
-            '',
+            CurrencyFormat::DEFAULT_DECIMALS_SEPARATOR,
+            CurrencyFormat::DEFAULT_THOUSANDS_SEPARATOR,
             CurrencyFormat::DECORATION_ISO_CODE
         );
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
@@ -121,8 +121,8 @@ class formatTests extends TestCase
     ) {
         $currency = Currency::fromString($amount, $currencyType);
         $currencyFormat = CurrencyFormat::fromParameters(
-            '.',
-            '',
+            CurrencyFormat::DEFAULT_DECIMALS_SEPARATOR,
+            CurrencyFormat::DEFAULT_THOUSANDS_SEPARATOR,
             $decorationType,
             $decorationSpace
         );
