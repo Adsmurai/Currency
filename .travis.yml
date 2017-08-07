@@ -18,7 +18,7 @@ install:
    - php ./build/bin/composer.phar install
 
 script:
-   - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml tests/
+   - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml
 
 after_script:
    - wget --output-document=build/bin/ocular.phar https://scrutinizer-ci.com/ocular.phar
