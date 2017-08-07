@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
+use Adsmurai\Currency\Contracts\Currency as CurrencyContract;
 use Adsmurai\Currency\Errors\InconsistentCurrenciesError;
 use InvalidArgumentException;
 
-final class Currency implements CurrencyInterface
+final class Currency implements CurrencyContract
 {
     private $ISOCode;
 
@@ -74,23 +74,23 @@ final class Currency implements CurrencyInterface
         return $this->symbolPlacement;
     }
 
-    public function equals(CurrencyInterface $currencyType): bool
+    public function equals(CurrencyContract $currency): bool
     {
-        if ($this === $currencyType) {
+        if ($this === $currency) {
             return true;
         }
 
-        if ($currencyType->getISOCode() !== $this->ISOCode) {
+        if ($currency->getISOCode() !== $this->ISOCode) {
             return false;
         }
 
         if (!(
-            $currencyType->getName() === $this->name &&
-            $currencyType->getSymbol() === $this->symbol &&
-            $currencyType->getNumFractionalDigits() === $this->numFractionalDigits &&
-            $currencyType->getSymbolPlacement() === $this->symbolPlacement
+            $currency->getName() === $this->name &&
+            $currency->getSymbol() === $this->symbol &&
+            $currency->getNumFractionalDigits() === $this->numFractionalDigits &&
+            $currency->getSymbolPlacement() === $this->symbolPlacement
         )) {
-            throw new InconsistentCurrenciesError($this, $currencyType);
+            throw new InconsistentCurrenciesError($this, $currency);
         }
 
         return true;

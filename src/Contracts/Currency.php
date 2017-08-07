@@ -17,5 +17,5 @@ interface Currency
 
     public function getSymbolPlacement(): int;
 
-    public function equals(Currency $currencyType): bool;
+    public function equals(Currency $currency): bool;
 }
