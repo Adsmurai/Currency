@@ -5,205 +5,94 @@ declare(strict_types=1);
 namespace Adsmurai\Currency;
 
 use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyFormat as CurrencyFormatInterface;
-use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Errors\InconsistentCurrenciesError;
 use InvalidArgumentException;
-use Litipk\BigNumbers\Decimal;
-use Litipk\BigNumbers\Errors\InfiniteInputError;
-use Litipk\BigNumbers\Errors\NaNInputError;
 
 final class Currency implements CurrencyInterface
 {
-    const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9][0-9]*|[0-9])(\.[0-9]+)?))';
-    const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
-    const INNER_FRACTIONAL_DIGITS = 8;
+    private $ISOCode;
 
-    /** @var Decimal */
-    private $amount;
+    private $name;
 
-    /** @var CurrencyType */
-    private $currencyType;
+    private $symbol;
 
-    /**
-     * @param Decimal      $amount
-     * @param CurrencyType $currencyType
-     */
-    private function __construct(Decimal $amount, CurrencyType $currencyType)
-    {
-        if ($amount->isNegative()) {
-            throw new InvalidArgumentException('Currency amounts must be positive');
+    private $numFractionalDigits;
+
+    private $symbolPlacement;
+
+    public function __construct(
+        string $ISOCode,
+        string $symbol,
+        int $numFractionalDigits,
+        int $symbolPlacement = self::AFTER_PLACEMENT,
+        string $name = ''
+    ) {
+        $symbol = \trim($symbol);
+        $name = \trim($name);
+
+        if (!in_array($symbolPlacement, [self::BEFORE_PLACEMENT, self::AFTER_PLACEMENT])) {
+            throw new InvalidArgumentException('Invalid symbol placement');
         }
 
-        $this->amount = $amount;
-        $this->currencyType = $currencyType;
-    }
-
-    public static function fromFloat(float $amount, CurrencyType $currencyType): Currency
-    {
-        try {
-            return new self(
-                Decimal::fromFloat($amount, self::INNER_FRACTIONAL_DIGITS),
-                $currencyType
-            );
-        } catch (InfiniteInputError $e) {
-            throw new InvalidArgumentException('Currency amounts must be finite', 0, $e);
-        } catch (NaNInputError $e) {
-            throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
-        }
-    }
-
-    public static function fromFractionalUnits(int $amount, CurrencyType $currencyType): Currency
-    {
-        $decimalAmount = Decimal::fromInteger($amount)
-            ->div(
-                Decimal::fromInteger(10 ** $currencyType->getNumFractionalDigits()),
-                self::INNER_FRACTIONAL_DIGITS
-            );
-
-        return new self($decimalAmount, $currencyType);
-    }
-
-    public static function fromString(string $amount, CurrencyType $currencyType): Currency
-    {
-        return new self(
-            self::extractNumericAmount($amount, $currencyType),
-            $currencyType
-        );
-    }
-
-    private static function extractNumericAmount(string $amount, CurrencyType $currencyType): Decimal
-    {
-        try {
-            if (
-                1 === \preg_match(self::SIMPLE_CURRENCY_PATTERN, $amount, $matches) ||
-                1 === \preg_match(self::getAmountPlusIsoCodePattern($currencyType), $amount, $matches) ||
-                1 === \preg_match(self::getAmountPlusSymbolPattern($currencyType), $amount, $matches)
-            ) {
-                return Decimal::fromString($matches['amount'], self::INNER_FRACTIONAL_DIGITS);
-            } else {
-                throw new InvalidArgumentException('Invalid currency value');
-            }
-        } catch (NaNInputError $e) {
-            throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
-        }
-    }
-
-    /**
-     * @param CurrencyType $currencyType
-     *
-     * @return string
-     */
-    private static function getAmountPlusIsoCodePattern(CurrencyType $currencyType): string
-    {
-        $amountPlusIsoCodePattern = '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currencyType->getISOCode().'$/x';
-
-        return $amountPlusIsoCodePattern;
-    }
-
-    private static function getAmountPlusSymbolPattern(CurrencyType $currencyType): string
-    {
-        $escapedSymbol = \preg_quote($currencyType->getSymbol());
-
-        return (CurrencyType::BEFORE_PLACEMENT === $currencyType->getSymbolPlacement())
-            ? '/^'.$escapedSymbol.'\s*'.self::DECIMAL_NUMBER_REGEXP.'$/x'
-            : '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$escapedSymbol.'$/x';
-    }
-
-    public static function fromDecimal(Decimal $amount, CurrencyType $currencyType): Currency
-    {
-        return new self(
-            Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
-            $currencyType
-        );
-    }
-
-    public function getCurrencyType(): CurrencyType
-    {
-        return $this->currencyType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAmountAsDecimal(): Decimal
-    {
-        return $this->amount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAmountAsFractionalUnits(): int
-    {
-        return $this->amount
-            ->mul(
-                Decimal::fromInteger(10 ** $this->currencyType->getNumFractionalDigits()),
-                self::INNER_FRACTIONAL_DIGITS
-            )
-            ->asInteger();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function format(CurrencyFormatInterface $currencyFormat = null): string
-    {
-        if (is_null($currencyFormat)) {
-            $currencyFormat = CurrencyFormat::default();
+        if ($numFractionalDigits < 0 || $numFractionalDigits > 8) {
+            throw new InvalidArgumentException('Invalid number of fractional digits');
         }
 
-        $nDecimals = $currencyFormat->getPrecision();
-        if (is_null($nDecimals)) {
-            $nDecimals = $this->currencyType->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
+        if ('' === $symbol) {
+            throw new InvalidArgumentException('Empty symbol');
         }
 
-        $amount = Decimal::fromDecimal($this->amount, $nDecimals);
-
-        $number = ('' === $currencyFormat->getThousandsSeparator())
-            ? \str_replace('.', $currencyFormat->getDecimalsSeparator(), $amount->__toString())  // This is safer!
-            : \number_format(
-                $amount->asFloat(),
-                $nDecimals,
-                $currencyFormat->getDecimalsSeparator(),
-                $currencyFormat->getThousandsSeparator()
-            );
-
-        return $this->decorate($number, $currencyFormat);
+        $this->ISOCode = $ISOCode;
+        $this->symbol = $symbol;
+        $this->numFractionalDigits = $numFractionalDigits;
+        $this->symbolPlacement = $symbolPlacement;
+        $this->name = $name;
     }
 
-    /**
-     * @param string                  $number
-     * @param CurrencyFormatInterface $currencyFormat
-     *
-     * @return string
-     */
-    private function decorate(string $number, CurrencyFormatInterface $currencyFormat): string
+    public function getISOCode(): string
     {
-        $separator = (CurrencyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace())
-            ? ' '
-            : '';
-        switch ($currencyFormat->getDecorationType()) {
-            case CurrencyFormat::DECORATION_NO_DECORATION:
-                return $number;
-                break;
-            case CurrencyFormat::DECORATION_ISO_CODE:
-                return $number.$separator.$this->currencyType->getISOCode();
-                break;
-            default:
-                return (CurrencyType::BEFORE_PLACEMENT === $this->currencyType->getSymbolPlacement())
-                    ? $this->currencyType->getSymbol().$separator.$number
-                    : $number.$separator.$this->currencyType->getSymbol();
+        return $this->ISOCode;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getSymbol(): string
+    {
+        return $this->symbol;
+    }
+
+    public function getNumFractionalDigits(): int
+    {
+        return $this->numFractionalDigits;
+    }
+
+    public function getSymbolPlacement(): int
+    {
+        return $this->symbolPlacement;
+    }
+
+    public function equals(CurrencyInterface $currencyType): bool
+    {
+        if ($this === $currencyType) {
+            return true;
         }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function equals(CurrencyInterface $currency): bool
-    {
-        return $currency === $this || (
-                $this->amount->equals($currency->getAmountAsDecimal()) &&
-                $this->currencyType->equals($currency->getCurrencyType())
-            );
+        if ($currencyType->getISOCode() !== $this->ISOCode) {
+            return false;
+        }
+
+        if (!(
+            $currencyType->getName() === $this->name &&
+            $currencyType->getSymbol() === $this->symbol &&
+            $currencyType->getNumFractionalDigits() === $this->numFractionalDigits &&
+            $currencyType->getSymbolPlacement() === $this->symbolPlacement
+        )) {
+            throw new InconsistentCurrenciesError($this, $currencyType);
+        }
+
+        return true;
     }
 }

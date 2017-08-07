@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Currency;
+use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
+use Adsmurai\Currency\Money;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
@@ -33,20 +33,20 @@ class equalsTests extends TestCase
     {
         return [
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromFractionalUnits(3475, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromFractionalUnits(3475, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromDecimal(
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromDecimal(
                     Decimal::fromString('34.75'),
                     CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
                 ),
@@ -58,43 +58,43 @@ class equalsTests extends TestCase
     {
         return [
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromString('34.76', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.76', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromFloat(34.76, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromFloat(34.76, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromFractionalUnits(3476, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromFractionalUnits(3476, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Currency::fromDecimal(
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+                Money::fromDecimal(
                     Decimal::fromString('34.76'),
                     CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
                 ),
             ],
 
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Money::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromFractionalUnits(
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Money::fromFractionalUnits(
                     3475,
                     CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
                 ),
             ],
             [
-                Currency::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Currency::fromDecimal(
+                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+                Money::fromDecimal(
                     Decimal::fromString('34.75'),
                     CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
                 ),

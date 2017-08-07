@@ -2,24 +2,24 @@
 
 namespace Adsmurai\Currency\Tests\Errors;
 
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\Errors\InconsistentCurrencyTypesError;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\Errors\InconsistentCurrenciesError;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class InconsistentCurrencyTypesErrorTests extends TestCase
 {
     /**
-     * @covers \Adsmurai\Currency\Errors\InconsistentCurrencyTypesError
+     * @covers \Adsmurai\Currency\Errors\InconsistentCurrenciesError
      */
     public function test___construct_with_valid_params()
     {
-        /** @var CurrencyType $ct1 */
-        $ct1 = Mockery::mock(CurrencyType::class);
-        /** @var CurrencyType $ct2 */
-        $ct2 = Mockery::mock(CurrencyType::class);
+        /** @var Currency $ct1 */
+        $ct1 = Mockery::mock(Currency::class);
+        /** @var Currency $ct2 */
+        $ct2 = Mockery::mock(Currency::class);
 
-        $e = new InconsistentCurrencyTypesError($ct1, $ct2);
+        $e = new InconsistentCurrenciesError($ct1, $ct2);
 
         $this->assertContains($ct1, $e->getInconsistentCurrencyTypes());
         $this->assertContains($ct2, $e->getInconsistentCurrencyTypes());
@@ -27,15 +27,15 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\Errors\InconsistentCurrencyTypesError
+     * @covers \Adsmurai\Currency\Errors\InconsistentCurrenciesError
      * @expectedException \LogicException
      * @expectedExceptionMessage Trying to construct InconsistentCurrencyTypesError with exactly equal CurrencyType instances
      */
     public function test___construct_with_invalid_params()
     {
-        /** @var CurrencyType $ct1 */
-        $ct1 = Mockery::mock(CurrencyType::class);
+        /** @var Currency $ct1 */
+        $ct1 = Mockery::mock(Currency::class);
 
-        new InconsistentCurrencyTypesError($ct1, $ct1);
+        new InconsistentCurrenciesError($ct1, $ct1);
     }
 }

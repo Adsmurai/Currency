@@ -2,9 +2,9 @@
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\CurrencyFormat as CurrencyFormatInterface;
+use Adsmurai\Currency\Contracts\MoneyFormat as MoneyFormatInterface;
 
-final class CurrencyFormat implements CurrencyFormatInterface
+final class MoneyFormat implements MoneyFormatInterface
 {
     /**
      * @var string
@@ -47,7 +47,7 @@ final class CurrencyFormat implements CurrencyFormatInterface
         $this->decorationSpace = $decorationSpace;
     }
 
-    public static function default(): CurrencyFormatInterface
+    public static function default(): MoneyFormatInterface
     {
         return new self();
     }
@@ -57,7 +57,7 @@ final class CurrencyFormat implements CurrencyFormatInterface
         string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE
-    ): CurrencyFormatInterface {
+    ): MoneyFormatInterface {
         return new self(
             $decimalsSeparator,
             $thousandsSeparator,
@@ -72,7 +72,7 @@ final class CurrencyFormat implements CurrencyFormatInterface
         string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE
-    ): CurrencyFormatInterface {
+    ): MoneyFormatInterface {
         return new self(
             $decimalsSeparator,
             $thousandsSeparator,
@@ -89,7 +89,7 @@ final class CurrencyFormat implements CurrencyFormatInterface
         string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE
-    ): CurrencyFormatInterface {
+    ): MoneyFormatInterface {
         return new self(
             $decimalsSeparator,
             $thousandsSeparator,

@@ -2,7 +2,7 @@
 
 namespace Adsmurai\Currency\Contracts;
 
-interface CurrencyFormat
+interface MoneyFormat
 {
     const DECORATION_NO_DECORATION = 0;
     const DECORATION_SYMBOL = 1;

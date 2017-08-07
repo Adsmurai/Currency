@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Currency;
+use Adsmurai\Currency\Money;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
 class BasicGetterTests extends TestCase
 {
     /**
-     * @covers \Adsmurai\Currency\Currency::getAmountAsDecimal
-     * @covers \Adsmurai\Currency\Currency::getCurrencyType
+     * @covers \Adsmurai\Currency\Money::getAmountAsDecimal
+     * @covers \Adsmurai\Currency\Money::getCurrencyType
      */
     public function test_basic_getters()
     {
@@ -21,7 +21,7 @@ class BasicGetterTests extends TestCase
         $amount = Decimal::fromString('34.56');
         $currencyType = CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType();
 
-        $currency = Currency::fromDecimal($amount, $currencyType);
+        $currency = Money::fromDecimal($amount, $currencyType);
 
         $this->assertSame($amount, $currency->getAmountAsDecimal());
         $this->assertSame($currencyType, $currency->getCurrencyType());

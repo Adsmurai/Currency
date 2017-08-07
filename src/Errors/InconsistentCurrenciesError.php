@@ -3,17 +3,17 @@
 namespace Adsmurai\Currency\Errors;
 
 use Adsmurai\Currency\Contracts\CurrencyError;
-use Adsmurai\Currency\Contracts\CurrencyType;
+use Adsmurai\Currency\Contracts\Currency;
 use LogicException;
 
-final class InconsistentCurrencyTypesError extends LogicException implements CurrencyError
+final class InconsistentCurrenciesError extends LogicException implements CurrencyError
 {
-    /** @var CurrencyType */
+    /** @var Currency */
     private $ct1;
-    /** @var CurrencyType */
+    /** @var Currency */
     private $ct2;
 
-    public function __construct(CurrencyType $ct1, CurrencyType $ct2)
+    public function __construct(Currency $ct1, Currency $ct2)
     {
         $this->ct1 = $ct1;
         $this->ct2 = $ct2;
@@ -28,7 +28,7 @@ final class InconsistentCurrencyTypesError extends LogicException implements Cur
     }
 
     /**
-     * @return CurrencyType[]
+     * @return Currency[]
      */
     public function getInconsistentCurrencyTypes(): array
     {
