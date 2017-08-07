@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\CurrencyFactoriesLocator;
 
+use Adsmurai\Currency\Contracts\MoneyFactory;
+use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Contracts\CurrencyFactory;
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\Contracts\CurrencyTypeFactory;
 use Adsmurai\Currency\CurrencyFactoriesLocator;
 use PHPUnit\Framework\TestCase;
 
@@ -20,19 +20,19 @@ class GetCurrencyFactoryTests extends TestCase
     {
         $currencyFactoriesLocator = new CurrencyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 
-        $this->assertInstanceOf(CurrencyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('EUR'));
-        $this->assertInstanceOf(CurrencyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('USD'));
+        $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('EUR'));
+        $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('USD'));
     }
 
     /**
-     * @return CurrencyTypeFactory|\Mockery\MockInterface
+     * @return CurrencyFactory|\Mockery\MockInterface
      */
     private function getCurrencyTypeFactoryMock()
     {
-        /** @var CurrencyTypeFactory|\Mockery\MockInterface $currencyTypeFactory */
-        $currencyTypeFactory = \Mockery::mock(CurrencyTypeFactory::class);
+        /** @var CurrencyFactory|\Mockery\MockInterface $currencyTypeFactory */
+        $currencyTypeFactory = \Mockery::mock(CurrencyFactory::class);
         $currencyTypeFactory
-            ->shouldReceive('buildFromISOCode')->andReturn(\Mockery::mock(CurrencyType::class));
+            ->shouldReceive('buildFromISOCode')->andReturn(\Mockery::mock(Currency::class));
 
         return $currencyTypeFactory;
     }

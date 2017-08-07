@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests;
 
-use Adsmurai\Currency\Contracts\CurrencyType as CurrencyTypeInterface;
-use Adsmurai\Currency\CurrencyType;
+use Adsmurai\Currency\Contracts\Currency as CurrencyTypeInterface;
+use Adsmurai\Currency\Currency;
 use PHPUnit\Framework\TestCase;
 
 class CurrencyTypeTests extends TestCase
@@ -35,9 +35,9 @@ class CurrencyTypeTests extends TestCase
         $this->assertEquals(self::EURO_SYMBOL_PLACEMENT, $currencyType->getSymbolPlacement());
     }
 
-    private static function getEuroCurrencyType(): CurrencyType
+    private static function getEuroCurrencyType(): Currency
     {
-        return new CurrencyType(
+        return new Currency(
             self::EURO_ISO_CODE,
             self::EURO_SYMBOL,
             self::EURO_NUM_DIGITS,
@@ -47,13 +47,13 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::__construct
+     * @covers \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid number of fractional digits
      */
     public function test__construct_with_negative_num_of_fractional_digits()
     {
-        new CurrencyType(
+        new Currency(
             self::EURO_ISO_CODE,
             '',
             -1,
@@ -63,13 +63,13 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::__construct
+     * @covers \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid symbol placement
      */
     public function test__construct_with_invalid_symbol_placement()
     {
-        new CurrencyType(
+        new Currency(
             self::EURO_ISO_CODE,
             '',
             self::EURO_NUM_DIGITS,
@@ -79,13 +79,13 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::__construct
+     * @covers \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Empty symbol
      */
     public function test__construct_with_empty_symbol()
     {
-        new CurrencyType(
+        new Currency(
             self::EURO_ISO_CODE,
             '',
             self::EURO_NUM_DIGITS,
@@ -95,13 +95,13 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::__construct
+     * @covers \Adsmurai\Currency\Currency::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Empty symbol
      */
     public function test__construct_with_almost_empty_symbol()
     {
-        new CurrencyType(
+        new Currency(
             self::EURO_ISO_CODE,
             '    ',
             self::EURO_NUM_DIGITS,
@@ -111,7 +111,7 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::equals
+     * @covers \Adsmurai\Currency\Currency::equals
      */
     public function test_equals_with_equal_CurrencyType_instances()
     {
@@ -123,7 +123,7 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::equals
+     * @covers \Adsmurai\Currency\Currency::equals
      */
     public function test_equals_with_same_CurrencyType_instances()
     {
@@ -133,13 +133,13 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::equals
+     * @covers \Adsmurai\Currency\Currency::equals
      */
     public function test_equals_with_different_CurrencyType_instances()
     {
         $ct1 = self::getEuroCurrencyType();
 
-        $ct2 = new CurrencyType(
+        $ct2 = new Currency(
             self::USD_ISO_CODE,
             self::USD_SYMBOL,
             self::USD_NUM_DIGITS,
@@ -152,15 +152,15 @@ class CurrencyTypeTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyType::equals
-     * @expectedException \Adsmurai\Currency\Errors\InconsistentCurrencyTypesError
+     * @covers \Adsmurai\Currency\Currency::equals
+     * @expectedException \Adsmurai\Currency\Errors\InconsistentCurrenciesError
      * @expectedExceptionMessage Same ISO currency code but different currency settings
      */
     public function test_equals_with_ambiguously_similar_CurrencyType_instances()
     {
         $ct1 = self::getEuroCurrencyType();
 
-        $ct2 = new CurrencyType(
+        $ct2 = new Currency(
             self::EURO_ISO_CODE,
             self::EURO_SYMBOL,
             4,

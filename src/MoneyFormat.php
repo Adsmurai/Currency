@@ -2,9 +2,9 @@
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\CurrencyFormat as CurrencyFormatInterface;
+use Adsmurai\Currency\Contracts\MoneyFormat as CurrencyFormatInterface;
 
-final class CurrencyFormat implements CurrencyFormatInterface
+final class MoneyFormat implements CurrencyFormatInterface
 {
     /**
      * @var string

@@ -4,36 +4,36 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\Currency;
+use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
 class fromFractionalUnitsTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::fromFractionalUnits
-     * @covers       \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Money::fromFractionalUnits
+     * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(int $amount, CurrencyType $currencyType)
+    public function test_with_valid_params(int $amount, Currency $currencyType)
     {
-        $currency = Currency::fromFractionalUnits($amount, $currencyType);
+        $currency = Money::fromFractionalUnits($amount, $currencyType);
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency);
-        $this->assertInstanceOf(Currency::class, $currency);
+        $this->assertInstanceOf(Money::class, $currency);
     }
 
     /**
      * @dataProvider negativeParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::fromFractionalUnits
-     * @covers       \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Money::fromFractionalUnits
+     * @covers       \Adsmurai\Currency\Money::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be positive
      */
-    public function test_with_negative_params(int $amount, CurrencyType $currencyType)
+    public function test_with_negative_params(int $amount, Currency $currencyType)
     {
-        Currency::fromFractionalUnits($amount, $currencyType);
+        Money::fromFractionalUnits($amount, $currencyType);
     }
 
     public function validParamsProvider(): array

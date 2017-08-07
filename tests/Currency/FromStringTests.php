@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\Currency;
+use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
 class fromStringTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::fromString
-     * @covers       \Adsmurai\Currency\Currency::extractNumericAmount
-     * @covers       \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
-     * @covers       \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
-     * @covers       \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Money::fromString
+     * @covers       \Adsmurai\Currency\Money::extractNumericAmount
+     * @covers       \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
+     * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
+     * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(string $amount, CurrencyType $currencyType)
+    public function test_with_valid_params(string $amount, Currency $currencyType)
     {
-        $currency = Currency::fromString($amount, $currencyType);
+        $currency = Money::fromString($amount, $currencyType);
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency);
-        $this->assertInstanceOf(Currency::class, $currency);
+        $this->assertInstanceOf(Money::class, $currency);
     }
 
     public function validParamsProvider(): array
@@ -77,16 +77,16 @@ class fromStringTests extends TestCase
 
     /**
      * @dataProvider invalidParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::fromString
-     * @covers       \Adsmurai\Currency\Currency::extractNumericAmount
-     * @covers       \Adsmurai\Currency\Currency::getAmountPlusIsoCodePattern
-     * @covers       \Adsmurai\Currency\Currency::getAmountPlusSymbolPattern
+     * @covers       \Adsmurai\Currency\Money::fromString
+     * @covers       \Adsmurai\Currency\Money::extractNumericAmount
+     * @covers       \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
+     * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid currency value
      */
-    public function test_with_invalid_params(string $amount, CurrencyType $currencyType)
+    public function test_with_invalid_params(string $amount, Currency $currencyType)
     {
-        Currency::fromString($amount, $currencyType);
+        Money::fromString($amount, $currencyType);
     }
 
     public function invalidParamsProvider(): array

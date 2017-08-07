@@ -4,39 +4,39 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\Currency;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
 class getAmountAsFractionalUnitsTests extends TestCase
 {
     /**
      * @dataProvider stringParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
-    public function test_from_string(string $amount, CurrencyType $currencyType, int $numFractionalUnits)
+    public function test_from_string(string $amount, Currency $currencyType, int $numFractionalUnits)
     {
-        $currency = Currency::fromString($amount, $currencyType);
+        $currency = Money::fromString($amount, $currencyType);
         $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
     }
 
     /**
      * @dataProvider floatParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
-    public function test_from_float(float $amount, CurrencyType $currencyType, int $numFractionalUnits)
+    public function test_from_float(float $amount, Currency $currencyType, int $numFractionalUnits)
     {
-        $currency = Currency::fromFloat($amount, $currencyType);
+        $currency = Money::fromFloat($amount, $currencyType);
         $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
     }
 
     /**
      * @dataProvider fractionalUnitsProvider
-     * @covers       \Adsmurai\Currency\Currency::getAmountAsFractionalUnits
+     * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
-    public function test_from_fractional_units(CurrencyType $currencyType, int $numFractionalUnits)
+    public function test_from_fractional_units(Currency $currencyType, int $numFractionalUnits)
     {
-        $currency = Currency::fromFractionalUnits($numFractionalUnits, $currencyType);
+        $currency = Money::fromFractionalUnits($numFractionalUnits, $currencyType);
         $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
     }
 

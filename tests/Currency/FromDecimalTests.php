@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\Currency;
+use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\Money;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
@@ -14,27 +14,27 @@ class fromDecimalTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::fromDecimal
-     * @covers       \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Money::fromDecimal
+     * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(Decimal $amount, CurrencyType $currencyType)
+    public function test_with_valid_params(Decimal $amount, Currency $currencyType)
     {
-        $currency = Currency::fromDecimal($amount, $currencyType);
+        $currency = Money::fromDecimal($amount, $currencyType);
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency);
-        $this->assertInstanceOf(Currency::class, $currency);
+        $this->assertInstanceOf(Money::class, $currency);
     }
 
     /**
      * @dataProvider negativeParamsProvider
-     * @covers       \Adsmurai\Currency\Currency::fromDecimal
-     * @covers       \Adsmurai\Currency\Currency::__construct
+     * @covers       \Adsmurai\Currency\Money::fromDecimal
+     * @covers       \Adsmurai\Currency\Money::__construct
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Currency amounts must be positive
      */
-    public function test_with_negative_params(Decimal $amount, CurrencyType $currencyType)
+    public function test_with_negative_params(Decimal $amount, Currency $currencyType)
     {
-        Currency::fromDecimal($amount, $currencyType);
+        Money::fromDecimal($amount, $currencyType);
     }
 
     public function validParamsProvider(): array

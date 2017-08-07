@@ -4,38 +4,121 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryInterface;
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Litipk\BigNumbers\Decimal;
+use Adsmurai\Currency\Contracts\Currency as CurrencyTypeInterface;
+use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyTypeFactoryInterface;
+use Adsmurai\Currency\Errors\InvalidCurrenciesDataError;
+use Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError;
 
-final class CurrencyFactory implements CurrencyFactoryInterface
+final class CurrencyFactory implements CurrencyTypeFactoryInterface
 {
-    /** @var CurrencyType */
-    private $currencyType;
+    const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
-    public function __construct(CurrencyType $currencyType)
+    /** @var array */
+    private $data;
+
+    /** @var Currency[] */
+    private $currencyTypes;
+
+    private function __construct(array $data)
     {
-        $this->currencyType = $currencyType;
+        $this->data = $data;
+        $this->currencyTypes = [];
     }
 
-    public function buildFromFloat(float $amount): CurrencyInterface
+    public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyFactory
     {
-        return Currency::fromFloat($amount, $this->currencyType);
+        /** @var array $data */
+        $data = include $dataPath;
+
+        return self::fromDataArray($data);
     }
 
-    public function buildFromFractionalUnits(int $amount): CurrencyInterface
+    public static function fromDataArray(array $data): CurrencyFactory
     {
-        return Currency::fromFractionalUnits($amount, $this->currencyType);
+        self::validateCurrenciesData($data);
+
+        return new self($data);
     }
 
-    public function buildFromString(string $amount): CurrencyInterface
+    /**
+     * @param array $currenciesData
+     *
+     * @throws InvalidCurrenciesDataError
+     */
+    private static function validateCurrenciesData(array $currenciesData)
     {
-        return Currency::fromString($amount, $this->currencyType);
+        if (empty($currenciesData)) {
+            throw new InvalidCurrenciesDataError();
+        }
+
+        foreach ($currenciesData as $ISOCode => $currencyData) {
+            if (
+                !self::hasValidISOCode($ISOCode)
+                || !self::hasValidSymbol($currencyData)
+                || !self::hasValidSymbolPlacement($currencyData)
+                || !self::hasValidNumFractionalDigits($currencyData)
+            ) {
+                throw new InvalidCurrenciesDataError();
+            }
+        }
     }
 
-    public function buildFromDecimal(Decimal $amount): CurrencyInterface
+    private static function hasValidISOCode($ISOCode): bool
     {
-        return Currency::fromDecimal($amount, $this->currencyType);
+        return \is_string($ISOCode) && !empty($ISOCode);
+    }
+
+    private static function hasValidSymbol(array $currencyData): bool
+    {
+        return
+            isset($currencyData['symbol'])
+            && \is_string($currencyData['symbol'])
+            && !empty($currencyData['symbol']);
+    }
+
+    private static function hasValidSymbolPlacement(array $currencyData): bool
+    {
+        return
+            isset($currencyData['symbolPlacement'])
+            && \is_int($currencyData['symbolPlacement'])
+            && \in_array(
+                $currencyData['symbolPlacement'],
+                [
+                    CurrencyTypeInterface::BEFORE_PLACEMENT,
+                    CurrencyTypeInterface::AFTER_PLACEMENT,
+                ]
+            );
+    }
+
+    private static function hasValidNumFractionalDigits(array $currencyData): bool
+    {
+        return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
+    }
+
+    public function buildFromISOCode(string $ISOCode): CurrencyTypeInterface
+    {
+        if (!isset($this->data[$ISOCode])) {
+            throw new UnsupportedCurrencyISOCodeError($ISOCode);
+        }
+
+        if (!isset($this->currencyTypes[$ISOCode])) {
+            $this->currencyTypes[$ISOCode] = new Currency(
+                $ISOCode,
+                $this->data[$ISOCode]['symbol'],
+                $this->data[$ISOCode]['numFractionalDigits'],
+                $this->data[$ISOCode]['symbolPlacement'],
+                (isset($this->data[$ISOCode]['name']) && !empty($this->data[$ISOCode]['name']))
+                    ? $this->data[$ISOCode]['name']
+                    : ''
+            );
+        }
+
+        return $this->currencyTypes[$ISOCode];
+    }
+
+    /** @return string[] */
+    public function getSupportedCurrencyISOCodes(): array
+    {
+        return \array_keys($this->data);
     }
 }

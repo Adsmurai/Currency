@@ -4,63 +4,63 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency\Tests\CurrencyTypeFactory;
 
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\CurrencyTypeFactory;
+use Adsmurai\Currency\Contracts\Currency;
+use Adsmurai\Currency\CurrencyFactory;
 use PHPUnit\Framework\TestCase;
 
 class fromDataArrayTests extends TestCase
 {
     /**
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
+     * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray
+     * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
+     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_empty_array()
     {
-        CurrencyTypeFactory::fromDataArray([]);
+        CurrencyFactory::fromDataArray([]);
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
-     * @covers \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
+     * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray
+     * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
+     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_invalid_ISO_codes()
     {
-        CurrencyTypeFactory::fromDataArray([
+        CurrencyFactory::fromDataArray([
             'EUR' => [
                 'numFractionalDigits' => 2,
                 'symbol' => '€',
-                'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
             ],
             23 => [
                 'numFractionalDigits' => 2,
                 'symbol' => '$',
-                'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+                'symbolPlacement' => Currency::BEFORE_PLACEMENT,
             ],
         ]);
     }
 
     /**
      * @dataProvider missingCurrencyInfoProvider
-     * @covers       \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
-     * @covers       \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
+     * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
+     * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
+     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_missing_currency_data(array $incompleteCurrencyInfo)
     {
-        CurrencyTypeFactory::fromDataArray($incompleteCurrencyInfo);
+        CurrencyFactory::fromDataArray($incompleteCurrencyInfo);
     }
 
     /**
      * @dataProvider incorrectlyTypedCurrencyInfoProvider
-     * @covers       \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
-     * @covers       \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
+     * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
+     * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
+     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_incorrectly_typed_currency_data(array $invalidCurrencyInfo)
     {
-        CurrencyTypeFactory::fromDataArray($invalidCurrencyInfo);
+        CurrencyFactory::fromDataArray($invalidCurrencyInfo);
     }
 
     public function missingCurrencyInfoProvider(): array
@@ -70,7 +70,7 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
@@ -81,22 +81,22 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'symbol' => '$',
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
                 ],
             ]],
         ];
@@ -109,7 +109,7 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
@@ -121,7 +121,7 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
@@ -133,36 +133,36 @@ class fromDataArrayTests extends TestCase
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
                     'symbol' => 23,
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '',
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
                 ],
             ]],
             [[
                 'EUR' => [
                     'numFractionalDigits' => 2,
                     'symbol' => '€',
-                    'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
                 ],
                 'USD' => [
                     'numFractionalDigits' => 'hello world',
                     'symbol' => '$',
-                    'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
                 ],
             ]],
         ];
