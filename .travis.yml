@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - hhvm
+
+install:
+   - mkdir -p build/bin
+   - mkdir -p build/logs
+   - curl -sS https://getcomposer.org/installer | php -- --install-dir=./build/bin
+   - php ./build/bin/composer.phar install
+
+script:
+   - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml tests/
