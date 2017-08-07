@@ -29,56 +29,56 @@ composer install adsmurai/currency
 ```php
 <?php
 
-use Adsmurai\Currency\Contracts\CurrencyType;
-use Adsmurai\Currency\CurrencyFactoriesLocator;
+use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\CurrencyFactory;
-use Adsmurai\Currency\CurrencyTypeFactory;
+use Adsmurai\Currency\MoneyFactoriesLocator;
+use Adsmurai\Currency\MoneyFactory;
 
-// This factory will create CurrencyType objects given the currency ISO code.
+// This factory will create Currency objects given the currency ISO code.
 // By default, it will load the currency data from a library's internal data
 // source, but we can use alternative data sources.
-$currencyTypeFactory = CurrencyTypeFactory::fromDataPath();
-$currencyTypeFactory = CurrencyTypeFactory::fromDataArray([
+$currencyFactory = CurrencyFactory::fromDataPath();
+$currencyFactory = CurrencyFactory::fromDataArray([
     'EUR' => [
         'numFractionalDigits' => 2,
         'symbol' => '€',
-        'symbolPlacement' => CurrencyType::AFTER_PLACEMENT,
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'USD' => [
         'numFractionalDigits' => 2,
         'symbol' => '$',
-        'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ]
 ]);
 
-// This factory will create Currency objects with the same currency type.
+// This factory will create Money objects with the same currency type.
 // The rationale behind this class is that almost always we'll work with the
 // same currency type.
-$currencyFactory = new CurrencyFactory(
-    $currencyTypeFactory->buildFromISOCode('EUR')
+$moneyFactory = new MoneyFactory(
+    $currencyFactory->buildFromISOCode('EUR')
 );
 
 // In fact, to avoid introducing hard dependencies on the factory implementation
 // through the instantiation (via the `new` operator), we recommend to obtain
-// the `CurrencyFactory` instances through the `CurrencyFactoriesLocator`.
+// the `MoneyFactory` instances through the `MoneyFactoriesLocator`.
 //
 // This will have some advantages:
-//   * We can inject instances of the `CurrencyFactoriesLocator` contract in our
+//   * We can inject instances of the `MoneyFactoriesLocator` contract in our
 //     domain logic without having to rely on specific implementations.
-//   * We can avoid `CurrencyFactory` instances proliferation, since this
+//   * We can avoid `MoneyFactory` instances proliferation, since this
 //     factories locator keeps one single instances per currency ISO code.
-$currencyFactoriesLocator = new CurrencyFactoriesLocator($currencyTypeFactory);
-$currencyFactory = $currencyFactoriesLocator->getCurrencyFactory('EUR');
+$moneyFactoriesLocator = new MoneyFactoriesLocator($currencyFactory);
+$moneyFactory = $moneyFactoriesLocator->getMoneyFactory('EUR');
 
-// We have many ways to construct Currency objects, depending on the data we
+// We have many ways to construct Money objects, depending on the data we
 // have at the time.
-$currency = $currencyFactory->buildFromString('10.57');
-$currency = $currencyFactory->buildFromFloat(10.57);
-$currency = $currencyFactory->buildFromFractionalUnits(1057);
+$money = $moneyFactory->buildFromString('10.57');
+$money = $moneyFactory->buildFromFloat(10.57);
+$money = $moneyFactory->buildFromFractionalUnits(1057);
 
 // If we want to format a currency value, we can use a specific method, that
 // will take into account the number of digits, symbol, symbol placement...
-echo $currency->format();
+echo $money->format();
 
 
 ```
