@@ -4,7 +4,7 @@ namespace Adsmurai\Currency;
 
 use Adsmurai\Currency\Contracts\CurrencyFormat as CurrencyFormatInterface;
 
-class CurrencyFormat implements CurrencyFormatInterface
+final class CurrencyFormat implements CurrencyFormatInterface
 {
     /**
      * @var string
@@ -26,12 +26,17 @@ class CurrencyFormat implements CurrencyFormatInterface
      * @var int
      */
     private $precision;
+    /**
+     * @var int
+     */
+    private $decorationSpace;
 
-    public function __construct(
-        string $decimalsSeparator = '.',
-        string $thousandsSeparator = '',
-        int $extraPrecision = 0,
+    private function __construct(
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
         int $decorationType = self::DECORATION_SYMBOL,
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
+        int $extraPrecision = 0,
         int $precision = null
     ) {
         $this->decimalsSeparator = $decimalsSeparator;
@@ -39,6 +44,59 @@ class CurrencyFormat implements CurrencyFormatInterface
         $this->extraPrecision = $extraPrecision;
         $this->decorationType = $decorationType;
         $this->precision = $precision;
+        $this->decorationSpace = $decorationSpace;
+    }
+
+    public static function default(): CurrencyFormatInterface
+    {
+        return new self();
+    }
+
+    public static function fromParameters(
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
+        int $decorationType = self::DECORATION_SYMBOL,
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE
+    ): CurrencyFormatInterface {
+        return new self(
+            $decimalsSeparator,
+            $thousandsSeparator,
+            $decorationType,
+            $decorationSpace
+        );
+    }
+
+    public static function fromParametersWithPrecision(
+        int $precision,
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
+        int $decorationType = self::DECORATION_SYMBOL,
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE
+    ): CurrencyFormatInterface {
+        return new self(
+            $decimalsSeparator,
+            $thousandsSeparator,
+            $decorationType,
+            $decorationSpace,
+            0,
+            $precision
+        );
+    }
+
+    public static function fromParametersWithExtraPrecision(
+        int $extraPrecision,
+        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
+        int $decorationType = self::DECORATION_SYMBOL,
+        int $decorationSpace = self::DECORATION_WITHOUT_SPACE
+    ): CurrencyFormatInterface {
+        return new self(
+            $decimalsSeparator,
+            $thousandsSeparator,
+            $decorationType,
+            $decorationSpace,
+            $extraPrecision
+        );
     }
 
     /**
@@ -79,5 +137,10 @@ class CurrencyFormat implements CurrencyFormatInterface
     public function getPrecision()
     {
         return $this->precision;
+    }
+
+    public function getDecorationSpace(): int
+    {
+        return $this->decorationSpace;
     }
 }
