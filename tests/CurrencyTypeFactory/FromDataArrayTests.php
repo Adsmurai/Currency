@@ -13,6 +13,7 @@ class fromDataArrayTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
+     * @covers \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
      * @expectedException \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
      */
     public function test_with_empty_array()
@@ -23,6 +24,7 @@ class fromDataArrayTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::fromDataArray
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::validateCurrenciesData
+     * @covers \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
      * @expectedException \Adsmurai\Currency\Errors\InvalidCurrencyTypesDataError
      */
     public function test_with_invalid_ISO_codes()

@@ -53,6 +53,7 @@ class BuildFromISOCodeTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\CurrencyTypeFactory::buildFromISOCode
+     * @covers \Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError
      * @expectedException \Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError
      * @expectedExceptionMessage Unsupported currency ISO code (USD)
      */
