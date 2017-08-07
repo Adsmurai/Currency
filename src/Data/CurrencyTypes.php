@@ -1,5 +1,5 @@
 <?php
-
+// @codeCoverageIgnoreStart
 declare(strict_types=1);
 
 namespace Adsmurai\Currency\Data;
@@ -295,3 +295,4 @@ return [
         'symbolPlacement' => CurrencyType::BEFORE_PLACEMENT,
     ],
 ];
+// @codeCoverageIgnoreEnd
