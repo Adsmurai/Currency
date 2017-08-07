@@ -6,6 +6,11 @@ php:
   - 7.2
   - hhvm
 
+matrix:
+  allow_failures:
+    - php: 7.2
+    - php: hhvm
+
 install:
    - mkdir -p build/bin
    - mkdir -p build/logs
@@ -14,3 +19,7 @@ install:
 
 script:
    - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml tests/
+
+after_script:
+   - wget --output-document=build/bin/ocular.phar https://scrutinizer-ci.com/ocular.phar
+   - php ./build/bin/ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml
