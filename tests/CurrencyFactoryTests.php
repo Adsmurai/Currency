@@ -24,7 +24,7 @@ class CurrencyFactoryTests extends TestCase
         $currency = $currencyFactory->buildFromFloat(1.0);
 
         $this->assertInstanceOf(Money::class, $currency);
-        $this->assertSame($currencyType, $currency->getCurrencyType());
+        $this->assertSame($currencyType, $currency->getCurrency());
     }
 
     private function getCurrencyType(): Currency
@@ -43,7 +43,7 @@ class CurrencyFactoryTests extends TestCase
         $currency = $currencyFactory->buildFromString('1.0');
 
         $this->assertInstanceOf(Money::class, $currency);
-        $this->assertSame($currencyType, $currency->getCurrencyType());
+        $this->assertSame($currencyType, $currency->getCurrency());
     }
 
     /**
@@ -57,7 +57,7 @@ class CurrencyFactoryTests extends TestCase
         $currency = $currencyFactory->buildFromFractionalUnits(100);
 
         $this->assertInstanceOf(Money::class, $currency);
-        $this->assertSame($currencyType, $currency->getCurrencyType());
+        $this->assertSame($currencyType, $currency->getCurrency());
     }
 
     /**
@@ -71,6 +71,6 @@ class CurrencyFactoryTests extends TestCase
         $currency = $currencyFactory->buildFromDecimal(Decimal::fromFloat(1.0));
 
         $this->assertInstanceOf(Money::class, $currency);
-        $this->assertSame($currencyType, $currency->getCurrencyType());
+        $this->assertSame($currencyType, $currency->getCurrency());
     }
 }

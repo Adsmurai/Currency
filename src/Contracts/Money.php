@@ -6,7 +6,7 @@ use Litipk\BigNumbers\Decimal;
 
 interface Money
 {
-    public function getCurrencyType(): Currency;
+    public function getCurrency(): Currency;
 
     /**
      * WARNING: This method is not meant to be used in currency formatting code nor currency representation code.

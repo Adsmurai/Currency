@@ -22,28 +22,28 @@ final class Money implements MoneyContract
     private $amount;
 
     /** @var CurrencyContract */
-    private $currencyType;
+    private $currency;
 
     /**
      * @param Decimal      $amount
-     * @param CurrencyContract $currencyType
+     * @param CurrencyContract $currency
      */
-    private function __construct(Decimal $amount, CurrencyContract $currencyType)
+    private function __construct(Decimal $amount, CurrencyContract $currency)
     {
         if ($amount->isNegative()) {
             throw new InvalidArgumentException('Currency amounts must be positive');
         }
 
         $this->amount = $amount;
-        $this->currencyType = $currencyType;
+        $this->currency = $currency;
     }
 
-    public static function fromFloat(float $amount, CurrencyContract $currencyType): Money
+    public static function fromFloat(float $amount, CurrencyContract $currency): Money
     {
         try {
             return new self(
                 Decimal::fromFloat($amount, self::INNER_FRACTIONAL_DIGITS),
-                $currencyType
+                $currency
             );
         } catch (InfiniteInputError $e) {
             throw new InvalidArgumentException('Currency amounts must be finite', 0, $e);
@@ -52,74 +52,74 @@ final class Money implements MoneyContract
         }
     }
 
-    public static function fromFractionalUnits(int $amount, CurrencyContract $currencyType): Money
+    public static function fromFractionalUnits(int $amount, CurrencyContract $currency): Money
     {
         $decimalAmount = Decimal::fromInteger($amount)
             ->div(
-                Decimal::fromInteger(10 ** $currencyType->getNumFractionalDigits()),
+                Decimal::fromInteger(10 ** $currency->getNumFractionalDigits()),
                 self::INNER_FRACTIONAL_DIGITS
             );
 
-        return new self($decimalAmount, $currencyType);
+        return new self($decimalAmount, $currency);
     }
 
-    public static function fromString(string $amount, CurrencyContract $currencyType): Money
+    public static function fromString(string $amount, CurrencyContract $currency): Money
     {
         return new self(
-            self::extractNumericAmount($amount, $currencyType),
-            $currencyType
+            self::extractNumericAmount($amount, $currency),
+            $currency
         );
     }
 
-    private static function extractNumericAmount(string $amount, CurrencyContract $currencyType): Decimal
+    private static function extractNumericAmount(string $amount, CurrencyContract $currency): Decimal
     {
         try {
             if (
                 1 === \preg_match(self::SIMPLE_CURRENCY_PATTERN, $amount, $matches) ||
-                1 === \preg_match(self::getAmountPlusIsoCodePattern($currencyType), $amount, $matches) ||
-                1 === \preg_match(self::getAmountPlusSymbolPattern($currencyType), $amount, $matches)
+                1 === \preg_match(self::getAmountPlusIsoCodePattern($currency), $amount, $matches) ||
+                1 === \preg_match(self::getAmountPlusSymbolPattern($currency), $amount, $matches)
             ) {
                 return Decimal::fromString($matches['amount'], self::INNER_FRACTIONAL_DIGITS);
             } else {
                 throw new InvalidArgumentException('Invalid currency value');
             }
         } catch (NaNInputError $e) {
-            throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
+            throw new InvalidArgumentException('Money amounts must be numbers', 0, $e);
         }
     }
 
     /**
-     * @param CurrencyContract $currencyType
+     * @param CurrencyContract $currency
      *
      * @return string
      */
-    private static function getAmountPlusIsoCodePattern(CurrencyContract $currencyType): string
+    private static function getAmountPlusIsoCodePattern(CurrencyContract $currency): string
     {
-        $amountPlusIsoCodePattern = '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currencyType->getISOCode().'$/x';
+        $amountPlusIsoCodePattern = '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currency->getISOCode().'$/x';
 
         return $amountPlusIsoCodePattern;
     }
 
-    private static function getAmountPlusSymbolPattern(CurrencyContract $currencyType): string
+    private static function getAmountPlusSymbolPattern(CurrencyContract $currency): string
     {
-        $escapedSymbol = \preg_quote($currencyType->getSymbol());
+        $escapedSymbol = \preg_quote($currency->getSymbol());
 
-        return (CurrencyContract::BEFORE_PLACEMENT === $currencyType->getSymbolPlacement())
+        return (CurrencyContract::BEFORE_PLACEMENT === $currency->getSymbolPlacement())
             ? '/^'.$escapedSymbol.'\s*'.self::DECIMAL_NUMBER_REGEXP.'$/x'
             : '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$escapedSymbol.'$/x';
     }
 
-    public static function fromDecimal(Decimal $amount, CurrencyContract $currencyType): Money
+    public static function fromDecimal(Decimal $amount, CurrencyContract $currency): Money
     {
         return new self(
             Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
-            $currencyType
+            $currency
         );
     }
 
-    public function getCurrencyType(): CurrencyContract
+    public function getCurrency(): CurrencyContract
     {
-        return $this->currencyType;
+        return $this->currency;
     }
 
     /**
@@ -137,7 +137,7 @@ final class Money implements MoneyContract
     {
         return $this->amount
             ->mul(
-                Decimal::fromInteger(10 ** $this->currencyType->getNumFractionalDigits()),
+                Decimal::fromInteger(10 ** $this->currency->getNumFractionalDigits()),
                 self::INNER_FRACTIONAL_DIGITS
             )
             ->asInteger();
@@ -154,7 +154,7 @@ final class Money implements MoneyContract
 
         $nDecimals = $currencyFormat->getPrecision();
         if (is_null($nDecimals)) {
-            $nDecimals = $this->currencyType->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
+            $nDecimals = $this->currency->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
         }
 
         $amount = Decimal::fromDecimal($this->amount, $nDecimals);
@@ -187,12 +187,12 @@ final class Money implements MoneyContract
                 return $number;
                 break;
             case MoneyFormat::DECORATION_ISO_CODE:
-                return $number.$separator.$this->currencyType->getISOCode();
+                return $number.$separator.$this->currency->getISOCode();
                 break;
             default:
-                return (CurrencyContract::BEFORE_PLACEMENT === $this->currencyType->getSymbolPlacement())
-                    ? $this->currencyType->getSymbol().$separator.$number
-                    : $number.$separator.$this->currencyType->getSymbol();
+                return (CurrencyContract::BEFORE_PLACEMENT === $this->currency->getSymbolPlacement())
+                    ? $this->currency->getSymbol().$separator.$number
+                    : $number.$separator.$this->currency->getSymbol();
         }
     }
 
@@ -203,7 +203,7 @@ final class Money implements MoneyContract
     {
         return $currency === $this || (
                 $this->amount->equals($currency->getAmountAsDecimal()) &&
-                $this->currencyType->equals($currency->getCurrencyType())
+                $this->currency->equals($currency->getCurrency())
             );
     }
 }

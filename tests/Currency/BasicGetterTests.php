@@ -12,7 +12,7 @@ class BasicGetterTests extends TestCase
 {
     /**
      * @covers \Adsmurai\Currency\Money::getAmountAsDecimal
-     * @covers \Adsmurai\Currency\Money::getCurrencyType
+     * @covers \Adsmurai\Currency\Money::getCurrency
      */
     public function test_basic_getters()
     {
@@ -24,6 +24,6 @@ class BasicGetterTests extends TestCase
         $currency = Money::fromDecimal($amount, $currencyType);
 
         $this->assertSame($amount, $currency->getAmountAsDecimal());
-        $this->assertSame($currencyType, $currency->getCurrencyType());
+        $this->assertSame($currencyType, $currency->getCurrency());
     }
 }
