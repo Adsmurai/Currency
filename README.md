@@ -1,5 +1,11 @@
 # Adsmurai Currency Library
 
+Status Label  | Status Value
+--------------|-------------
+Build | [![Build Status](https://travis-ci.org/Adsmurai/Currency.svg?branch=master)](https://travis-ci.org/Adsmurai/Currency)
+Code Quality (Scrutinizer): | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Adsmurai/Currency/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Adsmurai/Currency/?branch=master)
+Coverage (from Scrutinizer): | [![Code Coverage](https://scrutinizer-ci.com/g/Adsmurai/Currency/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Adsmurai/Currency/?branch=master)
+
 ## Introduction
 
 The Adsmurai Currency library has been developed to solve some currency and
