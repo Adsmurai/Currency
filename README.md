@@ -1,5 +1,9 @@
 # Adsmurai Currency Library
 
+Status Label  | Status Value
+--------------|-------------
+Build | [![Build Status](https://travis-ci.org/Adsmurai/Currency.svg?branch=master)](https://travis-ci.org/Adsmurai/Currency)
+
 ## Introduction
 
 The Adsmurai Currency library has been developed to solve some currency and
