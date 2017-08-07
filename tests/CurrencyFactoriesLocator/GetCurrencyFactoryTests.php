@@ -14,14 +14,14 @@ class GetCurrencyFactoryTests extends TestCase
 {
     /**
      * @covers \Adsmurai\Currency\MoneyFactoriesLocator::__construct
-     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getCurrencyFactory
+     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getMoneyFactory
      */
     public function test_that_getCurrencyFactory_returns_a_CurrencyFactory_instance()
     {
         $currencyFactoriesLocator = new MoneyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 
-        $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('EUR'));
-        $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('USD'));
+        $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getMoneyFactory('EUR'));
+        $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getMoneyFactory('USD'));
     }
 
     /**
@@ -39,14 +39,14 @@ class GetCurrencyFactoryTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\MoneyFactoriesLocator::__construct
-     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getCurrencyFactory
+     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getMoneyFactory
      */
     public function test_that_getCurrencyFactory_returns_the_same_instance_for_the_same_parameters()
     {
         $currencyFactoriesLocator = new MoneyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 
-        $currencyFactoryA = $currencyFactoriesLocator->getCurrencyFactory('EUR');
-        $currencyFactoryB = $currencyFactoriesLocator->getCurrencyFactory('EUR');
+        $currencyFactoryA = $currencyFactoriesLocator->getMoneyFactory('EUR');
+        $currencyFactoryB = $currencyFactoriesLocator->getMoneyFactory('EUR');
 
         $this->assertSame($currencyFactoryA, $currencyFactoryB);
     }

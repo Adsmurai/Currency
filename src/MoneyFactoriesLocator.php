@@ -21,7 +21,7 @@ final class MoneyFactoriesLocator implements MoneyFactoriesLocatorInterface
         $this->currencyTypeFactory = $currencyTypeFactory;
     }
 
-    public function getCurrencyFactory(string $isoCode): MoneyFactoryInterface
+    public function getMoneyFactory(string $isoCode): MoneyFactoryInterface
     {
         if (!isset($this->currencyFactories[$isoCode])) {
             $this->currencyFactories[$isoCode] = new MoneyFactory(
