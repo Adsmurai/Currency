@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyTypeInterface;
-use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyTypeFactoryInterface;
+use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
+use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryInterface;
 use Adsmurai\Currency\Errors\InvalidCurrenciesDataError;
 use Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError;
 
-final class CurrencyFactory implements CurrencyTypeFactoryInterface
+final class CurrencyFactory implements CurrencyFactoryInterface
 {
     const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
@@ -84,8 +84,8 @@ final class CurrencyFactory implements CurrencyTypeFactoryInterface
             && \in_array(
                 $currencyData['symbolPlacement'],
                 [
-                    CurrencyTypeInterface::BEFORE_PLACEMENT,
-                    CurrencyTypeInterface::AFTER_PLACEMENT,
+                    CurrencyInterface::BEFORE_PLACEMENT,
+                    CurrencyInterface::AFTER_PLACEMENT,
                 ]
             );
     }
@@ -95,7 +95,7 @@ final class CurrencyFactory implements CurrencyTypeFactoryInterface
         return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
     }
 
-    public function buildFromISOCode(string $ISOCode): CurrencyTypeInterface
+    public function buildFromISOCode(string $ISOCode): CurrencyInterface
     {
         if (!isset($this->data[$ISOCode])) {
             throw new UnsupportedCurrencyISOCodeError($ISOCode);

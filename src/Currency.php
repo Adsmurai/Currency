@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyTypeInterface;
+use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
 use Adsmurai\Currency\Errors\InconsistentCurrenciesError;
 use InvalidArgumentException;
 
-final class Currency implements CurrencyTypeInterface
+final class Currency implements CurrencyInterface
 {
     private $ISOCode;
 
@@ -74,7 +74,7 @@ final class Currency implements CurrencyTypeInterface
         return $this->symbolPlacement;
     }
 
-    public function equals(CurrencyTypeInterface $currencyType): bool
+    public function equals(CurrencyInterface $currencyType): bool
     {
         if ($this === $currencyType) {
             return true;

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\CurrencyFactoriesLocator as CurrencyFactoriesLocatorInterface;
-use Adsmurai\Currency\Contracts\MoneyFactory as CurrencyFactoryInterface;
+use Adsmurai\Currency\Contracts\MoneyFactoriesLocator as MoneyFactoriesLocatorInterface;
+use Adsmurai\Currency\Contracts\MoneyFactory as MoneyFactoryInterface;
 use Adsmurai\Currency\Contracts\CurrencyFactory;
 
-final class CurrencyFactoriesLocator implements CurrencyFactoriesLocatorInterface
+final class MoneyFactoriesLocator implements MoneyFactoriesLocatorInterface
 {
     /** @var CurrencyFactory */
     private $currencyTypeFactory;
@@ -21,7 +21,7 @@ final class CurrencyFactoriesLocator implements CurrencyFactoriesLocatorInterfac
         $this->currencyTypeFactory = $currencyTypeFactory;
     }
 
-    public function getCurrencyFactory(string $isoCode): CurrencyFactoryInterface
+    public function getCurrencyFactory(string $isoCode): MoneyFactoryInterface
     {
         if (!isset($this->currencyFactories[$isoCode])) {
             $this->currencyFactories[$isoCode] = new MoneyFactory(

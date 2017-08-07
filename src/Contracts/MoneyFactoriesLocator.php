@@ -2,7 +2,7 @@
 
 namespace Adsmurai\Currency\Contracts;
 
-interface CurrencyFactoriesLocator
+interface MoneyFactoriesLocator
 {
     public function getCurrencyFactory(string $isoCode): MoneyFactory;
 

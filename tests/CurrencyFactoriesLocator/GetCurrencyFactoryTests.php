@@ -7,18 +7,18 @@ namespace Adsmurai\Currency\Tests\CurrencyFactoriesLocator;
 use Adsmurai\Currency\Contracts\MoneyFactory;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Contracts\CurrencyFactory;
-use Adsmurai\Currency\CurrencyFactoriesLocator;
+use Adsmurai\Currency\MoneyFactoriesLocator;
 use PHPUnit\Framework\TestCase;
 
 class GetCurrencyFactoryTests extends TestCase
 {
     /**
-     * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::__construct
-     * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::getCurrencyFactory
+     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::__construct
+     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getCurrencyFactory
      */
     public function test_that_getCurrencyFactory_returns_a_CurrencyFactory_instance()
     {
-        $currencyFactoriesLocator = new CurrencyFactoriesLocator($this->getCurrencyTypeFactoryMock());
+        $currencyFactoriesLocator = new MoneyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 
         $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('EUR'));
         $this->assertInstanceOf(MoneyFactory::class, $currencyFactoriesLocator->getCurrencyFactory('USD'));
@@ -38,12 +38,12 @@ class GetCurrencyFactoryTests extends TestCase
     }
 
     /**
-     * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::__construct
-     * @covers \Adsmurai\Currency\CurrencyFactoriesLocator::getCurrencyFactory
+     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::__construct
+     * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getCurrencyFactory
      */
     public function test_that_getCurrencyFactory_returns_the_same_instance_for_the_same_parameters()
     {
-        $currencyFactoriesLocator = new CurrencyFactoriesLocator($this->getCurrencyTypeFactoryMock());
+        $currencyFactoriesLocator = new MoneyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 
         $currencyFactoryA = $currencyFactoriesLocator->getCurrencyFactory('EUR');
         $currencyFactoryB = $currencyFactoriesLocator->getCurrencyFactory('EUR');

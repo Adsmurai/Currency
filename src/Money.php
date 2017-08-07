@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
-use Adsmurai\Currency\Contracts\MoneyFormat as CurrencyFormatInterface;
+use Adsmurai\Currency\Contracts\Money as MoneyInterface;
+use Adsmurai\Currency\Contracts\MoneyFormat as MoneyFormatInterface;
 use Adsmurai\Currency\Contracts\Currency;
 use InvalidArgumentException;
 use Litipk\BigNumbers\Decimal;
 use Litipk\BigNumbers\Errors\InfiniteInputError;
 use Litipk\BigNumbers\Errors\NaNInputError;
 
-final class Money implements CurrencyInterface
+final class Money implements MoneyInterface
 {
     const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9][0-9]*|[0-9])(\.[0-9]+)?))';
     const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
@@ -146,7 +146,7 @@ final class Money implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function format(CurrencyFormatInterface $currencyFormat = null): string
+    public function format(MoneyFormatInterface $currencyFormat = null): string
     {
         if (is_null($currencyFormat)) {
             $currencyFormat = MoneyFormat::default();
@@ -173,11 +173,11 @@ final class Money implements CurrencyInterface
 
     /**
      * @param string                  $number
-     * @param CurrencyFormatInterface $currencyFormat
+     * @param MoneyFormatInterface $currencyFormat
      *
      * @return string
      */
-    private function decorate(string $number, CurrencyFormatInterface $currencyFormat): string
+    private function decorate(string $number, MoneyFormatInterface $currencyFormat): string
     {
         $separator = (MoneyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace())
             ? ' '
@@ -199,7 +199,7 @@ final class Money implements CurrencyInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(CurrencyInterface $currency): bool
+    public function equals(MoneyInterface $currency): bool
     {
         return $currency === $this || (
                 $this->amount->equals($currency->getAmountAsDecimal()) &&
