@@ -182,13 +182,12 @@ final class Money implements MoneyContract
         $separator = (MoneyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace())
             ? ' '
             : '';
+
         switch ($currencyFormat->getDecorationType()) {
             case MoneyFormat::DECORATION_NO_DECORATION:
                 return $number;
-                break;
             case MoneyFormat::DECORATION_ISO_CODE:
                 return $number.$separator.$this->currency->getISOCode();
-                break;
             default:
                 return (CurrencyContract::BEFORE_PLACEMENT === $this->currency->getSymbolPlacement())
                     ? $this->currency->getSymbol().$separator.$number
