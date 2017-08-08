@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\MoneyFactoriesLocator as MoneyFactoriesLocatorInterface;
-use Adsmurai\Currency\Contracts\MoneyFactory as MoneyFactoryInterface;
+use Adsmurai\Currency\Contracts\MoneyFactoriesLocator as MoneyFactoriesLocatorContract;
+use Adsmurai\Currency\Contracts\MoneyFactory as MoneyFactoryContract;
 use Adsmurai\Currency\Contracts\CurrencyFactory;
 
-final class MoneyFactoriesLocator implements MoneyFactoriesLocatorInterface
+final class MoneyFactoriesLocator implements MoneyFactoriesLocatorContract
 {
     /** @var CurrencyFactory */
-    private $currencyTypeFactory;
+    private $currencyFactory;
 
     /** @var MoneyFactory[] */
-    private $currencyFactories;
+    private $moneyFactories;
 
-    public function __construct(CurrencyFactory $currencyTypeFactory)
+    public function __construct(CurrencyFactory $currencyFactory)
     {
-        $this->currencyTypeFactory = $currencyTypeFactory;
+        $this->currencyFactory = $currencyFactory;
     }
 
-    public function getMoneyFactory(string $isoCode): MoneyFactoryInterface
+    public function getMoneyFactory(string $isoCode): MoneyFactoryContract
     {
-        if (!isset($this->currencyFactories[$isoCode])) {
-            $this->currencyFactories[$isoCode] = new MoneyFactory(
-                $this->currencyTypeFactory->buildFromISOCode($isoCode)
+        if (!isset($this->moneyFactories[$isoCode])) {
+            $this->moneyFactories[$isoCode] = new MoneyFactory(
+                $this->currencyFactory->buildFromISOCode($isoCode)
             );
         }
 
-        return $this->currencyFactories[$isoCode];
+        return $this->moneyFactories[$isoCode];
     }
 
     /** @return string[] */
     public function getSupportedCurrencyISOCodes(): array
     {
-        return $this->currencyTypeFactory->getSupportedCurrencyISOCodes();
+        return $this->currencyFactory->getSupportedCurrencyISOCodes();
     }
 }

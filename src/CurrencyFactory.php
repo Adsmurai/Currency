@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Adsmurai\Currency;
 
-use Adsmurai\Currency\Contracts\Currency as CurrencyInterface;
-use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryInterface;
+use Adsmurai\Currency\Contracts\Currency as CurrencyContract;
+use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryContract;
 use Adsmurai\Currency\Errors\InvalidCurrenciesDataError;
 use Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError;
 
-final class CurrencyFactory implements CurrencyFactoryInterface
+final class CurrencyFactory implements CurrencyFactoryContract
 {
     const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
@@ -17,12 +17,12 @@ final class CurrencyFactory implements CurrencyFactoryInterface
     private $data;
 
     /** @var Currency[] */
-    private $currencyTypes;
+    private $currencies;
 
     private function __construct(array $data)
     {
         $this->data = $data;
-        $this->currencyTypes = [];
+        $this->currencies = [];
     }
 
     public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyFactory
@@ -84,8 +84,8 @@ final class CurrencyFactory implements CurrencyFactoryInterface
             && \in_array(
                 $currencyData['symbolPlacement'],
                 [
-                    CurrencyInterface::BEFORE_PLACEMENT,
-                    CurrencyInterface::AFTER_PLACEMENT,
+                    CurrencyContract::BEFORE_PLACEMENT,
+                    CurrencyContract::AFTER_PLACEMENT,
                 ]
             );
     }
@@ -95,14 +95,14 @@ final class CurrencyFactory implements CurrencyFactoryInterface
         return isset($currencyData['numFractionalDigits']) && \is_int($currencyData['numFractionalDigits']);
     }
 
-    public function buildFromISOCode(string $ISOCode): CurrencyInterface
+    public function buildFromISOCode(string $ISOCode): CurrencyContract
     {
         if (!isset($this->data[$ISOCode])) {
             throw new UnsupportedCurrencyISOCodeError($ISOCode);
         }
 
-        if (!isset($this->currencyTypes[$ISOCode])) {
-            $this->currencyTypes[$ISOCode] = new Currency(
+        if (!isset($this->currencies[$ISOCode])) {
+            $this->currencies[$ISOCode] = new Currency(
                 $ISOCode,
                 $this->data[$ISOCode]['symbol'],
                 $this->data[$ISOCode]['numFractionalDigits'],
@@ -113,7 +113,7 @@ final class CurrencyFactory implements CurrencyFactoryInterface
             );
         }
 
-        return $this->currencyTypes[$ISOCode];
+        return $this->currencies[$ISOCode];
     }
 
     /** @return string[] */
