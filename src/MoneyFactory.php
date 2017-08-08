@@ -11,7 +11,7 @@ use Litipk\BigNumbers\Decimal;
 
 final class MoneyFactory implements MoneyFactoryContract
 {
-    /** @var Currency */
+    /** @var CurrencyContract */
     private $currency;
 
     public function __construct(CurrencyContract $currency)
