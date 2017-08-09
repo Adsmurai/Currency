@@ -84,5 +84,5 @@ echo $money->format();
 ## Troubleshooting
 
 We haven't faced any interesting problem related with this library, if you are
-struggling to make it work, send an email to andreu@adsmurai.com (and we'll update
+struggling to make it work, open an issue on the issue tracker (and we'll update
 this section).
