@@ -1,12 +1,17 @@
 language: php
 
-php:
-  - 7.0
-  - 7.1
-  - 7.2
-  - hhvm
-
 matrix:
+  include:
+    - php: 7.0
+    - php: 7.1
+    - php: 7.2
+    - php: hhvm
+      env:
+        - HHVMPHP7="yes"
+    - php: hhvm
+      env:
+        - HHVMPHP7="no"
+
   allow_failures:
     - php: 7.2
     - php: hhvm
@@ -16,6 +21,9 @@ install:
    - mkdir -p build/logs
    - curl -sS https://getcomposer.org/installer | php -- --install-dir=./build/bin
    - php ./build/bin/composer.phar install
+
+before_script:
+  - "if [[ ${HHVMPHP7} == 'yes' ]]; then echo 'hhvm.php7.all=1' >> /etc/hhvm/php.ini; fi"
 
 script:
    - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml
