@@ -73,19 +73,15 @@ final class Money implements MoneyContract
 
     private static function extractNumericAmount(string $amount, CurrencyContract $currency): Decimal
     {
-        try {
-            if (
-                1 === \preg_match(self::SIMPLE_CURRENCY_PATTERN, $amount, $matches) ||
-                1 === \preg_match(self::getAmountPlusIsoCodePattern($currency), $amount, $matches) ||
-                1 === \preg_match(self::getAmountPlusSymbolPattern($currency), $amount, $matches)
-            ) {
-                return Decimal::fromString($matches['amount'], self::INNER_FRACTIONAL_DIGITS);
-            } else {
-                throw new InvalidArgumentException('Invalid currency value');
-            }
-        } catch (NaNInputError $e) {
-            throw new InvalidArgumentException('Money amounts must be numbers', 0, $e);
+        if (
+            1 === \preg_match(self::SIMPLE_CURRENCY_PATTERN, $amount, $matches) ||
+            1 === \preg_match(self::getAmountPlusIsoCodePattern($currency), $amount, $matches) ||
+            1 === \preg_match(self::getAmountPlusSymbolPattern($currency), $amount, $matches)
+        ) {
+            return Decimal::fromString($matches['amount'], self::INNER_FRACTIONAL_DIGITS);
         }
+
+        throw new InvalidArgumentException('Invalid currency value');
     }
 
     /**
