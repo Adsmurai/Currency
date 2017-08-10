@@ -71,6 +71,10 @@ $moneyFactory = $moneyFactoriesLocator->getMoneyFactory('EUR');
 // We have many ways to construct Money objects, depending on the data we
 // have at the time.
 $money = $moneyFactory->buildFromString('10.57');
+$money = $moneyFactory->buildFromString('10.57€'); // Look! it will validate the symbol too :)
+$money = $moneyFactory->buildFromString('10.57 €');
+$money = $moneyFactory->buildFromString('10.57EUR'); // Look! it will validate the ISO code too :)
+$money = $moneyFactory->buildFromString('10.57 EUR');
 $money = $moneyFactory->buildFromFloat(10.57);
 $money = $moneyFactory->buildFromFractionalUnits(1057);
 
