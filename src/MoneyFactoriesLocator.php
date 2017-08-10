@@ -6,17 +6,17 @@ namespace Adsmurai\Currency;
 
 use Adsmurai\Currency\Contracts\MoneyFactoriesLocator as MoneyFactoriesLocatorContract;
 use Adsmurai\Currency\Contracts\MoneyFactory as MoneyFactoryContract;
-use Adsmurai\Currency\Contracts\CurrencyFactory;
+use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryContract;
 
 final class MoneyFactoriesLocator implements MoneyFactoriesLocatorContract
 {
-    /** @var CurrencyFactory */
+    /** @var CurrencyFactoryContract */
     private $currencyFactory;
 
     /** @var MoneyFactory[] */
     private $moneyFactories;
 
-    public function __construct(CurrencyFactory $currencyFactory)
+    public function __construct(CurrencyFactoryContract $currencyFactory)
     {
         $this->currencyFactory = $currencyFactory;
     }
