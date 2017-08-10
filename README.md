@@ -19,7 +19,7 @@ architecture related problems:
 
 Install it through composer, that's it:
 ```bash
-composer install adsmurai/currency
+composer require adsmurai/currency
 ```
 
 ## Code examples
