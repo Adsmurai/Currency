@@ -8,6 +8,10 @@
         {
             "name": "Andreu Correa",
             "email": "andreu@adsmurai.com"
+        },
+        {
+            "name": "Jordi Creus",
+            "email": "jordi@adsmurai.com"
         }
     ],
     "minimum-stability": "stable",
