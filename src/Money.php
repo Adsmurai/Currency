@@ -25,7 +25,7 @@ final class Money implements MoneyContract
     private $currency;
 
     /**
-     * @param Decimal      $amount
+     * @param Decimal          $amount
      * @param CurrencyContract $currency
      */
     private function __construct(Decimal $amount, CurrencyContract $currency)
@@ -168,7 +168,7 @@ final class Money implements MoneyContract
     }
 
     /**
-     * @param string                  $number
+     * @param string               $number
      * @param MoneyFormatInterface $currencyFormat
      *
      * @return string
