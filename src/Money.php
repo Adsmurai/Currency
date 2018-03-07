@@ -30,10 +30,6 @@ final class Money implements MoneyContract
      */
     private function __construct(Decimal $amount, CurrencyContract $currency)
     {
-        if ($amount->isNegative()) {
-            throw new InvalidArgumentException('Currency amounts must be positive');
-        }
-
         $this->amount = $amount;
         $this->currency = $currency;
     }

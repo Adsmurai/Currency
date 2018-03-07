@@ -25,18 +25,6 @@ class fromDecimalTests extends TestCase
         $this->assertInstanceOf(Money::class, $currency);
     }
 
-    /**
-     * @dataProvider negativeParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromDecimal
-     * @covers       \Adsmurai\Currency\Money::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Currency amounts must be positive
-     */
-    public function test_with_negative_params(Decimal $amount, Currency $currencyType)
-    {
-        Money::fromDecimal($amount, $currencyType);
-    }
-
     public function validParamsProvider(): array
     {
         return [
@@ -44,12 +32,6 @@ class fromDecimalTests extends TestCase
             [Decimal::fromString('100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-        ];
-    }
-
-    public function negativeParamsProvider(): array
-    {
-        return [
             [Decimal::fromString('-34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('-100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
             [Decimal::fromString('-0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],

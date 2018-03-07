@@ -25,18 +25,6 @@ class fromFloatTests extends TestCase
     }
 
     /**
-     * @dataProvider negativeParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromFloat
-     * @covers       \Adsmurai\Currency\Money::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Currency amounts must be positive
-     */
-    public function test_with_negative_amounts(float $amount, Currency $currencyType)
-    {
-        Money::fromFloat($amount, $currencyType);
-    }
-
-    /**
      * @dataProvider infiniteParamsProvider
      * @covers       \Adsmurai\Currency\Money::fromFloat
      * @covers       \Adsmurai\Currency\Money::__construct
@@ -66,12 +54,6 @@ class fromFloatTests extends TestCase
             [100, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
             [0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
             [12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-        ];
-    }
-
-    public function negativeParamsProvider(): array
-    {
-        return [
             [-34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
             [-100, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
             [-0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
