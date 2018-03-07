@@ -1,3 +1,0 @@
-- name: tests
-  service: currency
-  command: vendor/bin/phpunit
