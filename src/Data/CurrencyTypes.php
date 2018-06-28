@@ -295,5 +295,45 @@ return [
         'symbol' => 'Rs',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
+    'BHD' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'BD',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+
+    'KWD' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'د.ك',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+
+    'LBP' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ل.ل',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+
+    'JOD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'JD',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+
+    'MAD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'درهم',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'QAR' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ر.ق',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+
+    'SAR' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ر.س',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
