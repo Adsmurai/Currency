@@ -320,5 +320,15 @@ return [
         'symbol' => 'ر.س',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'RSD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'дин',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'HRK' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'kn',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
