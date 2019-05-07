@@ -200,11 +200,6 @@ return [
         'symbol' => '₡',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'QAR' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '﷼',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
     'INR' => [
         'numFractionalDigits' => 2,
         'symbol' => '₹',
@@ -224,11 +219,6 @@ return [
         'numFractionalDigits' => 2,
         'symbol' => 'Bs.',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'SAR' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '﷼',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'CNY' => [
         'numFractionalDigits' => 1,
@@ -300,25 +290,21 @@ return [
         'symbol' => 'BD',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-
     'KWD' => [
         'numFractionalDigits' => 3,
         'symbol' => 'د.ك',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-
     'LBP' => [
         'numFractionalDigits' => 2,
         'symbol' => 'ل.ل',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-
     'JOD' => [
         'numFractionalDigits' => 2,
         'symbol' => 'JD',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-
     'MAD' => [
         'numFractionalDigits' => 2,
         'symbol' => 'درهم',
@@ -329,7 +315,6 @@ return [
         'symbol' => 'ر.ق',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-
     'SAR' => [
         'numFractionalDigits' => 2,
         'symbol' => 'ر.س',
