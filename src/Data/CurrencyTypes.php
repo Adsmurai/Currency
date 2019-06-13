@@ -236,7 +236,7 @@ return [
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'HUF' => [
-        'numFractionalDigits' => 0,
+        'numFractionalDigits' => 2,
         'symbol' => 'Ft',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
