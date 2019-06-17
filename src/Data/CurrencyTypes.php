@@ -46,7 +46,7 @@ return [
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'COP' => [
-        'numFractionalDigits' => 0,
+        'numFractionalDigits' => 2,
         'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
