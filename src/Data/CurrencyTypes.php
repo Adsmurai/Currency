@@ -141,7 +141,7 @@ return [
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'TWD' => [
-        'numFractionalDigits' => 0,
+        'numFractionalDigits' => 2,
         'symbol' => 'NT$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
@@ -196,7 +196,7 @@ return [
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CRC' => [
-        'numFractionalDigits' => 0,
+        'numFractionalDigits' => 2,
         'symbol' => '₡',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
@@ -241,7 +241,7 @@ return [
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'IDR' => [
-        'numFractionalDigits' => 0,
+        'numFractionalDigits' => 2,
         'symbol' => 'Rp',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
