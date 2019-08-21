@@ -330,5 +330,10 @@ return [
         'symbol' => 'kn',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'OMR' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ر.ع.',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
