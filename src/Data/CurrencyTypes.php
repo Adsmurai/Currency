@@ -301,7 +301,7 @@ return [
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'JOD' => [
-        'numFractionalDigits' => 2,
+        'numFractionalDigits' => 3,
         'symbol' => 'JD',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
