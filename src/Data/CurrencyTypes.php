@@ -331,7 +331,7 @@ return [
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'OMR' => [
-        'numFractionalDigits' => 2,
+        'numFractionalDigits' => 3,
         'symbol' => 'ر.ع.',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
