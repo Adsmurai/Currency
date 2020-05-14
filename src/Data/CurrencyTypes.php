@@ -335,5 +335,10 @@ return [
         'symbol' => 'ر.ع.',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'BGN' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'Лв',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
