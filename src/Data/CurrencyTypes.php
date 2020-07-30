@@ -340,5 +340,10 @@ return [
         'symbol' => 'Лв',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'UAH' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '₴',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
