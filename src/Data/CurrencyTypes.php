@@ -345,5 +345,10 @@ return [
         'symbol' => '₴',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'TND' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'د.ت',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
