@@ -350,5 +350,10 @@ return [
         'symbol' => 'د.ت',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
+    'KZT' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '₸',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
