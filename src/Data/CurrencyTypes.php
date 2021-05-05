@@ -355,5 +355,10 @@ return [
         'symbol' => '₸',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
+    'GEL' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ლ',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
