@@ -31,6 +31,7 @@ class fromStringTests extends TestCase
     {
         $eurCurrencyType = CurrencyTypeMocks::getEuroCurrencyType();
         $usdCurrencyType = CurrencyTypeMocks::getUsDollarCurrencyType();
+        $penCurrencyType = CurrencyTypeMocks::getPenCurrencyType();
 
         return [
             ['34.76', $eurCurrencyType],
@@ -43,6 +44,11 @@ class fromStringTests extends TestCase
             ['0.01', $usdCurrencyType],
             ['12345678.50', $usdCurrencyType],
 
+            ['34.76', $penCurrencyType],
+            ['100', $penCurrencyType],
+            ['0.01', $penCurrencyType],
+            ['12345678.50', $penCurrencyType],
+
             ['34.76 EUR', $eurCurrencyType],
             ['100 EUR', $eurCurrencyType],
             ['0.01 EUR', $eurCurrencyType],
@@ -52,6 +58,11 @@ class fromStringTests extends TestCase
             ['100 USD', $usdCurrencyType],
             ['0.01 USD', $usdCurrencyType],
             ['12345678.50 USD', $usdCurrencyType],
+
+            ['34.76 PEN', $penCurrencyType],
+            ['100 PEN', $penCurrencyType],
+            ['0.01 PEN', $penCurrencyType],
+            ['12345678.50 PEN', $penCurrencyType],
 
             ['34.76 €', $eurCurrencyType],
             ['100 €', $eurCurrencyType],
@@ -72,6 +83,16 @@ class fromStringTests extends TestCase
             ['$100', $usdCurrencyType],
             ['$0.01', $usdCurrencyType],
             ['$12345678.50', $usdCurrencyType],
+
+            ['S/ 34.76', $penCurrencyType],
+            ['S/ 100', $penCurrencyType],
+            ['S/ 0.01', $penCurrencyType],
+            ['S/ 12345678.50', $penCurrencyType],
+
+            ['S/34.76', $penCurrencyType],
+            ['S/100', $penCurrencyType],
+            ['S/0.01', $penCurrencyType],
+            ['S/12345678.50', $penCurrencyType],
         ];
     }
 

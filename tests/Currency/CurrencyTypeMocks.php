@@ -72,4 +72,18 @@ final class CurrencyTypeMocks
 
         return $currencyType;
     }
+
+    public static function getPenCurrencyType(): Currency
+    {
+        /** @var Currency|MockInterface $currencyType */
+        $currencyType = \Mockery::mock(Currency::class);
+
+        $currencyType
+            ->shouldReceive('getNumFractionalDigits')->andReturn(2)
+            ->shouldReceive('getISOCode')->andReturn('PEN')
+            ->shouldReceive('getSymbol')->andReturn('S/')
+            ->shouldReceive('getSymbolPlacement')->andReturn(Currency::BEFORE_PLACEMENT);
+
+        return $currencyType;
+    }
 }
