@@ -94,7 +94,7 @@ final class Money implements MoneyContract
 
     private static function getAmountPlusSymbolPattern(CurrencyContract $currency): string
     {
-        $escapedSymbol = \preg_quote($currency->getSymbol());
+        $escapedSymbol = \preg_quote($currency->getSymbol(), '/');
 
         return (CurrencyContract::BEFORE_PLACEMENT === $currency->getSymbolPlacement())
             ? '/^'.$escapedSymbol.'\s*'.self::DECIMAL_NUMBER_REGEXP.'$/x'
