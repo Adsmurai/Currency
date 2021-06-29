@@ -360,5 +360,10 @@ return [
         'symbol' => 'ლ',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
+    'AMD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '֏',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
