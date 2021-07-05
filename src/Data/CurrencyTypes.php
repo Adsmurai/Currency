@@ -365,5 +365,10 @@ return [
         'symbol' => '֏',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'MKD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'Ден',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
