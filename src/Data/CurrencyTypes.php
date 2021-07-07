@@ -370,5 +370,10 @@ return [
         'symbol' => 'Ден',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'BAM' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'KM',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
