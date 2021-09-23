@@ -375,5 +375,10 @@ return [
         'symbol' => 'KM',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'ALL' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'L',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
