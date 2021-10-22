@@ -56,7 +56,7 @@ return [
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CLP' => [
-        'numFractionalDigits' => 2,
+        'numFractionalDigits' => 0,
         'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
