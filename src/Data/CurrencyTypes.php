@@ -380,5 +380,10 @@ return [
         'symbol' => 'L',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'AZN' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'm',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
