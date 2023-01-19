@@ -337,7 +337,7 @@ return [
     ],
     'BGN' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'Лв',
+        'symbol' => 'лв',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'UAH' => [
