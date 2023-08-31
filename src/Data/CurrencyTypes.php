@@ -385,5 +385,10 @@ return [
         'symbol' => 'm',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
+    'PAB' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'B/',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
 ];
 // @codeCoverageIgnoreEnd
