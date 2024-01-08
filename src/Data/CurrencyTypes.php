@@ -215,11 +215,6 @@ return [
         'symbol' => 'د.إ',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'VEF' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'Bs.',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
     'CNY' => [
         'numFractionalDigits' => 1,
         'symbol' => '¥',
@@ -323,11 +318,6 @@ return [
     'RSD' => [
         'numFractionalDigits' => 2,
         'symbol' => 'дин',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'HRK' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'kn',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'OMR' => [
