@@ -15,49 +15,59 @@ use Adsmurai\Currency\Contracts\Currency;
  * minimum units used by FACEBOOK to bill services.
  */
 return [
-    'EUR' => [
+    'AED' => [
         'numFractionalDigits' => 2,
-        'symbol' => '€',
+        'symbol' => 'د.إ',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'USD' => [
+    'ALL' => [
         'numFractionalDigits' => 2,
-        'symbol' => '$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'CAD' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'GBP' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '£',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'PLN' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'zł',
+        'symbol' => 'L',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'MXN' => [
+    'AMD' => [
         'numFractionalDigits' => 2,
-        'symbol' => '$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'COP' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+        'symbol' => '֏',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'ARS' => [
         'numFractionalDigits' => 2,
         'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'CLP' => [
-        'numFractionalDigits' => 0,
+    'AUD' => [
+        'numFractionalDigits' => 2,
         'symbol' => '$',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'AZN' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'm',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'BAM' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'KM',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'BDT' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'Tk',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'BGN' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'лв',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'BHD' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'BD',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'BOB' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'R$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'BRL' => [
@@ -65,69 +75,9 @@ return [
         'symbol' => 'R$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'JPY' => [
-        'numFractionalDigits' => 0,
-        'symbol' => '¥',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'DKK' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'kr',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'TRY' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '₺',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'RUB' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '₽',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'PYG' => [
-        'numFractionalDigits' => 0,
-        'symbol' => '₲',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'PEN' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'S/',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'NOK' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'kr',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'KRW' => [
-        'numFractionalDigits' => 0,
-        'symbol' => '₩',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'SGD' => [
+    'CAD' => [
         'numFractionalDigits' => 2,
         'symbol' => '$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'RON' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'lei',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'SEK' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'kr',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'ZAR' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'R',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'HKD' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'HK$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CHF' => [
@@ -135,64 +85,19 @@ return [
         'symbol' => 'CHF',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'NIO' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'C$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'TWD' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'NT$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'ISK' => [
+    'CLP' => [
         'numFractionalDigits' => 0,
-        'symbol' => 'kr',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'NZD' => [
-        'numFractionalDigits' => 2,
         'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'CZK' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'Kč',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'AUD' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'THB' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '฿',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'BOB' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'R$',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'ILS' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '₪',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'HNL' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'L',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'MOP' => [
+    'CNY' => [
         'numFractionalDigits' => 1,
-        'symbol' => 'MOP$',
+        'symbol' => '¥',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'UYU' => [
+    'COP' => [
         'numFractionalDigits' => 2,
-        'symbol' => '$U',
+        'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CRC' => [
@@ -200,9 +105,39 @@ return [
         'symbol' => '₡',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'INR' => [
+    'CZK' => [
         'numFractionalDigits' => 2,
-        'symbol' => '₹',
+        'symbol' => 'Kč',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'DKK' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'kr',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'DZD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'DA',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'EGP' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '£',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'EUR' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '€',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'GBP' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '£',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'GEL' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ლ',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'GTQ' => [
@@ -210,24 +145,14 @@ return [
         'symbol' => 'Q',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'AED' => [
+    'HKD' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'د.إ',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'CNY' => [
-        'numFractionalDigits' => 1,
-        'symbol' => '¥',
+        'symbol' => 'HK$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'PHP' => [
+    'HNL' => [
         'numFractionalDigits' => 2,
-        'symbol' => '₱',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'VND' => [
-        'numFractionalDigits' => 0,
-        'symbol' => '₫',
+        'symbol' => 'L',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'HUF' => [
@@ -240,24 +165,79 @@ return [
         'symbol' => 'Rp',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'DZD' => [
+    'ILS' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'DA',
+        'symbol' => '₪',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'BDT' => [
+    'INR' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'Tk',
+        'symbol' => '₹',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'EGP' => [
-        'numFractionalDigits' => 2,
-        'symbol' => '£',
+    'ISK' => [
+        'numFractionalDigits' => 0,
+        'symbol' => 'kr',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'JOD' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'JD',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'JPY' => [
+        'numFractionalDigits' => 0,
+        'symbol' => '¥',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'KES' => [
         'numFractionalDigits' => 2,
         'symbol' => 'KSh',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'KRW' => [
+        'numFractionalDigits' => 0,
+        'symbol' => '₩',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'KWD' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'د.ك',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'KZT' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '₸',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'LBP' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ل.ل',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'LKR' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'Rs',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'MAD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'درهم',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'MKD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'Ден',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'MOP' => [
+        'numFractionalDigits' => 1,
+        'symbol' => 'MOP$',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'MXN' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'MYR' => [
@@ -270,39 +250,54 @@ return [
         'symbol' => '₦',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
+    'NIO' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'C$',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'NOK' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'kr',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'NZD' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '$',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'OMR' => [
+        'numFractionalDigits' => 3,
+        'symbol' => 'ر.ع.',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'PAB' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'B/',
+        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    ],
+    'PEN' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'S/',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'PHP' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '₱',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
     'PKR' => [
         'numFractionalDigits' => 2,
         'symbol' => 'Rs',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'LKR' => [
+    'PLN' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'Rs',
-        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-    ],
-    'BHD' => [
-        'numFractionalDigits' => 3,
-        'symbol' => 'BD',
+        'symbol' => 'zł',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'KWD' => [
-        'numFractionalDigits' => 3,
-        'symbol' => 'د.ك',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'LBP' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'ل.ل',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'JOD' => [
-        'numFractionalDigits' => 3,
-        'symbol' => 'JD',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'MAD' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'درهم',
+    'PYG' => [
+        'numFractionalDigits' => 0,
+        'symbol' => '₲',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'QAR' => [
@@ -310,75 +305,80 @@ return [
         'symbol' => 'ر.ق',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'SAR' => [
+    'RON' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'ر.س',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+        'symbol' => 'lei',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'RSD' => [
         'numFractionalDigits' => 2,
         'symbol' => 'дин',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'OMR' => [
-        'numFractionalDigits' => 3,
-        'symbol' => 'ر.ع.',
+    'RUB' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '₽',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'SAR' => [
+        'numFractionalDigits' => 2,
+        'symbol' => 'ر.س',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'BGN' => [
+    'SEK' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'лв',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+        'symbol' => 'kr',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'UAH' => [
+    'SGD' => [
         'numFractionalDigits' => 2,
-        'symbol' => '₴',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+        'symbol' => '$',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+    ],
+    'THB' => [
+        'numFractionalDigits' => 2,
+        'symbol' => '฿',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'TND' => [
         'numFractionalDigits' => 3,
         'symbol' => 'د.ت',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'KZT' => [
+    'TRY' => [
         'numFractionalDigits' => 2,
-        'symbol' => '₸',
+        'symbol' => '₺',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'GEL' => [
+    'TWD' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'ლ',
+        'symbol' => 'NT$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'AMD' => [
+    'UAH' => [
         'numFractionalDigits' => 2,
-        'symbol' => '֏',
+        'symbol' => '₴',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
-    'MKD' => [
+    'USD' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'Ден',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+        'symbol' => '$',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'BAM' => [
+    'UYU' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'KM',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+        'symbol' => '$U',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'ALL' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'L',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+    'VND' => [
+        'numFractionalDigits' => 0,
+        'symbol' => '₫',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
-    'AZN' => [
+    'ZAR' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'm',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
-    ],
-    'PAB' => [
-        'numFractionalDigits' => 2,
-        'symbol' => 'B/',
-        'symbolPlacement' => Currency::AFTER_PLACEMENT,
+        'symbol' => 'R',
+        'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
 ];
 // @codeCoverageIgnoreEnd
