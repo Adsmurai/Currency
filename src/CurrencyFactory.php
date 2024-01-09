@@ -121,4 +121,14 @@ final class CurrencyFactory implements CurrencyFactoryContract
     {
         return \array_keys($this->data);
     }
+
+    /** @return Currency[] */
+    public function getSupportedCurrencies(): array
+    {
+        foreach (array_keys($this->data) as $ISOCode) {
+            $this->buildFromISOCode($ISOCode);
+        }
+
+        return array_values($this->currencies);
+    }
 }
