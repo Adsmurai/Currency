@@ -53,7 +53,7 @@ return [
     'AUD' => [
         'name' => 'Australian Dollar',
         'numFractionalDigits' => 2,
-        'symbol' => '$',
+        'symbol' => '$A',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'AWG' => [
@@ -161,7 +161,7 @@ return [
     'CAD' => [
         'name' => 'Canadian Dollar',
         'numFractionalDigits' => 2,
-        'symbol' => '$',
+        'symbol' => 'Can$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CDF' => [
@@ -191,7 +191,7 @@ return [
     'COP' => [
         'name' => 'Colombian Peso',
         'numFractionalDigits' => 2,
-        'symbol' => '$',
+        'symbol' => 'Col$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CRC' => [
@@ -569,7 +569,7 @@ return [
     'MXN' => [
         'name' => 'Mexican Peso',
         'numFractionalDigits' => 2,
-        'symbol' => '$',
+        'symbol' => 'Mex$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'MYR' => [
@@ -617,7 +617,7 @@ return [
     'NZD' => [
         'name' => 'New Zealand Dollar',
         'numFractionalDigits' => 2,
-        'symbol' => 'NZ$',
+        'symbol' => '$NZ',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'OMR' => [
@@ -731,7 +731,7 @@ return [
     'SGD' => [
         'name' => 'Singapore Dollar',
         'numFractionalDigits' => 2,
-        'symbol' => '$',
+        'symbol' => 'S$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'SHP' => [
@@ -863,7 +863,7 @@ return [
     'UYU' => [
         'name' => 'Uruguayan Peso',
         'numFractionalDigits' => 2,
-        'symbol' => '$',
+        'symbol' => 'Ur$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'UZS' => [
