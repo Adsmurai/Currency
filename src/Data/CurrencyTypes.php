@@ -11,7 +11,7 @@ return [
     'AED' => [
         'name' => 'United Arab Emirates Dirham',
         'numFractionalDigits' => 2,
-        'symbol' => 'AED',
+        'symbol' => 'د.إ',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'AFN' => [
@@ -23,13 +23,13 @@ return [
     'ALL' => [
         'name' => 'Albanian Lek',
         'numFractionalDigits' => 2,
-        'symbol' => 'ALL',
+        'symbol' => 'L',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'AMD' => [
         'name' => 'Armenian Dram',
         'numFractionalDigits' => 2,
-        'symbol' => 'AMD',
+        'symbol' => '֏',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'ANG' => [
@@ -40,14 +40,14 @@ return [
     ],
     'AOA' => [
         'numFractionalDigits' => 2,
-        'symbol' => 'AOA',
+        'symbol' => 'Kz',
         'name' => 'Angolan Kwanza',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'ARS' => [
         'name' => 'Argentine Peso',
         'numFractionalDigits' => 2,
-        'symbol' => 'ARS',
+        'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'AUD' => [
@@ -65,19 +65,19 @@ return [
     'AZN' => [
         'name' => 'Azerbaijani Manat',
         'numFractionalDigits' => 2,
-        'symbol' => 'AZN',
+        'symbol' => 'm',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'BAM' => [
         'name' => 'Bosnia-Herzegovina Convertible Mark',
         'numFractionalDigits' => 2,
-        'symbol' => 'BAM',
+        'symbol' => 'KM',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'BBD' => [
         'name' => 'Barbadian Dollar',
         'numFractionalDigits' => 2,
-        'symbol' => 'BBD',
+        'symbol' => 'BDS$',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'BDT' => [
@@ -89,13 +89,13 @@ return [
     'BGN' => [
         'name' => 'Bulgarian Lev',
         'numFractionalDigits' => 2,
-        'symbol' => 'BGN',
+        'symbol' => 'лв',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'BHD' => [
         'name' => 'Bahraini Dinar',
         'numFractionalDigits' => 3,
-        'symbol' => 'BHD',
+        'symbol' => 'BD',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'BIF' => [
@@ -179,7 +179,7 @@ return [
     'CLP' => [
         'name' => 'Chilean Peso',
         'numFractionalDigits' => 0,
-        'symbol' => 'CLP',
+        'symbol' => '$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'CNY' => [
@@ -221,7 +221,7 @@ return [
     'CZK' => [
         'name' => 'Czech Koruna',
         'numFractionalDigits' => 2,
-        'symbol' => 'CZK',
+        'symbol' => 'Kč',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'DJF' => [
@@ -359,7 +359,7 @@ return [
     'IDR' => [
         'name' => 'Indonesian Rupiah',
         'numFractionalDigits' => 2,
-        'symbol' => 'IDR',
+        'symbol' => 'Rp',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'ILS' => [
@@ -401,7 +401,7 @@ return [
     'JOD' => [
         'name' => 'Jordanian Dinar',
         'numFractionalDigits' => 3,
-        'symbol' => 'JOD',
+        'symbol' => 'JD',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'JPY' => [
@@ -449,7 +449,7 @@ return [
     'KWD' => [
         'name' => 'Kuwaiti Dinar',
         'numFractionalDigits' => 3,
-        'symbol' => 'KWD',
+        'symbol' => 'د.ك',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'KYD' => [
@@ -473,7 +473,7 @@ return [
     'LBP' => [
         'name' => 'Lebanese Pound',
         'numFractionalDigits' => 2,
-        'symbol' => 'LBP',
+        'symbol' => 'ل.ل',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'LKR' => [
@@ -503,7 +503,7 @@ return [
     'MAD' => [
         'name' => 'Moroccan Dirham',
         'numFractionalDigits' => 2,
-        'symbol' => 'MAD',
+        'symbol' => 'درهم',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'MDL' => [
@@ -521,7 +521,7 @@ return [
     'MKD' => [
         'name' => 'Macedonian Denar',
         'numFractionalDigits' => 2,
-        'symbol' => 'MKD',
+        'symbol' => 'Ден',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'MMK' => [
@@ -539,7 +539,7 @@ return [
     'MOP' => [
         'name' => 'Macanese Pataca',
         'numFractionalDigits' => 2,
-        'symbol' => 'MOP',
+        'symbol' => 'MOP$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'MRU' => [
@@ -599,13 +599,13 @@ return [
     'NIO' => [
         'name' => 'Nicaraguan Córdoba',
         'numFractionalDigits' => 2,
-        'symbol' => 'NIO',
+        'symbol' => 'C$',
         'symbolPlacement' => Currency::BEFORE_PLACEMENT,
     ],
     'NOK' => [
         'name' => 'Norwegian Krone',
         'numFractionalDigits' => 2,
-        'symbol' => 'NOK',
+        'symbol' => 'kr',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'NPR' => [
@@ -623,13 +623,13 @@ return [
     'OMR' => [
         'name' => 'Omani Rial',
         'numFractionalDigits' => 3,
-        'symbol' => 'OMR',
+        'symbol' => 'ر.ع.',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'PAB' => [
         'name' => 'Panamanian Balboa',
         'numFractionalDigits' => 2,
-        'symbol' => 'PAB',
+        'symbol' => 'B/',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'PEN' => [
@@ -659,13 +659,13 @@ return [
     'PLN' => [
         'name' => 'Polish Zloty',
         'numFractionalDigits' => 2,
-        'symbol' => 'PLN',
+        'symbol' => 'zł',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'PYG' => [
         'name' => 'Paraguayan Guarani',
         'numFractionalDigits' => 0,
-        'symbol' => 'PYG',
+        'symbol' => '₲',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'QAR' => [
@@ -683,7 +683,7 @@ return [
     'RSD' => [
         'name' => 'Serbian Dinar',
         'numFractionalDigits' => 2,
-        'symbol' => 'RSD',
+        'symbol' => 'дин',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'RUB' => [
@@ -845,7 +845,7 @@ return [
     'UAH' => [
         'name' => 'Ukrainian Hryvnia',
         'numFractionalDigits' => 2,
-        'symbol' => 'UAH',
+        'symbol' => '₴',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'UGX' => [
