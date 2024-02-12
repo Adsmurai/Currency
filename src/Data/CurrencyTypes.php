@@ -701,7 +701,7 @@ return [
     'SAR' => [
         'name' => 'Saudi Riyal',
         'numFractionalDigits' => 2,
-        'symbol' => 'SAR',
+        'symbol' => 'ر.س',
         'symbolPlacement' => Currency::AFTER_PLACEMENT,
     ],
     'SBD' => [
