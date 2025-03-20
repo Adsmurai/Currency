@@ -14,10 +14,11 @@ class fromDataArrayTests extends TestCase
      * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray
      * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      * @covers \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_empty_array()
     {
+        $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
+
         CurrencyFactory::fromDataArray([]);
     }
 
@@ -25,10 +26,11 @@ class fromDataArrayTests extends TestCase
      * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray
      * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      * @covers \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_invalid_ISO_codes()
     {
+        $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
+
         CurrencyFactory::fromDataArray([
             'EUR' => [
                 'numFractionalDigits' => 2,
@@ -47,10 +49,11 @@ class fromDataArrayTests extends TestCase
      * @dataProvider missingCurrencyInfoProvider
      * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
      * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_missing_currency_data(array $incompleteCurrencyInfo)
     {
+        $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
+
         CurrencyFactory::fromDataArray($incompleteCurrencyInfo);
     }
 
@@ -58,10 +61,11 @@ class fromDataArrayTests extends TestCase
      * @dataProvider incorrectlyTypedCurrencyInfoProvider
      * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
      * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
-     * @expectedException \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
     public function test_with_incorrectly_typed_currency_data(array $invalidCurrencyInfo)
     {
+        $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
+
         CurrencyFactory::fromDataArray($invalidCurrencyInfo);
     }
 

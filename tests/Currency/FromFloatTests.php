@@ -9,7 +9,7 @@ use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
-class fromFloatTests extends TestCase
+class FromFloatTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
@@ -28,22 +28,24 @@ class fromFloatTests extends TestCase
      * @dataProvider infiniteParamsProvider
      * @covers       \Adsmurai\Currency\Money::fromFloat
      * @covers       \Adsmurai\Currency\Money::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Currency amounts must be finite
      */
     public function test_with_infinite_amounts(float $amount, Currency $currencyType)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Currency amounts must be finite');
+
         Money::fromFloat($amount, $currencyType);
     }
 
     /**
      * @covers \Adsmurai\Currency\Money::fromFloat
      * @covers \Adsmurai\Currency\Money::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Currency amounts must be numbers
      */
     public function test_with_nan_amount()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Currency amounts must be numbers');
+
         Money::fromFloat(\NAN, CurrencyTypeMocks::getCurrencyTypeDummyMock());
     }
 

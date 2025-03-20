@@ -138,7 +138,7 @@ final class Money implements MoneyContract
     /**
      * {@inheritdoc}
      */
-    public function format(MoneyFormatInterface $currencyFormat = null): string
+    public function format(?MoneyFormatInterface $currencyFormat = null): string
     {
         if (is_null($currencyFormat)) {
             $currencyFormat = MoneyFormat::default();
