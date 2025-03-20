@@ -9,7 +9,7 @@ use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
-class fromStringTests extends TestCase
+class FromStringTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
@@ -102,11 +102,12 @@ class fromStringTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::extractNumericAmount
      * @covers       \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
      * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid currency value
      */
     public function test_with_invalid_params(string $amount, Currency $currencyType)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid currency value');
+
         Money::fromString($amount, $currencyType);
     }
 

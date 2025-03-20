@@ -40,7 +40,7 @@ interface Money
      *
      * @return string
      */
-    public function format(MoneyFormat $currencyFormat = null): string;
+    public function format(?MoneyFormat $currencyFormat = null): string;
 
     /**
      * Use this method to compare currency values.

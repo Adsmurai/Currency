@@ -28,13 +28,14 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\Errors\InconsistentCurrenciesError
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Trying to construct InconsistentCurrencyTypesError with exactly equal CurrencyType instances
      */
     public function test___construct_with_invalid_params()
     {
         /** @var Currency $ct1 */
         $ct1 = Mockery::mock(Currency::class);
+
+        $this->expectException(\LogicException::class);
+        $this->expectDeprecationMessage('Trying to construct InconsistentCurrencyTypesError with exactly equal CurrencyType instances');
 
         new InconsistentCurrenciesError($ct1, $ct1);
     }

@@ -37,7 +37,7 @@ final class MoneyFormat implements MoneyFormatInterface
         int $decorationType = self::DECORATION_SYMBOL,
         int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
         int $extraPrecision = 0,
-        int $precision = null
+        ?int $precision = null
     ) {
         $this->decimalsSeparator = $decimalsSeparator;
         $this->thousandsSeparator = $thousandsSeparator;

@@ -48,11 +48,12 @@ class CurrencyTypeTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid number of fractional digits
      */
     public function test__construct_with_negative_num_of_fractional_digits()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid number of fractional digits');
+
         new Currency(
             self::EURO_ISO_CODE,
             '',
@@ -64,11 +65,12 @@ class CurrencyTypeTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid symbol placement
      */
     public function test__construct_with_invalid_symbol_placement()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Invalid symbol placement');
+
         new Currency(
             self::EURO_ISO_CODE,
             '',
@@ -80,11 +82,12 @@ class CurrencyTypeTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Empty symbol
      */
     public function test__construct_with_empty_symbol()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Empty symbol');
+
         new Currency(
             self::EURO_ISO_CODE,
             '',
@@ -96,11 +99,12 @@ class CurrencyTypeTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Empty symbol
      */
     public function test__construct_with_almost_empty_symbol()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectDeprecationMessage('Empty symbol');
+
         new Currency(
             self::EURO_ISO_CODE,
             '    ',
@@ -153,8 +157,6 @@ class CurrencyTypeTests extends TestCase
 
     /**
      * @covers \Adsmurai\Currency\Currency::equals
-     * @expectedException \Adsmurai\Currency\Errors\InconsistentCurrenciesError
-     * @expectedExceptionMessage Same ISO currency code but different currency settings
      */
     public function test_equals_with_ambiguously_similar_CurrencyType_instances()
     {
@@ -167,6 +169,9 @@ class CurrencyTypeTests extends TestCase
             self::EURO_SYMBOL_PLACEMENT,
             self::EURO_NAME
         );
+
+        $this->expectException(\Adsmurai\Currency\Errors\InconsistentCurrenciesError::class);
+        $this->expectDeprecationMessage('Same ISO currency code but different currency settings');
 
         $ct1->equals($ct2);
     }
