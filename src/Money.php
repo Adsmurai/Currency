@@ -18,20 +18,12 @@ final class Money implements MoneyContract
     const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
     const INNER_FRACTIONAL_DIGITS = 8;
 
-    /** @var Decimal */
-    private $amount;
-
-    /** @var CurrencyContract */
-    private $currency;
-
     /**
      * @param Decimal          $amount
      * @param CurrencyContract $currency
      */
-    private function __construct(Decimal $amount, CurrencyContract $currency)
+    private function __construct(private Decimal $amount, private CurrencyContract $currency)
     {
-        $this->amount = $amount;
-        $this->currency = $currency;
     }
 
     public static function fromFloat(float $amount, CurrencyContract $currency): Money

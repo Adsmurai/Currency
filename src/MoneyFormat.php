@@ -6,45 +6,18 @@ use Adsmurai\Currency\Contracts\MoneyFormat as MoneyFormatInterface;
 
 final class MoneyFormat implements MoneyFormatInterface
 {
-    /**
-     * @var string
-     */
-    private $decimalsSeparator;
-    /**
-     * @var string
-     */
-    private $thousandsSeparator;
-    /**
-     * @var int
-     */
-    private $extraPrecision;
-    /**
-     * @var int
-     */
-    private $decorationType;
-    /**
-     * @var int
-     */
-    private $precision;
-    /**
-     * @var int
-     */
-    private $decorationSpace;
-
     private function __construct(
-        string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
-        string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
-        int $decorationType = self::DECORATION_SYMBOL,
-        int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
-        int $extraPrecision = 0,
-        ?int $precision = null
-    ) {
-        $this->decimalsSeparator = $decimalsSeparator;
-        $this->thousandsSeparator = $thousandsSeparator;
-        $this->extraPrecision = $extraPrecision;
-        $this->decorationType = $decorationType;
-        $this->precision = $precision;
-        $this->decorationSpace = $decorationSpace;
+        private string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        private string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
+        private int $decorationType = self::DECORATION_SYMBOL,
+        private int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
+        private int $extraPrecision = 0,
+        /**
+         * @var int
+         */
+        private ?int $precision = null
+    )
+    {
     }
 
     public static function default(): MoneyFormatInterface

@@ -10,15 +10,11 @@ use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryContract;
 
 final class MoneyFactoriesLocator implements MoneyFactoriesLocatorContract
 {
-    /** @var CurrencyFactoryContract */
-    private $currencyFactory;
-
     /** @var MoneyFactory[] */
     private $moneyFactories;
 
-    public function __construct(CurrencyFactoryContract $currencyFactory)
+    public function __construct(private CurrencyFactoryContract $currencyFactory)
     {
-        $this->currencyFactory = $currencyFactory;
     }
 
     public function getMoneyFactory(string $isoCode): MoneyFactoryContract

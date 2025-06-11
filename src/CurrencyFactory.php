@@ -13,15 +13,11 @@ final class CurrencyFactory implements CurrencyFactoryContract
 {
     const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
-    /** @var array */
-    private $data;
-
     /** @var Currency[] */
     private $currencies;
 
-    private function __construct(array $data)
+    private function __construct(private array $data)
     {
-        $this->data = $data;
         $this->currencies = [];
     }
 

@@ -11,12 +11,8 @@ use Litipk\BigNumbers\Decimal;
 
 final class MoneyFactory implements MoneyFactoryContract
 {
-    /** @var CurrencyContract */
-    private $currency;
-
-    public function __construct(CurrencyContract $currency)
+    public function __construct(private CurrencyContract $currency)
     {
-        $this->currency = $currency;
     }
 
     public function buildFromFloat(float $amount): MoneyContract

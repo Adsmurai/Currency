@@ -10,8 +10,6 @@ use InvalidArgumentException;
 
 final class Currency implements CurrencyContract
 {
-    private $ISOCode;
-
     private $name;
 
     private $symbol;
@@ -21,7 +19,7 @@ final class Currency implements CurrencyContract
     private $symbolPlacement;
 
     public function __construct(
-        string $ISOCode,
+        private string $ISOCode,
         string $symbol,
         int $numFractionalDigits,
         int $symbolPlacement = self::AFTER_PLACEMENT,
@@ -41,8 +39,6 @@ final class Currency implements CurrencyContract
         if ('' === $symbol) {
             throw new InvalidArgumentException('Empty symbol');
         }
-
-        $this->ISOCode = $ISOCode;
         $this->symbol = $symbol;
         $this->numFractionalDigits = $numFractionalDigits;
         $this->symbolPlacement = $symbolPlacement;
