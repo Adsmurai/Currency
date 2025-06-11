@@ -92,10 +92,7 @@ final class MoneyFormat implements MoneyFormatInterface
         return $this->decorationType;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPrecision()
+    public function getPrecision(): ?int
     {
         return $this->precision;
     }

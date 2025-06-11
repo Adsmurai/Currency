@@ -10,13 +10,13 @@ use InvalidArgumentException;
 
 final class Currency implements CurrencyContract
 {
-    private $name;
+    private readonly string $name;
 
-    private $symbol;
+    private readonly string $symbol;
 
-    private $numFractionalDigits;
+    private readonly int $numFractionalDigits;
 
-    private $symbolPlacement;
+    private readonly int $symbolPlacement;
 
     public function __construct(
         private readonly string $ISOCode,

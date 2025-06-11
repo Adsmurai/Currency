@@ -11,7 +11,7 @@ use Adsmurai\Currency\Contracts\CurrencyFactory as CurrencyFactoryContract;
 final class MoneyFactoriesLocator implements MoneyFactoriesLocatorContract
 {
     /** @var MoneyFactory[] */
-    private $moneyFactories;
+    private ?array $moneyFactories = null;
 
     public function __construct(private readonly CurrencyFactoryContract $currencyFactory)
     {

@@ -14,7 +14,7 @@ final class CurrencyFactory implements CurrencyFactoryContract
     const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
     /** @var Currency[] */
-    private $currencies = [];
+    private array $currencies = [];
 
     private function __construct(private array $data)
     {
@@ -38,7 +38,7 @@ final class CurrencyFactory implements CurrencyFactoryContract
     /**
      * @throws InvalidCurrenciesDataError
      */
-    private static function validateCurrenciesData(array $currenciesData)
+    private static function validateCurrenciesData(array $currenciesData): void
     {
         if ($currenciesData === []) {
             throw new InvalidCurrenciesDataError();
@@ -56,7 +56,7 @@ final class CurrencyFactory implements CurrencyFactoryContract
         }
     }
 
-    private static function hasValidISOCode($ISOCode): bool
+    private static function hasValidISOCode(int|string $ISOCode): bool
     {
         return \is_string($ISOCode) && ($ISOCode !== '' && $ISOCode !== '0');
     }
