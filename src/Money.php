@@ -14,7 +14,7 @@ use Litipk\BigNumbers\Errors\NaNInputError;
 
 final class Money implements MoneyContract
 {
-    const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9][0-9]*|[0-9])(\.[0-9]+)?))';
+    const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9]\d*|\d)(\.\d+)?))';
     const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
     const INNER_FRACTIONAL_DIGITS = 8;
 

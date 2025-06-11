@@ -14,11 +14,10 @@ final class CurrencyFactory implements CurrencyFactoryContract
     const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
     /** @var Currency[] */
-    private $currencies;
+    private $currencies = [];
 
     private function __construct(private array $data)
     {
-        $this->currencies = [];
     }
 
     public static function fromDataPath(string $dataPath = self::DEFAULT_DATA_PATH): CurrencyFactory
@@ -41,7 +40,7 @@ final class CurrencyFactory implements CurrencyFactoryContract
      */
     private static function validateCurrenciesData(array $currenciesData)
     {
-        if (empty($currenciesData)) {
+        if ($currenciesData === []) {
             throw new InvalidCurrenciesDataError();
         }
 
@@ -59,7 +58,7 @@ final class CurrencyFactory implements CurrencyFactoryContract
 
     private static function hasValidISOCode($ISOCode): bool
     {
-        return \is_string($ISOCode) && !empty($ISOCode);
+        return \is_string($ISOCode) && ($ISOCode !== '' && $ISOCode !== '0');
     }
 
     private static function hasValidSymbol(array $currencyData): bool
@@ -67,7 +66,7 @@ final class CurrencyFactory implements CurrencyFactoryContract
         return
             isset($currencyData['symbol'])
             && \is_string($currencyData['symbol'])
-            && !empty($currencyData['symbol']);
+            && (isset($currencyData['symbol']) && ($currencyData['symbol'] !== '' && $currencyData['symbol'] !== '0'));
     }
 
     private static function hasValidSymbolPlacement(array $currencyData): bool

@@ -24,7 +24,7 @@ class CurrencyTypeTests extends TestCase
 
     public function test___construct_with_valid_params()
     {
-        $currencyType = self::getEuroCurrencyType();
+        $currencyType = $this->getEuroCurrencyType();
 
         $this->assertInstanceOf(CurrencyTypeInterface::class, $currencyType);
 
@@ -35,7 +35,7 @@ class CurrencyTypeTests extends TestCase
         $this->assertSame(self::EURO_SYMBOL_PLACEMENT, $currencyType->getSymbolPlacement());
     }
 
-    private static function getEuroCurrencyType(): Currency
+    private function getEuroCurrencyType(): Currency
     {
         return new Currency(
             self::EURO_ISO_CODE,
@@ -119,8 +119,8 @@ class CurrencyTypeTests extends TestCase
      */
     public function test_equals_with_equal_CurrencyType_instances()
     {
-        $ct1 = self::getEuroCurrencyType();
-        $ct2 = self::getEuroCurrencyType();
+        $ct1 = $this->getEuroCurrencyType();
+        $ct2 = $this->getEuroCurrencyType();
 
         $this->assertTrue($ct1->equals($ct2));
         $this->assertTrue($ct2->equals($ct1));
@@ -131,7 +131,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test_equals_with_same_CurrencyType_instances()
     {
-        $ct1 = self::getEuroCurrencyType();
+        $ct1 = $this->getEuroCurrencyType();
 
         $this->assertTrue($ct1->equals($ct1));
     }
@@ -141,7 +141,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test_equals_with_different_CurrencyType_instances()
     {
-        $ct1 = self::getEuroCurrencyType();
+        $ct1 = $this->getEuroCurrencyType();
 
         $ct2 = new Currency(
             self::USD_ISO_CODE,
@@ -160,7 +160,7 @@ class CurrencyTypeTests extends TestCase
      */
     public function test_equals_with_ambiguously_similar_CurrencyType_instances()
     {
-        $ct1 = self::getEuroCurrencyType();
+        $ct1 = $this->getEuroCurrencyType();
 
         $ct2 = new Currency(
             self::EURO_ISO_CODE,
