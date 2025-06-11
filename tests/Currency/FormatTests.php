@@ -10,7 +10,7 @@ use Adsmurai\Currency\MoneyFormat;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
-class formatTests extends TestCase
+class FormatTests extends TestCase
 {
     /**
      * @dataProvider simpleParamsProvider

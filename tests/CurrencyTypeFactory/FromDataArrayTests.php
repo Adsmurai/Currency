@@ -8,7 +8,7 @@ use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\CurrencyFactory;
 use PHPUnit\Framework\TestCase;
 
-class fromDataArrayTests extends TestCase
+class FromDataArrayTests extends TestCase
 {
     /**
      * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray

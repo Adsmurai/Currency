@@ -9,7 +9,7 @@ use Adsmurai\Currency\Money;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
-class equalsTests extends TestCase
+class EqualsTests extends TestCase
 {
     /**
      * @dataProvider equalCurrenciesProvider

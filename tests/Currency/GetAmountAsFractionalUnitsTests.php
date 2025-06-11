@@ -8,7 +8,7 @@ use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
-class getAmountAsFractionalUnitsTests extends TestCase
+class GetAmountAsFractionalUnitsTests extends TestCase
 {
     /**
      * @dataProvider stringParamsProvider

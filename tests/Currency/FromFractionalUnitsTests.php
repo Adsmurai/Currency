@@ -9,7 +9,7 @@ use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
 use PHPUnit\Framework\TestCase;
 
-class fromFractionalUnitsTests extends TestCase
+class FromFractionalUnitsTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider

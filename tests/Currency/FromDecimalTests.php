@@ -10,7 +10,7 @@ use Adsmurai\Currency\Money;
 use Litipk\BigNumbers\Decimal;
 use PHPUnit\Framework\TestCase;
 
-class fromDecimalTests extends TestCase
+class FromDecimalTests extends TestCase
 {
     /**
      * @dataProvider validParamsProvider
