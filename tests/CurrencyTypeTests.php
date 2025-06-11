@@ -28,11 +28,11 @@ class CurrencyTypeTests extends TestCase
 
         $this->assertInstanceOf(CurrencyTypeInterface::class, $currencyType);
 
-        $this->assertEquals(self::EURO_ISO_CODE, $currencyType->getISOCode());
-        $this->assertEquals(self::EURO_SYMBOL, $currencyType->getSymbol());
-        $this->assertEquals(self::EURO_NAME, $currencyType->getName());
-        $this->assertEquals(self::EURO_NUM_DIGITS, $currencyType->getNumFractionalDigits());
-        $this->assertEquals(self::EURO_SYMBOL_PLACEMENT, $currencyType->getSymbolPlacement());
+        $this->assertSame(self::EURO_ISO_CODE, $currencyType->getISOCode());
+        $this->assertSame(self::EURO_SYMBOL, $currencyType->getSymbol());
+        $this->assertSame(self::EURO_NAME, $currencyType->getName());
+        $this->assertSame(self::EURO_NUM_DIGITS, $currencyType->getNumFractionalDigits());
+        $this->assertSame(self::EURO_SYMBOL_PLACEMENT, $currencyType->getSymbolPlacement());
     }
 
     private static function getEuroCurrencyType(): Currency

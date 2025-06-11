@@ -23,7 +23,7 @@ class FormatTests extends TestCase
         string $formattedCurrency
     ) {
         $currency = Money::fromString($amount, $currencyType);
-        $this->assertEquals($formattedCurrency, $currency->format());
+        $this->assertSame($formattedCurrency, $currency->format());
     }
 
     /**
@@ -40,7 +40,7 @@ class FormatTests extends TestCase
     ) {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParameters($decimalsSeparator, $thousandsSeparator);
-        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+        $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
@@ -56,7 +56,7 @@ class FormatTests extends TestCase
     ) {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParametersWithExtraPrecision($extraPrecision);
-        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+        $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
@@ -72,7 +72,7 @@ class FormatTests extends TestCase
     ) {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParametersWithPrecision($precision);
-        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+        $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
@@ -91,7 +91,7 @@ class FormatTests extends TestCase
             MoneyFormat::DEFAULT_THOUSANDS_SEPARATOR,
             MoneyFormat::DECORATION_NO_DECORATION
         );
-        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+        $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
@@ -110,7 +110,7 @@ class FormatTests extends TestCase
             MoneyFormat::DEFAULT_THOUSANDS_SEPARATOR,
             MoneyFormat::DECORATION_ISO_CODE
         );
-        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+        $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
     }
 
     /**
@@ -132,7 +132,7 @@ class FormatTests extends TestCase
             $decorationType,
             $decorationSpace
         );
-        $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
+        $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
     }
 
     public static function simpleParamsProvider(): \Iterator

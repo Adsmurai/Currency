@@ -23,7 +23,7 @@ class BuildFromISOCodeTests extends TestCase
         $currencyType = $currencyTypeFactory->buildFromISOCode($ISOCode);
 
         $this->assertInstanceOf(Currency::class, $currencyType);
-        $this->assertEquals($ISOCode, $currencyType->getISOCode());
+        $this->assertSame($ISOCode, $currencyType->getISOCode());
         $this->assertEquals($currencyData['symbol'], $currencyType->getSymbol());
         $this->assertEquals($currencyData['symbolPlacement'], $currencyType->getSymbolPlacement());
         $this->assertEquals($currencyData['numFractionalDigits'], $currencyType->getNumFractionalDigits());
