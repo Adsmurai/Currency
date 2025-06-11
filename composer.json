@@ -16,7 +16,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.1",
+        "php": ">=8.1",
         "litipk/php-bignumbers": "^0.8"
     },
     "require-dev": {
