@@ -167,16 +167,13 @@ final class Money implements MoneyContract
             ? ' '
             : '';
 
-        switch ($currencyFormat->getDecorationType()) {
-            case MoneyFormat::DECORATION_NO_DECORATION:
-                return $number;
-            case MoneyFormat::DECORATION_ISO_CODE:
-                return $number.$separator.$this->currency->getISOCode();
-            default:
-                return (CurrencyContract::BEFORE_PLACEMENT === $this->currency->getSymbolPlacement())
-                    ? $this->currency->getSymbol().$separator.$number
-                    : $number.$separator.$this->currency->getSymbol();
-        }
+        return match ($currencyFormat->getDecorationType()) {
+            MoneyFormat::DECORATION_NO_DECORATION => $number,
+            MoneyFormat::DECORATION_ISO_CODE => $number.$separator.$this->currency->getISOCode(),
+            default => (CurrencyContract::BEFORE_PLACEMENT === $this->currency->getSymbolPlacement())
+                ? $this->currency->getSymbol().$separator.$number
+                : $number.$separator.$this->currency->getSymbol(),
+        };
     }
 
     /**
