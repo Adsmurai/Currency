@@ -7,15 +7,15 @@ use Adsmurai\Currency\Contracts\MoneyFormat as MoneyFormatInterface;
 final class MoneyFormat implements MoneyFormatInterface
 {
     private function __construct(
-        private string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
-        private string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
-        private int $decorationType = self::DECORATION_SYMBOL,
-        private int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
-        private int $extraPrecision = 0,
+        private readonly string $decimalsSeparator = self::DEFAULT_DECIMALS_SEPARATOR,
+        private readonly string $thousandsSeparator = self::DEFAULT_THOUSANDS_SEPARATOR,
+        private readonly int $decorationType = self::DECORATION_SYMBOL,
+        private readonly int $decorationSpace = self::DECORATION_WITHOUT_SPACE,
+        private readonly int $extraPrecision = 0,
         /**
          * @var int
          */
-        private ?int $precision = null
+        private readonly ?int $precision = null
     )
     {
     }

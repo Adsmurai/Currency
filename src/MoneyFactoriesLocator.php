@@ -13,7 +13,7 @@ final class MoneyFactoriesLocator implements MoneyFactoriesLocatorContract
     /** @var MoneyFactory[] */
     private $moneyFactories;
 
-    public function __construct(private CurrencyFactoryContract $currencyFactory)
+    public function __construct(private readonly CurrencyFactoryContract $currencyFactory)
     {
     }
 

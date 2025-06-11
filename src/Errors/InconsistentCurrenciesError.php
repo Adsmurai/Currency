@@ -8,7 +8,7 @@ use LogicException;
 
 final class InconsistentCurrenciesError extends LogicException implements CurrencyError
 {
-    public function __construct(private Currency $ct1, private Currency $ct2)
+    public function __construct(private readonly Currency $ct1, private readonly Currency $ct2)
     {
         if ($this->ct1 === $this->ct2) {
             throw new LogicException(

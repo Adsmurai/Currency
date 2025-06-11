@@ -19,7 +19,7 @@ final class Currency implements CurrencyContract
     private $symbolPlacement;
 
     public function __construct(
-        private string $ISOCode,
+        private readonly string $ISOCode,
         string $symbol,
         int $numFractionalDigits,
         int $symbolPlacement = self::AFTER_PLACEMENT,
