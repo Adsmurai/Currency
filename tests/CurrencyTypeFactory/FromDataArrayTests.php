@@ -15,7 +15,7 @@ class FromDataArrayTests extends TestCase
      * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      * @covers \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
-    public function test_with_empty_array()
+    public function test_with_empty_array(): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
 
@@ -27,7 +27,7 @@ class FromDataArrayTests extends TestCase
      * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      * @covers \Adsmurai\Currency\Errors\InvalidCurrenciesDataError
      */
-    public function test_with_invalid_ISO_codes()
+    public function test_with_invalid_ISO_codes(): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
 
@@ -50,7 +50,7 @@ class FromDataArrayTests extends TestCase
      * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
      * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      */
-    public function test_with_missing_currency_data(array $incompleteCurrencyInfo)
+    public function test_with_missing_currency_data(array $incompleteCurrencyInfo): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
 
@@ -62,7 +62,7 @@ class FromDataArrayTests extends TestCase
      * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
      * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      */
-    public function test_with_incorrectly_typed_currency_data(array $invalidCurrencyInfo)
+    public function test_with_incorrectly_typed_currency_data(array $invalidCurrencyInfo): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
 

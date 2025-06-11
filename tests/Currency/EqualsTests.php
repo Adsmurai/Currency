@@ -14,7 +14,7 @@ class EqualsTests extends TestCase
     /**
      * @dataProvider equalCurrenciesProvider
      */
-    public function test_equality(CurrencyInterface $c1, CurrencyInterface $c2)
+    public function test_equality(CurrencyInterface $c1, CurrencyInterface $c2): void
     {
         $this->assertTrue($c1->equals($c2));
         $this->assertTrue($c2->equals($c1));
@@ -23,7 +23,7 @@ class EqualsTests extends TestCase
     /**
      * @dataProvider unequalCurrenciesProvider
      */
-    public function test_inequality(CurrencyInterface $c1, CurrencyInterface $c2)
+    public function test_inequality(CurrencyInterface $c1, CurrencyInterface $c2): void
     {
         $this->assertFalse($c1->equals($c2));
         $this->assertFalse($c2->equals($c1));

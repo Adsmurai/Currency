@@ -16,7 +16,7 @@ class CurrencyFactoryTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\MoneyFactory
      */
-    public function test_buildFromFloat()
+    public function test_buildFromFloat(): void
     {
         $currencyType = $this->getCurrencyType();
         $currencyFactory = new MoneyFactory($currencyType);
@@ -35,7 +35,7 @@ class CurrencyFactoryTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\MoneyFactory
      */
-    public function test_buildFromString()
+    public function test_buildFromString(): void
     {
         $currencyType = $this->getCurrencyType();
         $currencyFactory = new MoneyFactory($currencyType);
@@ -49,7 +49,7 @@ class CurrencyFactoryTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\MoneyFactory
      */
-    public function test_buildFromFractionalUnits()
+    public function test_buildFromFractionalUnits(): void
     {
         $currencyType = $this->getCurrencyType();
         $currencyFactory = new MoneyFactory($currencyType);
@@ -63,7 +63,7 @@ class CurrencyFactoryTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\MoneyFactory
      */
-    public function test_buildFromDecimal()
+    public function test_buildFromDecimal(): void
     {
         $currencyType = $this->getCurrencyType();
         $currencyFactory = new MoneyFactory($currencyType);

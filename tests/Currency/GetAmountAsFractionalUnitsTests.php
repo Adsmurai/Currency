@@ -14,7 +14,7 @@ class GetAmountAsFractionalUnitsTests extends TestCase
      * @dataProvider stringParamsProvider
      * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
-    public function test_from_string(string $amount, Currency $currencyType, int $numFractionalUnits)
+    public function test_from_string(string $amount, Currency $currencyType, int $numFractionalUnits): void
     {
         $currency = Money::fromString($amount, $currencyType);
         $this->assertSame($numFractionalUnits, $currency->getAmountAsFractionalUnits());
@@ -24,7 +24,7 @@ class GetAmountAsFractionalUnitsTests extends TestCase
      * @dataProvider floatParamsProvider
      * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
-    public function test_from_float(float $amount, Currency $currencyType, int $numFractionalUnits)
+    public function test_from_float(float $amount, Currency $currencyType, int $numFractionalUnits): void
     {
         $currency = Money::fromFloat($amount, $currencyType);
         $this->assertSame($numFractionalUnits, $currency->getAmountAsFractionalUnits());
@@ -34,7 +34,7 @@ class GetAmountAsFractionalUnitsTests extends TestCase
      * @dataProvider fractionalUnitsProvider
      * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
-    public function test_from_fractional_units(Currency $currencyType, int $numFractionalUnits)
+    public function test_from_fractional_units(Currency $currencyType, int $numFractionalUnits): void
     {
         $currency = Money::fromFractionalUnits($numFractionalUnits, $currencyType);
         $this->assertSame($numFractionalUnits, $currency->getAmountAsFractionalUnits());

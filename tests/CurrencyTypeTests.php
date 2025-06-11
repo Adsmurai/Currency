@@ -22,7 +22,7 @@ class CurrencyTypeTests extends TestCase
     const USD_NUM_DIGITS = 2;
     const USD_SYMBOL_PLACEMENT = CurrencyTypeInterface::BEFORE_PLACEMENT;
 
-    public function test___construct_with_valid_params()
+    public function test___construct_with_valid_params(): void
     {
         $currencyType = $this->getEuroCurrencyType();
 
@@ -49,7 +49,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
      */
-    public function test__construct_with_negative_num_of_fractional_digits()
+    public function test__construct_with_negative_num_of_fractional_digits(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid number of fractional digits');
@@ -66,7 +66,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
      */
-    public function test__construct_with_invalid_symbol_placement()
+    public function test__construct_with_invalid_symbol_placement(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid symbol placement');
@@ -83,7 +83,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
      */
-    public function test__construct_with_empty_symbol()
+    public function test__construct_with_empty_symbol(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Empty symbol');
@@ -100,7 +100,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::__construct
      */
-    public function test__construct_with_almost_empty_symbol()
+    public function test__construct_with_almost_empty_symbol(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Empty symbol');
@@ -117,7 +117,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::equals
      */
-    public function test_equals_with_equal_CurrencyType_instances()
+    public function test_equals_with_equal_CurrencyType_instances(): void
     {
         $ct1 = $this->getEuroCurrencyType();
         $ct2 = $this->getEuroCurrencyType();
@@ -129,7 +129,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::equals
      */
-    public function test_equals_with_same_CurrencyType_instances()
+    public function test_equals_with_same_CurrencyType_instances(): void
     {
         $ct1 = $this->getEuroCurrencyType();
 
@@ -139,7 +139,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::equals
      */
-    public function test_equals_with_different_CurrencyType_instances()
+    public function test_equals_with_different_CurrencyType_instances(): void
     {
         $ct1 = $this->getEuroCurrencyType();
 
@@ -158,7 +158,7 @@ class CurrencyTypeTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Currency::equals
      */
-    public function test_equals_with_ambiguously_similar_CurrencyType_instances()
+    public function test_equals_with_ambiguously_similar_CurrencyType_instances(): void
     {
         $ct1 = $this->getEuroCurrencyType();
 

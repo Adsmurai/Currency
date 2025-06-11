@@ -19,7 +19,7 @@ class FromStringTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
      * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(string $amount, Currency $currencyType)
+    public function test_with_valid_params(string $amount, Currency $currencyType): void
     {
         $currency = Money::fromString($amount, $currencyType);
 
@@ -89,7 +89,7 @@ class FromStringTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
      * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
      */
-    public function test_with_invalid_params(string $amount, Currency $currencyType)
+    public function test_with_invalid_params(string $amount, Currency $currencyType): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid currency value');

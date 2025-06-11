@@ -13,7 +13,7 @@ class GetSupportedCurrencyISOCodesTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\CurrencyFactory::getSupportedCurrencyISOCodes
      */
-    public function test_that_returns_the_supported_currency_iso_codes()
+    public function test_that_returns_the_supported_currency_iso_codes(): void
     {
         $currencyTypeFactory = CurrencyFactory::fromDataArray([
             'EUR' => [

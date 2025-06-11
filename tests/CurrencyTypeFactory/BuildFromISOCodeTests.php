@@ -14,7 +14,7 @@ class BuildFromISOCodeTests extends TestCase
      * @dataProvider commonCurrenciesProvider
      * @covers       \Adsmurai\Currency\CurrencyFactory
      */
-    public function test_with_common_currencies(string $ISOCode)
+    public function test_with_common_currencies(string $ISOCode): void
     {
         /** @var array $currencyData */
         $currencyData = $this->getCurrenciesData()[$ISOCode];
@@ -41,7 +41,7 @@ class BuildFromISOCodeTests extends TestCase
      * @dataProvider commonCurrenciesProvider
      * @covers       \Adsmurai\Currency\CurrencyFactory
      */
-    public function test_that_there_are_no_multiple_instances_for_same_currency_type(string $ISOCode)
+    public function test_that_there_are_no_multiple_instances_for_same_currency_type(string $ISOCode): void
     {
         $currencyTypeFactory = CurrencyFactory::fromDataPath();
 
@@ -55,7 +55,7 @@ class BuildFromISOCodeTests extends TestCase
      * @covers \Adsmurai\Currency\CurrencyFactory::buildFromISOCode
      * @covers \Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError
      */
-    public function test_that_an_exception_is_thrown_when_we_try_to_build_a_not_defined_currency_type()
+    public function test_that_an_exception_is_thrown_when_we_try_to_build_a_not_defined_currency_type(): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError::class);
         $this->expectExceptionMessage('Unsupported currency ISO code (USD)');
@@ -72,7 +72,7 @@ class BuildFromISOCodeTests extends TestCase
     public static function commonCurrenciesProvider(): array
     {
         return \array_map(
-            fn(string $ISOCode) => [$ISOCode],
+            fn(string $ISOCode): array => [$ISOCode],
             \array_keys(self::getCurrenciesData())
         );
     }

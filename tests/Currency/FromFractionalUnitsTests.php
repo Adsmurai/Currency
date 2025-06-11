@@ -16,7 +16,7 @@ class FromFractionalUnitsTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::fromFractionalUnits
      * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(int $amount, Currency $currencyType)
+    public function test_with_valid_params(int $amount, Currency $currencyType): void
     {
         $currency = Money::fromFractionalUnits($amount, $currencyType);
 

@@ -12,7 +12,7 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Errors\InconsistentCurrenciesError
      */
-    public function test___construct_with_valid_params()
+    public function test___construct_with_valid_params(): void
     {
         /** @var Currency $ct1 */
         $ct1 = Mockery::mock(Currency::class);
@@ -29,7 +29,7 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\Errors\InconsistentCurrenciesError
      */
-    public function test___construct_with_invalid_params()
+    public function test___construct_with_invalid_params(): void
     {
         /** @var Currency $ct1 */
         $ct1 = Mockery::mock(Currency::class);

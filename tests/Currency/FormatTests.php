@@ -21,7 +21,7 @@ class FormatTests extends TestCase
         string $amount,
         Currency $currencyType,
         string $formattedCurrency
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $this->assertSame($formattedCurrency, $currency->format());
     }
@@ -37,7 +37,7 @@ class FormatTests extends TestCase
         string $decimalsSeparator,
         string $thousandsSeparator,
         string $formattedCurrency
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParameters($decimalsSeparator, $thousandsSeparator);
         $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
@@ -53,7 +53,7 @@ class FormatTests extends TestCase
         Currency $currencyType,
         int $extraPrecision,
         string $formattedCurrency
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParametersWithExtraPrecision($extraPrecision);
         $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
@@ -69,7 +69,7 @@ class FormatTests extends TestCase
         Currency $currencyType,
         int $precision,
         string $formattedCurrency
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParametersWithPrecision($precision);
         $this->assertSame($formattedCurrency, $currency->format($currencyFormat));
@@ -84,7 +84,7 @@ class FormatTests extends TestCase
         string $amount,
         Currency $currencyType,
         string $formattedCurrency
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParameters(
             MoneyFormat::DEFAULT_DECIMALS_SEPARATOR,
@@ -103,7 +103,7 @@ class FormatTests extends TestCase
         string $amount,
         Currency $currencyType,
         string $formattedCurrency
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParameters(
             MoneyFormat::DEFAULT_DECIMALS_SEPARATOR,
@@ -124,7 +124,7 @@ class FormatTests extends TestCase
         string $formattedCurrency,
         int $decorationSpace,
         int $decorationType
-    ) {
+    ): void {
         $currency = Money::fromString($amount, $currencyType);
         $currencyFormat = MoneyFormat::fromParameters(
             MoneyFormat::DEFAULT_DECIMALS_SEPARATOR,

@@ -17,7 +17,7 @@ class FromDecimalTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::fromDecimal
      * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(Decimal $amount, Currency $currencyType)
+    public function test_with_valid_params(Decimal $amount, Currency $currencyType): void
     {
         $currency = Money::fromDecimal($amount, $currencyType);
 

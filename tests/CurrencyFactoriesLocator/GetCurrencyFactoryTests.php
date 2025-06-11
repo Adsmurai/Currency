@@ -16,7 +16,7 @@ class GetCurrencyFactoryTests extends TestCase
      * @covers \Adsmurai\Currency\MoneyFactoriesLocator::__construct
      * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getMoneyFactory
      */
-    public function test_that_getCurrencyFactory_returns_a_CurrencyFactory_instance()
+    public function test_that_getCurrencyFactory_returns_a_CurrencyFactory_instance(): void
     {
         $currencyFactoriesLocator = new MoneyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 
@@ -41,7 +41,7 @@ class GetCurrencyFactoryTests extends TestCase
      * @covers \Adsmurai\Currency\MoneyFactoriesLocator::__construct
      * @covers \Adsmurai\Currency\MoneyFactoriesLocator::getMoneyFactory
      */
-    public function test_that_getCurrencyFactory_returns_the_same_instance_for_the_same_parameters()
+    public function test_that_getCurrencyFactory_returns_the_same_instance_for_the_same_parameters(): void
     {
         $currencyFactoriesLocator = new MoneyFactoriesLocator($this->getCurrencyTypeFactoryMock());
 

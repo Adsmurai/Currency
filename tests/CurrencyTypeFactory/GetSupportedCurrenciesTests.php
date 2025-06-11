@@ -13,7 +13,7 @@ class GetSupportedCurrenciesTests extends TestCase
     /**
      * @covers \Adsmurai\Currency\CurrencyFactory::getSupportedCurrencies
      */
-    public function test_that_returns_the_supported_currencies()
+    public function test_that_returns_the_supported_currencies(): void
     {
         $currencyTypeFactory = CurrencyFactory::fromDataArray([
             'EUR' => [

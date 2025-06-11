@@ -14,7 +14,7 @@ class BasicGetterTests extends TestCase
      * @covers \Adsmurai\Currency\Money::getAmountAsDecimal
      * @covers \Adsmurai\Currency\Money::getCurrency
      */
-    public function test_basic_getters()
+    public function test_basic_getters(): void
     {
         // @todo: Improve the test to decouple from Decimal. It requires refactoring Decimal.
 

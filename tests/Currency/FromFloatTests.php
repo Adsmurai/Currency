@@ -16,7 +16,7 @@ class FromFloatTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::fromFloat
      * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(float $amount, Currency $currencyType)
+    public function test_with_valid_params(float $amount, Currency $currencyType): void
     {
         $currency = Money::fromFloat($amount, $currencyType);
 
@@ -29,7 +29,7 @@ class FromFloatTests extends TestCase
      * @covers       \Adsmurai\Currency\Money::fromFloat
      * @covers       \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_infinite_amounts(float $amount, Currency $currencyType)
+    public function test_with_infinite_amounts(float $amount, Currency $currencyType): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Currency amounts must be finite');
@@ -41,7 +41,7 @@ class FromFloatTests extends TestCase
      * @covers \Adsmurai\Currency\Money::fromFloat
      * @covers \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_nan_amount()
+    public function test_with_nan_amount(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Currency amounts must be numbers');
