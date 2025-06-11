@@ -135,38 +135,32 @@ class FormatTests extends TestCase
         $this->assertEquals($formattedCurrency, $currency->format($currencyFormat));
     }
 
-    public function simpleParamsProvider(): array
+    public static function simpleParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(), '34.76€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(), '100.00€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(), '0.01€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), '12345678.50€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), '34.760€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), '100.000€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), '0.010€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), '12345678.500€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$'), '34.760$'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$'), '100.000$'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$'), '0.010$'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$'), '12345678.500$'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$34.760'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$100.000'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$0.010'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$12345678.500'],
-
-            ['34.761', $this->getNDecimalDigitsCurrencyType(), '34.76€'],
-            ['34.766', $this->getNDecimalDigitsCurrencyType(), '34.77€'],
-            ['100.002', $this->getNDecimalDigitsCurrencyType(), '100.00€'],
-            ['100.008', $this->getNDecimalDigitsCurrencyType(), '100.01€'],
-            ['0.014', $this->getNDecimalDigitsCurrencyType(), '0.01€'],
-            ['0.017', $this->getNDecimalDigitsCurrencyType(), '0.02€'],
-            ['12345678.503', $this->getNDecimalDigitsCurrencyType(), '12345678.50€'],
-            ['12345678.509', $this->getNDecimalDigitsCurrencyType(), '12345678.51€'],
-        ];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(), '34.76€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(), '100.00€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(), '0.01€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(), '12345678.50€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3), '34.760€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3), '100.000€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3), '0.010€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3), '12345678.500€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$'), '34.760$'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$'), '100.000$'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$'), '0.010$'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$'), '12345678.500$'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$34.760'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$100.000'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$0.010'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '$12345678.500'];
+        yield ['34.761', self::getNDecimalDigitsCurrencyType(), '34.76€'];
+        yield ['34.766', self::getNDecimalDigitsCurrencyType(), '34.77€'];
+        yield ['100.002', self::getNDecimalDigitsCurrencyType(), '100.00€'];
+        yield ['100.008', self::getNDecimalDigitsCurrencyType(), '100.01€'];
+        yield ['0.014', self::getNDecimalDigitsCurrencyType(), '0.01€'];
+        yield ['0.017', self::getNDecimalDigitsCurrencyType(), '0.02€'];
+        yield ['12345678.503', self::getNDecimalDigitsCurrencyType(), '12345678.50€'];
+        yield ['12345678.509', self::getNDecimalDigitsCurrencyType(), '12345678.51€'];
     }
 
     private static function getNDecimalDigitsCurrencyType(
@@ -187,194 +181,165 @@ class FormatTests extends TestCase
         return $currencyType;
     }
 
-    public function customizedParamsProvider(): array
+    public static function customizedParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(), ',', '.', '34,76€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(), ',', '.', '100,00€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(), ',', '.', '0,01€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), ',', '.', '12.345.678,50€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), ',', '.', '34,760€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), ',', '.', '100,000€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), ',', '.', '0,010€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), ',', '.', '12.345.678,500€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '34,760$'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '100,000$'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '0,010$'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '12.345.678,500$'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$34,760'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$100,000'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$0,010'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$12.345.678,500'],
-        ];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(), ',', '.', '34,76€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(), ',', '.', '100,00€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(), ',', '.', '0,01€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(), ',', '.', '12.345.678,50€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3), ',', '.', '34,760€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3), ',', '.', '100,000€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3), ',', '.', '0,010€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3), ',', '.', '12.345.678,500€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '34,760$'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '100,000$'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '0,010$'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$'), ',', '.', '12.345.678,500$'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$34,760'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$100,000'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$0,010'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), ',', '.', '$12.345.678,500'];
     }
 
-    public function extraPrecisionParamsProvider(): array
+    public static function extraPrecisionParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(), 2, '34.7600€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(), 2, '100.0000€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(), 2, '0.0100€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), 2, '12345678.5000€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), 2, '34.76000€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), 2, '100.00000€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), 2, '0.01000€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 2, '12345678.50000€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '34.76000$'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '100.00000$'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '0.01000$'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '12345678.50000$'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$34.76000'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$100.00000'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$0.01000'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$12345678.50000'],
-        ];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(), 2, '34.7600€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(), 2, '100.0000€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(), 2, '0.0100€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(), 2, '12345678.5000€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3), 2, '34.76000€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3), 2, '100.00000€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3), 2, '0.01000€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3), 2, '12345678.50000€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '34.76000$'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '100.00000$'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '0.01000$'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '12345678.50000$'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$34.76000'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$100.00000'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$0.01000'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$12345678.50000'];
     }
 
-    public function precisionParamsProvider(): array
+    public static function precisionParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(), 2, '34.76€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(), 2, '100.00€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(), 2, '0.01€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), 2, '12345678.50€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), 2, '34.76€'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), 2, '100.00€'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), 2, '0.01€'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), 2, '12345678.50€'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '34.76$'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '100.00$'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '0.01$'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$'), 2, '12345678.50$'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$34.76'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$100.00'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$0.01'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$12345678.50'],
-        ];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(), 2, '34.76€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(), 2, '100.00€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(), 2, '0.01€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(), 2, '12345678.50€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3), 2, '34.76€'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3), 2, '100.00€'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3), 2, '0.01€'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3), 2, '12345678.50€'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '34.76$'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '100.00$'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '0.01$'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$'), 2, '12345678.50$'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$34.76'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$100.00'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$0.01'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), 2, '$12345678.50'];
     }
 
-    public function noDecorationParamsProvider(): array
+    public static function noDecorationParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(), '34.76'],
-            ['100', $this->getNDecimalDigitsCurrencyType(), '100.00'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(), '0.01'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), '12345678.50'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), '34.760'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), '100.000'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), '0.010'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), '12345678.500'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$'), '34.760'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$'), '100.000'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$'), '0.010'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$'), '12345678.500'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '34.760'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '100.000'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '0.010'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '12345678.500'],
-
-            ['34.761', $this->getNDecimalDigitsCurrencyType(), '34.76'],
-            ['34.766', $this->getNDecimalDigitsCurrencyType(), '34.77'],
-            ['100.002', $this->getNDecimalDigitsCurrencyType(), '100.00'],
-            ['100.008', $this->getNDecimalDigitsCurrencyType(), '100.01'],
-            ['0.014', $this->getNDecimalDigitsCurrencyType(), '0.01'],
-            ['0.017', $this->getNDecimalDigitsCurrencyType(), '0.02'],
-            ['12345678.503', $this->getNDecimalDigitsCurrencyType(), '12345678.50'],
-            ['12345678.509', $this->getNDecimalDigitsCurrencyType(), '12345678.51'],
-        ];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(), '34.76'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(), '100.00'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(), '0.01'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(), '12345678.50'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3), '34.760'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3), '100.000'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3), '0.010'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3), '12345678.500'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$'), '34.760'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$'), '100.000'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$'), '0.010'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$'), '12345678.500'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '34.760'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '100.000'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '0.010'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT), '12345678.500'];
+        yield ['34.761', self::getNDecimalDigitsCurrencyType(), '34.76'];
+        yield ['34.766', self::getNDecimalDigitsCurrencyType(), '34.77'];
+        yield ['100.002', self::getNDecimalDigitsCurrencyType(), '100.00'];
+        yield ['100.008', self::getNDecimalDigitsCurrencyType(), '100.01'];
+        yield ['0.014', self::getNDecimalDigitsCurrencyType(), '0.01'];
+        yield ['0.017', self::getNDecimalDigitsCurrencyType(), '0.02'];
+        yield ['12345678.503', self::getNDecimalDigitsCurrencyType(), '12345678.50'];
+        yield ['12345678.509', self::getNDecimalDigitsCurrencyType(), '12345678.51'];
     }
 
-    public function isoCodeDecorationParamsProvider(): array
+    public static function isoCodeDecorationParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', $this->getNDecimalDigitsCurrencyType(), '34.76EUR'],
-            ['100', $this->getNDecimalDigitsCurrencyType(), '100.00EUR'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(), '0.01EUR'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(), '12345678.50EUR'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3), '34.760EUR'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3), '100.000EUR'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3), '0.010EUR'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3), '12345678.500EUR'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '34.760USD'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '100.000USD'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '0.010USD'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '12345678.500USD'],
-
-            ['34.76', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '34.760USD'],
-            ['100', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '100.000USD'],
-            ['0.01', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '0.010USD'],
-            ['12345678.50', $this->getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '12345678.500USD'],
-
-            ['34.761', $this->getNDecimalDigitsCurrencyType(), '34.76EUR'],
-            ['34.766', $this->getNDecimalDigitsCurrencyType(), '34.77EUR'],
-            ['100.002', $this->getNDecimalDigitsCurrencyType(), '100.00EUR'],
-            ['100.008', $this->getNDecimalDigitsCurrencyType(), '100.01EUR'],
-            ['0.014', $this->getNDecimalDigitsCurrencyType(), '0.01EUR'],
-            ['0.017', $this->getNDecimalDigitsCurrencyType(), '0.02EUR'],
-            ['12345678.503', $this->getNDecimalDigitsCurrencyType(), '12345678.50EUR'],
-            ['12345678.509', $this->getNDecimalDigitsCurrencyType(), '12345678.51EUR'],
-        ];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(), '34.76EUR'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(), '100.00EUR'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(), '0.01EUR'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(), '12345678.50EUR'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3), '34.760EUR'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3), '100.000EUR'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3), '0.010EUR'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3), '12345678.500EUR'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '34.760USD'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '100.000USD'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '0.010USD'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::AFTER_PLACEMENT, 'USD'), '12345678.500USD'];
+        yield ['34.76', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '34.760USD'];
+        yield ['100', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '100.000USD'];
+        yield ['0.01', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '0.010USD'];
+        yield ['12345678.50', self::getNDecimalDigitsCurrencyType(3, '$', Currency::BEFORE_PLACEMENT, 'USD'), '12345678.500USD'];
+        yield ['34.761', self::getNDecimalDigitsCurrencyType(), '34.76EUR'];
+        yield ['34.766', self::getNDecimalDigitsCurrencyType(), '34.77EUR'];
+        yield ['100.002', self::getNDecimalDigitsCurrencyType(), '100.00EUR'];
+        yield ['100.008', self::getNDecimalDigitsCurrencyType(), '100.01EUR'];
+        yield ['0.014', self::getNDecimalDigitsCurrencyType(), '0.01EUR'];
+        yield ['0.017', self::getNDecimalDigitsCurrencyType(), '0.02EUR'];
+        yield ['12345678.503', self::getNDecimalDigitsCurrencyType(), '12345678.50EUR'];
+        yield ['12345678.509', self::getNDecimalDigitsCurrencyType(), '12345678.51EUR'];
     }
 
-    public function spaceDecorationParamsProvider(): array
+    public static function spaceDecorationParamsProvider(): \Iterator
     {
-        return [
-            [
-                '34.76',
-                $this->getNDecimalDigitsCurrencyType(),
-                '34.76 €',
-                MoneyFormat::DECORATION_WITH_SPACE,
-                MoneyFormat::DECORATION_SYMBOL,
-            ],
-            [
-                '34.76',
-                $this->getNDecimalDigitsCurrencyType(),
-                '34.76€',
-                MoneyFormat::DECORATION_WITHOUT_SPACE,
-                MoneyFormat::DECORATION_SYMBOL,
-            ],
-            [
-                '34.76',
-                $this->getNDecimalDigitsCurrencyType(),
-                '34.76 EUR',
-                MoneyFormat::DECORATION_WITH_SPACE,
-                MoneyFormat::DECORATION_ISO_CODE,
-            ],
-            [
-                '34.76',
-                $this->getNDecimalDigitsCurrencyType(),
-                '34.76EUR',
-                MoneyFormat::DECORATION_WITHOUT_SPACE,
-                MoneyFormat::DECORATION_ISO_CODE,
-            ],
-            [
-                '34.76',
-                $this->getNDecimalDigitsCurrencyType(2, '€', Currency::BEFORE_PLACEMENT),
-                '€ 34.76',
-                MoneyFormat::DECORATION_WITH_SPACE,
-                MoneyFormat::DECORATION_SYMBOL,
-            ],
-            [
-                '34.76',
-                $this->getNDecimalDigitsCurrencyType(2, '€', Currency::BEFORE_PLACEMENT),
-                '€34.76',
-                MoneyFormat::DECORATION_WITHOUT_SPACE,
-                MoneyFormat::DECORATION_SYMBOL,
-            ],
+        yield [
+            '34.76',
+            self::getNDecimalDigitsCurrencyType(),
+            '34.76 €',
+            MoneyFormat::DECORATION_WITH_SPACE,
+            MoneyFormat::DECORATION_SYMBOL,
+        ];
+        yield [
+            '34.76',
+            self::getNDecimalDigitsCurrencyType(),
+            '34.76€',
+            MoneyFormat::DECORATION_WITHOUT_SPACE,
+            MoneyFormat::DECORATION_SYMBOL,
+        ];
+        yield [
+            '34.76',
+            self::getNDecimalDigitsCurrencyType(),
+            '34.76 EUR',
+            MoneyFormat::DECORATION_WITH_SPACE,
+            MoneyFormat::DECORATION_ISO_CODE,
+        ];
+        yield [
+            '34.76',
+            self::getNDecimalDigitsCurrencyType(),
+            '34.76EUR',
+            MoneyFormat::DECORATION_WITHOUT_SPACE,
+            MoneyFormat::DECORATION_ISO_CODE,
+        ];
+        yield [
+            '34.76',
+            self::getNDecimalDigitsCurrencyType(2, '€', Currency::BEFORE_PLACEMENT),
+            '€ 34.76',
+            MoneyFormat::DECORATION_WITH_SPACE,
+            MoneyFormat::DECORATION_SYMBOL,
+        ];
+        yield [
+            '34.76',
+            self::getNDecimalDigitsCurrencyType(2, '€', Currency::BEFORE_PLACEMENT),
+            '€34.76',
+            MoneyFormat::DECORATION_WITHOUT_SPACE,
+            MoneyFormat::DECORATION_SYMBOL,
         ];
     }
 }

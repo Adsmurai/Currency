@@ -29,7 +29,7 @@ class BuildFromISOCodeTests extends TestCase
         $this->assertEquals($currencyData['numFractionalDigits'], $currencyType->getNumFractionalDigits());
     }
 
-    private function getCurrenciesData(): array
+    private static function getCurrenciesData(): array
     {
         /** @var array $currenciesData */
         $currenciesData = include __DIR__.'/../../src/Data/CurrencyTypes.php';
@@ -69,13 +69,13 @@ class BuildFromISOCodeTests extends TestCase
         $currencyTypeFactory->buildFromISOCode('USD');
     }
 
-    public function commonCurrenciesProvider(): array
+    public static function commonCurrenciesProvider(): array
     {
         return \array_map(
             function (string $ISOCode) {
                 return [$ISOCode];
             },
-            \array_keys($this->getCurrenciesData())
+            \array_keys(self::getCurrenciesData())
         );
     }
 }

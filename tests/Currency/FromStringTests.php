@@ -27,73 +27,59 @@ class FromStringTests extends TestCase
         $this->assertInstanceOf(Money::class, $currency);
     }
 
-    public function validParamsProvider(): array
+    public static function validParamsProvider(): \Iterator
     {
         $eurCurrencyType = CurrencyTypeMocks::getEuroCurrencyType();
         $usdCurrencyType = CurrencyTypeMocks::getUsDollarCurrencyType();
         $penCurrencyType = CurrencyTypeMocks::getPenCurrencyType();
-
-        return [
-            ['34.76', $eurCurrencyType],
-            ['100', $eurCurrencyType],
-            ['0.01', $eurCurrencyType],
-            ['12345678.50', $eurCurrencyType],
-
-            ['34.76', $usdCurrencyType],
-            ['100', $usdCurrencyType],
-            ['0.01', $usdCurrencyType],
-            ['12345678.50', $usdCurrencyType],
-
-            ['34.76', $penCurrencyType],
-            ['100', $penCurrencyType],
-            ['0.01', $penCurrencyType],
-            ['12345678.50', $penCurrencyType],
-
-            ['34.76 EUR', $eurCurrencyType],
-            ['100 EUR', $eurCurrencyType],
-            ['0.01 EUR', $eurCurrencyType],
-            ['12345678.50 EUR', $eurCurrencyType],
-
-            ['34.76 USD', $usdCurrencyType],
-            ['100 USD', $usdCurrencyType],
-            ['0.01 USD', $usdCurrencyType],
-            ['12345678.50 USD', $usdCurrencyType],
-
-            ['34.76 PEN', $penCurrencyType],
-            ['100 PEN', $penCurrencyType],
-            ['0.01 PEN', $penCurrencyType],
-            ['12345678.50 PEN', $penCurrencyType],
-
-            ['34.76 €', $eurCurrencyType],
-            ['100 €', $eurCurrencyType],
-            ['0.01 €', $eurCurrencyType],
-            ['12345678.50 €', $eurCurrencyType],
-
-            ['34.76€', $eurCurrencyType],
-            ['100€', $eurCurrencyType],
-            ['0.01€', $eurCurrencyType],
-            ['12345678.50€', $eurCurrencyType],
-
-            ['$ 34.76', $usdCurrencyType],
-            ['$ 100', $usdCurrencyType],
-            ['$ 0.01', $usdCurrencyType],
-            ['$ 12345678.50', $usdCurrencyType],
-
-            ['$34.76', $usdCurrencyType],
-            ['$100', $usdCurrencyType],
-            ['$0.01', $usdCurrencyType],
-            ['$12345678.50', $usdCurrencyType],
-
-            ['S/ 34.76', $penCurrencyType],
-            ['S/ 100', $penCurrencyType],
-            ['S/ 0.01', $penCurrencyType],
-            ['S/ 12345678.50', $penCurrencyType],
-
-            ['S/34.76', $penCurrencyType],
-            ['S/100', $penCurrencyType],
-            ['S/0.01', $penCurrencyType],
-            ['S/12345678.50', $penCurrencyType],
-        ];
+        yield ['34.76', $eurCurrencyType];
+        yield ['100', $eurCurrencyType];
+        yield ['0.01', $eurCurrencyType];
+        yield ['12345678.50', $eurCurrencyType];
+        yield ['34.76', $usdCurrencyType];
+        yield ['100', $usdCurrencyType];
+        yield ['0.01', $usdCurrencyType];
+        yield ['12345678.50', $usdCurrencyType];
+        yield ['34.76', $penCurrencyType];
+        yield ['100', $penCurrencyType];
+        yield ['0.01', $penCurrencyType];
+        yield ['12345678.50', $penCurrencyType];
+        yield ['34.76 EUR', $eurCurrencyType];
+        yield ['100 EUR', $eurCurrencyType];
+        yield ['0.01 EUR', $eurCurrencyType];
+        yield ['12345678.50 EUR', $eurCurrencyType];
+        yield ['34.76 USD', $usdCurrencyType];
+        yield ['100 USD', $usdCurrencyType];
+        yield ['0.01 USD', $usdCurrencyType];
+        yield ['12345678.50 USD', $usdCurrencyType];
+        yield ['34.76 PEN', $penCurrencyType];
+        yield ['100 PEN', $penCurrencyType];
+        yield ['0.01 PEN', $penCurrencyType];
+        yield ['12345678.50 PEN', $penCurrencyType];
+        yield ['34.76 €', $eurCurrencyType];
+        yield ['100 €', $eurCurrencyType];
+        yield ['0.01 €', $eurCurrencyType];
+        yield ['12345678.50 €', $eurCurrencyType];
+        yield ['34.76€', $eurCurrencyType];
+        yield ['100€', $eurCurrencyType];
+        yield ['0.01€', $eurCurrencyType];
+        yield ['12345678.50€', $eurCurrencyType];
+        yield ['$ 34.76', $usdCurrencyType];
+        yield ['$ 100', $usdCurrencyType];
+        yield ['$ 0.01', $usdCurrencyType];
+        yield ['$ 12345678.50', $usdCurrencyType];
+        yield ['$34.76', $usdCurrencyType];
+        yield ['$100', $usdCurrencyType];
+        yield ['$0.01', $usdCurrencyType];
+        yield ['$12345678.50', $usdCurrencyType];
+        yield ['S/ 34.76', $penCurrencyType];
+        yield ['S/ 100', $penCurrencyType];
+        yield ['S/ 0.01', $penCurrencyType];
+        yield ['S/ 12345678.50', $penCurrencyType];
+        yield ['S/34.76', $penCurrencyType];
+        yield ['S/100', $penCurrencyType];
+        yield ['S/0.01', $penCurrencyType];
+        yield ['S/12345678.50', $penCurrencyType];
     }
 
     /**
@@ -111,51 +97,41 @@ class FromStringTests extends TestCase
         Money::fromString($amount, $currencyType);
     }
 
-    public function invalidParamsProvider(): array
+    public static function invalidParamsProvider(): \Iterator
     {
         $eurCurrencyType = CurrencyTypeMocks::getEuroCurrencyType();
         $usdCurrencyType = CurrencyTypeMocks::getUsDollarCurrencyType();
-
-        return [
-            ['-34.76', $eurCurrencyType],
-            ['-100', $eurCurrencyType],
-            ['-0.01', $eurCurrencyType],
-            ['-12345678.50', $eurCurrencyType],
-
-            ['-34.76', $usdCurrencyType],
-            ['-100', $usdCurrencyType],
-            ['-0.01', $usdCurrencyType],
-            ['-12345678.50', $usdCurrencyType],
-
-            ['', $eurCurrencyType],
-            ['hello world', $eurCurrencyType],
-            ['45.035,56', $eurCurrencyType],
-            ['45,035.56', $eurCurrencyType],
-
-            ['', $usdCurrencyType],
-            ['hello world', $usdCurrencyType],
-            ['45.035,56', $usdCurrencyType],
-            ['45,035.56', $usdCurrencyType],
-
-            ['34.76 EUR', $usdCurrencyType],
-            ['100 EUR', $usdCurrencyType],
-            ['0.01 EUR', $usdCurrencyType],
-            ['12345678.50 EUR', $usdCurrencyType],
-
-            ['34.76 USD', $eurCurrencyType],
-            ['100 USD', $eurCurrencyType],
-            ['0.01 USD', $eurCurrencyType],
-            ['12345678.50 USD', $eurCurrencyType],
-
-            ['34.76 €', $usdCurrencyType],
-            ['100 €', $usdCurrencyType],
-            ['0.01 €', $usdCurrencyType],
-            ['12345678.50 €', $usdCurrencyType],
-
-            ['34.76 $', $eurCurrencyType],
-            ['100 $', $eurCurrencyType],
-            ['0.01 $', $eurCurrencyType],
-            ['12345678.50 $', $eurCurrencyType],
-        ];
+        yield ['-34.76', $eurCurrencyType];
+        yield ['-100', $eurCurrencyType];
+        yield ['-0.01', $eurCurrencyType];
+        yield ['-12345678.50', $eurCurrencyType];
+        yield ['-34.76', $usdCurrencyType];
+        yield ['-100', $usdCurrencyType];
+        yield ['-0.01', $usdCurrencyType];
+        yield ['-12345678.50', $usdCurrencyType];
+        yield ['', $eurCurrencyType];
+        yield ['hello world', $eurCurrencyType];
+        yield ['45.035,56', $eurCurrencyType];
+        yield ['45,035.56', $eurCurrencyType];
+        yield ['', $usdCurrencyType];
+        yield ['hello world', $usdCurrencyType];
+        yield ['45.035,56', $usdCurrencyType];
+        yield ['45,035.56', $usdCurrencyType];
+        yield ['34.76 EUR', $usdCurrencyType];
+        yield ['100 EUR', $usdCurrencyType];
+        yield ['0.01 EUR', $usdCurrencyType];
+        yield ['12345678.50 EUR', $usdCurrencyType];
+        yield ['34.76 USD', $eurCurrencyType];
+        yield ['100 USD', $eurCurrencyType];
+        yield ['0.01 USD', $eurCurrencyType];
+        yield ['12345678.50 USD', $eurCurrencyType];
+        yield ['34.76 €', $usdCurrencyType];
+        yield ['100 €', $usdCurrencyType];
+        yield ['0.01 €', $usdCurrencyType];
+        yield ['12345678.50 €', $usdCurrencyType];
+        yield ['34.76 $', $eurCurrencyType];
+        yield ['100 $', $eurCurrencyType];
+        yield ['0.01 $', $eurCurrencyType];
+        yield ['12345678.50 $', $eurCurrencyType];
     }
 }

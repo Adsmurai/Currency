@@ -49,25 +49,21 @@ class FromFloatTests extends TestCase
         Money::fromFloat(\NAN, CurrencyTypeMocks::getCurrencyTypeDummyMock());
     }
 
-    public function validParamsProvider(): array
+    public static function validParamsProvider(): \Iterator
     {
-        return [
-            [34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [100, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [-34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [-100, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [-0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [-12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-        ];
+        yield [34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [100, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [-34.76, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [-100, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [-0.01, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [-12345678.50, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
     }
 
-    public function infiniteParamsProvider(): array
+    public static function infiniteParamsProvider(): \Iterator
     {
-        return [
-            [-INF, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-            [+INF, CurrencyTypeMocks::getCurrencyTypeDummyMock()],
-        ];
+        yield [-INF, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
+        yield [+INF, CurrencyTypeMocks::getCurrencyTypeDummyMock()];
     }
 }

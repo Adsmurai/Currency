@@ -69,108 +69,104 @@ class FromDataArrayTests extends TestCase
         CurrencyFactory::fromDataArray($invalidCurrencyInfo);
     }
 
-    public function missingCurrencyInfoProvider(): array
+    public static function missingCurrencyInfoProvider(): \Iterator
     {
-        return [
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '$',
-                ],
-            ]],
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 2,
-                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-                ],
-            ]],
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'symbol' => '$',
-                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-                ],
-            ]],
-        ];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '$',
+            ],
+        ]];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 2,
+                'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+            ],
+        ]];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'symbol' => '$',
+                'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+            ],
+        ]];
     }
 
-    public function incorrectlyTypedCurrencyInfoProvider(): array
+    public static function incorrectlyTypedCurrencyInfoProvider(): \Iterator
     {
-        return [
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '$',
-                    'symbolPlacement' => 'hello world',
-                ],
-            ]],
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '$',
-                    'symbolPlacement' => 23,
-                ],
-            ]],
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => 23,
-                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-                ],
-            ]],
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '',
-                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-                ],
-            ]],
-            [[
-                'EUR' => [
-                    'numFractionalDigits' => 2,
-                    'symbol' => '€',
-                    'symbolPlacement' => Currency::AFTER_PLACEMENT,
-                ],
-                'USD' => [
-                    'numFractionalDigits' => 'hello world',
-                    'symbol' => '$',
-                    'symbolPlacement' => Currency::BEFORE_PLACEMENT,
-                ],
-            ]],
-        ];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '$',
+                'symbolPlacement' => 'hello world',
+            ],
+        ]];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '$',
+                'symbolPlacement' => 23,
+            ],
+        ]];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 2,
+                'symbol' => 23,
+                'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+            ],
+        ]];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '',
+                'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+            ],
+        ]];
+        yield [[
+            'EUR' => [
+                'numFractionalDigits' => 2,
+                'symbol' => '€',
+                'symbolPlacement' => Currency::AFTER_PLACEMENT,
+            ],
+            'USD' => [
+                'numFractionalDigits' => 'hello world',
+                'symbol' => '$',
+                'symbolPlacement' => Currency::BEFORE_PLACEMENT,
+            ],
+        ]];
     }
 }

@@ -24,17 +24,15 @@ class FromFractionalUnitsTests extends TestCase
         $this->assertInstanceOf(Money::class, $currency);
     }
 
-    public function validParamsProvider(): array
+    public static function validParamsProvider(): \Iterator
     {
-        return [
-            [3476, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [10000, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [1, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [1234567850, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [-3476, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [-10000, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [-1, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [-1234567850, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-        ];
+        yield [3476, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [10000, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [1, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [1234567850, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [-3476, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [-10000, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [-1, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [-1234567850, CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
     }
 }

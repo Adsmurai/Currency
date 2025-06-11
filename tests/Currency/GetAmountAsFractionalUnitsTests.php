@@ -40,45 +40,39 @@ class GetAmountAsFractionalUnitsTests extends TestCase
         $this->assertEquals($numFractionalUnits, $currency->getAmountAsFractionalUnits());
     }
 
-    public function stringParamsProvider(): array
+    public static function stringParamsProvider(): \Iterator
     {
-        return [
-            ['34.76', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476],
-            ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000],
-            ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1],
-            ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850],
-            ['34.76', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 34760],
-            ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000],
-            ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10],
-            ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500],
-        ];
+        yield ['34.76', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476];
+        yield ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000];
+        yield ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1];
+        yield ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850];
+        yield ['34.76', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 34760];
+        yield ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000];
+        yield ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10];
+        yield ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500];
     }
 
-    public function floatParamsProvider(): array
+    public static function floatParamsProvider(): \Iterator
     {
-        return [
-            [34.76, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476],
-            [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000],
-            [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1],
-            [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850],
-            [34.76, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 34760],
-            [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000],
-            [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10],
-            [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500],
-        ];
+        yield [34.76, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476];
+        yield [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000];
+        yield [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1];
+        yield [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850];
+        yield [34.76, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 34760];
+        yield [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000];
+        yield [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10];
+        yield [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500];
     }
 
-    public function fractionalUnitsProvider(): array
+    public static function fractionalUnitsProvider(): \Iterator
     {
-        return [
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 3476],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10000],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 1],
-            [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 1234567850],
-        ];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 3476];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 10000];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(2), 1234567850];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 3476];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10000];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 1];
+        yield [CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 1234567850];
     }
 }

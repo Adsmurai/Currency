@@ -25,17 +25,15 @@ class FromDecimalTests extends TestCase
         $this->assertInstanceOf(Money::class, $currency);
     }
 
-    public function validParamsProvider(): array
+    public static function validParamsProvider(): \Iterator
     {
-        return [
-            [Decimal::fromString('34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-            [Decimal::fromString('-12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()],
-        ];
+        yield [Decimal::fromString('34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('-34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('-100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('-0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [Decimal::fromString('-12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
     }
 }

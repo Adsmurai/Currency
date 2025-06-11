@@ -29,76 +29,71 @@ class EqualsTests extends TestCase
         $this->assertFalse($c2->equals($c1));
     }
 
-    public function equalCurrenciesProvider(): array
+    public static function equalCurrenciesProvider(): \Iterator
     {
-        return [
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromFractionalUnits(3475, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromDecimal(
-                    Decimal::fromString('34.75'),
-                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
-                ),
-            ],
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromFractionalUnits(3475, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromDecimal(
+                Decimal::fromString('34.75'),
+                CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
+            ),
         ];
     }
 
-    public function unequalCurrenciesProvider(): array
+    public static function unequalCurrenciesProvider(): \Iterator
     {
-        return [
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromString('34.76', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromFloat(34.76, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromFractionalUnits(3476, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
-                Money::fromDecimal(
-                    Decimal::fromString('34.76'),
-                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
-                ),
-            ],
-
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Money::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Money::fromFractionalUnits(
-                    3475,
-                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
-                ),
-            ],
-            [
-                Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
-                Money::fromDecimal(
-                    Decimal::fromString('34.75'),
-                    CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
-                ),
-            ],
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromString('34.76', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromFloat(34.76, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromFractionalUnits(3476, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
+            Money::fromDecimal(
+                Decimal::fromString('34.76'),
+                CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
+            ),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+            Money::fromFloat(34.75, CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+            Money::fromFractionalUnits(
+                3475,
+                CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
+            ),
+        ];
+        yield [
+            Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
+            Money::fromDecimal(
+                Decimal::fromString('34.75'),
+                CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
+            ),
         ];
     }
 }
