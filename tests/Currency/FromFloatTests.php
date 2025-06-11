@@ -32,7 +32,7 @@ class FromFloatTests extends TestCase
     public function test_with_infinite_amounts(float $amount, Currency $currencyType)
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Currency amounts must be finite');
+        $this->expectExceptionMessage('Currency amounts must be finite');
 
         Money::fromFloat($amount, $currencyType);
     }
@@ -44,7 +44,7 @@ class FromFloatTests extends TestCase
     public function test_with_nan_amount()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Currency amounts must be numbers');
+        $this->expectExceptionMessage('Currency amounts must be numbers');
 
         Money::fromFloat(\NAN, CurrencyTypeMocks::getCurrencyTypeDummyMock());
     }

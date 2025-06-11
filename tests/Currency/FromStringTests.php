@@ -106,7 +106,7 @@ class FromStringTests extends TestCase
     public function test_with_invalid_params(string $amount, Currency $currencyType)
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Invalid currency value');
+        $this->expectExceptionMessage('Invalid currency value');
 
         Money::fromString($amount, $currencyType);
     }

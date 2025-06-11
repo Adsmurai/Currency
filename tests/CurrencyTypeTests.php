@@ -52,7 +52,7 @@ class CurrencyTypeTests extends TestCase
     public function test__construct_with_negative_num_of_fractional_digits()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Invalid number of fractional digits');
+        $this->expectExceptionMessage('Invalid number of fractional digits');
 
         new Currency(
             self::EURO_ISO_CODE,
@@ -69,7 +69,7 @@ class CurrencyTypeTests extends TestCase
     public function test__construct_with_invalid_symbol_placement()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Invalid symbol placement');
+        $this->expectExceptionMessage('Invalid symbol placement');
 
         new Currency(
             self::EURO_ISO_CODE,
@@ -86,7 +86,7 @@ class CurrencyTypeTests extends TestCase
     public function test__construct_with_empty_symbol()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Empty symbol');
+        $this->expectExceptionMessage('Empty symbol');
 
         new Currency(
             self::EURO_ISO_CODE,
@@ -103,7 +103,7 @@ class CurrencyTypeTests extends TestCase
     public function test__construct_with_almost_empty_symbol()
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectDeprecationMessage('Empty symbol');
+        $this->expectExceptionMessage('Empty symbol');
 
         new Currency(
             self::EURO_ISO_CODE,
@@ -171,7 +171,7 @@ class CurrencyTypeTests extends TestCase
         );
 
         $this->expectException(\Adsmurai\Currency\Errors\InconsistentCurrenciesError::class);
-        $this->expectDeprecationMessage('Same ISO currency code but different currency settings');
+        $this->expectExceptionMessage('Same ISO currency code but different currency settings');
 
         $ct1->equals($ct2);
     }

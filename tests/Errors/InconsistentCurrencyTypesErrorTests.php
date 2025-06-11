@@ -35,7 +35,7 @@ class InconsistentCurrencyTypesErrorTests extends TestCase
         $ct1 = Mockery::mock(Currency::class);
 
         $this->expectException(\LogicException::class);
-        $this->expectDeprecationMessage('Trying to construct InconsistentCurrencyTypesError with exactly equal CurrencyType instances');
+        $this->expectExceptionMessage('Trying to construct InconsistentCurrencyTypesError with exactly equal CurrencyType instances');
 
         new InconsistentCurrenciesError($ct1, $ct1);
     }

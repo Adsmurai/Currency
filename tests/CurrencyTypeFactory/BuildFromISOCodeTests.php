@@ -58,7 +58,7 @@ class BuildFromISOCodeTests extends TestCase
     public function test_that_an_exception_is_thrown_when_we_try_to_build_a_not_defined_currency_type()
     {
         $this->expectException(\Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError::class);
-        $this->expectDeprecationMessage('Unsupported currency ISO code (USD)');
+        $this->expectExceptionMessage('Unsupported currency ISO code (USD)');
 
         $currencyTypeFactory = CurrencyFactory::fromDataArray(['EUR' => [
             'numFractionalDigits' => 2,
