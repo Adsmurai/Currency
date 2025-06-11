@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         bootstrap="./phpunit.php"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         verbose="true"
+         cacheDirectory="./storage/cache/"
+         executionOrder="random"
 >
+    <source>
+        <include>
+            <directory>./src/</directory>
+        </include>
+    </source>
     <testsuites>
         <testsuite name="adsmurai_currency/tests">
             <directory suffix=".php">./tests/</directory>
+            <exclude>./tests/Currency/CurrencyTypeMocks.php</exclude>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src/</directory>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true"/>
-        <log type="coverage-html" target="coverage" showUncoveredFiles="true"/>
-        <log type="coverage-clover" target="coverage.xml" showUncoveredFiles="true"/>
-    </logging>
 </phpunit>
