@@ -16,7 +16,7 @@ final class InconsistentCurrenciesError extends LogicException implements Curren
             );
         }
 
-        parent::__construct('Same ISO currency code but different currency settings', 0, null);
+        parent::__construct('Same ISO currency code but different currency settings');
     }
 
     /**

@@ -18,10 +18,6 @@ final class Money implements MoneyContract
     const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
     const INNER_FRACTIONAL_DIGITS = 8;
 
-    /**
-     * @param Decimal          $amount
-     * @param CurrencyContract $currency
-     */
     private function __construct(private readonly Decimal $amount, private readonly CurrencyContract $currency)
     {
     }
@@ -72,16 +68,9 @@ final class Money implements MoneyContract
         throw new InvalidArgumentException('Invalid currency value');
     }
 
-    /**
-     * @param CurrencyContract $currency
-     *
-     * @return string
-     */
     private static function getAmountPlusIsoCodePattern(CurrencyContract $currency): string
     {
-        $amountPlusIsoCodePattern = '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currency->getISOCode().'$/x';
-
-        return $amountPlusIsoCodePattern;
+        return '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$currency->getISOCode().'$/x';
     }
 
     private static function getAmountPlusSymbolPattern(CurrencyContract $currency): string
@@ -155,12 +144,6 @@ final class Money implements MoneyContract
         return $this->decorate($number, $currencyFormat);
     }
 
-    /**
-     * @param string               $number
-     * @param MoneyFormatInterface $currencyFormat
-     *
-     * @return string
-     */
     private function decorate(string $number, MoneyFormatInterface $currencyFormat): string
     {
         $separator = (MoneyFormat::DECORATION_WITH_SPACE === $currencyFormat->getDecorationSpace())

@@ -37,8 +37,6 @@ final class CurrencyFactory implements CurrencyFactoryContract
     }
 
     /**
-     * @param array $currenciesData
-     *
      * @throws InvalidCurrenciesDataError
      */
     private static function validateCurrenciesData(array $currenciesData)

@@ -13,8 +13,6 @@ interface Money
      *
      * This method returns the monetary amount as a string representing a decimal number. Its meant to be used in
      * fixed precision mathematical operations, like the ones that can be done with libraries like BCMath.
-     *
-     * @return Decimal
      */
     public function getAmountAsDecimal(): Decimal;
 
@@ -28,8 +26,6 @@ interface Money
      * This method returns the monetary amount measured in currency's minimum fractional units. Examples:
      *  - 171.43 €   ->  17143
      *  - 56.611 BD  ->  56611
-     *
-     * @return int
      */
     public function getAmountAsFractionalUnits(): int;
 
@@ -37,8 +33,6 @@ interface Money
      * Use this method to represent monetary amounts as strings.
      *
      * @param MoneyFormat $currencyFormat
-     *
-     * @return string
      */
     public function format(?MoneyFormat $currencyFormat = null): string;
 
@@ -46,9 +40,7 @@ interface Money
      * Use this method to compare currency values.
      * It will return false if the amount or the currency types don't match.
      *
-     * @param Money $currency
      *
-     * @return bool
      */
     public function equals(Money $currency): bool;
 }

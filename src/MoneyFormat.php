@@ -72,33 +72,21 @@ final class MoneyFormat implements MoneyFormatInterface
         );
     }
 
-    /**
-     * @return string
-     */
     public function getDecimalsSeparator(): string
     {
         return $this->decimalsSeparator;
     }
 
-    /**
-     * @return string
-     */
     public function getThousandsSeparator(): string
     {
         return $this->thousandsSeparator;
     }
 
-    /**
-     * @return int
-     */
     public function getExtraPrecision(): int
     {
         return $this->extraPrecision;
     }
 
-    /**
-     * @return int
-     */
     public function getDecorationType(): int
     {
         return $this->decorationType;
