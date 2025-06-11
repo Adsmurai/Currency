@@ -4,8 +4,8 @@ namespace Adsmurai\Currency\Contracts;
 
 interface Currency
 {
-    const BEFORE_PLACEMENT = 0;
-    const AFTER_PLACEMENT = 1;
+    public const BEFORE_PLACEMENT = 0;
+    public const AFTER_PLACEMENT = 1;
 
     public function getISOCode(): string;
 

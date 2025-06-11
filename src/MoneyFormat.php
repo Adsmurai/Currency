@@ -16,8 +16,7 @@ final class MoneyFormat implements MoneyFormatInterface
          * @var int
          */
         private readonly ?int $precision = null
-    )
-    {
+    ) {
     }
 
     public static function default(): MoneyFormatInterface

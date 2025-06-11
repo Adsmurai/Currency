@@ -11,7 +11,7 @@ use Adsmurai\Currency\Errors\UnsupportedCurrencyISOCodeError;
 
 final class CurrencyFactory implements CurrencyFactoryContract
 {
-    const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
+    public const DEFAULT_DATA_PATH = __DIR__.'/Data/CurrencyTypes.php';
 
     /** @var Currency[] */
     private array $currencies = [];

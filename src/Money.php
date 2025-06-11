@@ -14,9 +14,9 @@ use Litipk\BigNumbers\Errors\NaNInputError;
 
 final class Money implements MoneyContract
 {
-    const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9]\d*|\d)(\.\d+)?))';
-    const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
-    const INNER_FRACTIONAL_DIGITS = 8;
+    public const DECIMAL_NUMBER_REGEXP = '(?P<amount> 0*(([1-9]\d*|\d)(\.\d+)?))';
+    public const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
+    public const INNER_FRACTIONAL_DIGITS = 8;
 
     private function __construct(private readonly Decimal $amount, private readonly CurrencyContract $currency)
     {
@@ -165,8 +165,8 @@ final class Money implements MoneyContract
     public function equals(MoneyContract $currency): bool
     {
         return $currency === $this || (
-                $this->amount->equals($currency->getAmountAsDecimal()) &&
+            $this->amount->equals($currency->getAmountAsDecimal()) &&
                 $this->currency->equals($currency->getCurrency())
-            );
+        );
     }
 }

@@ -10,17 +10,17 @@ use PHPUnit\Framework\TestCase;
 
 class CurrencyTypeTests extends TestCase
 {
-    const EURO_ISO_CODE = 'EUR';
-    const EURO_NAME = 'euro';
-    const EURO_SYMBOL = '€';
-    const EURO_NUM_DIGITS = 2;
-    const EURO_SYMBOL_PLACEMENT = CurrencyTypeInterface::AFTER_PLACEMENT;
+    public const EURO_ISO_CODE = 'EUR';
+    public const EURO_NAME = 'euro';
+    public const EURO_SYMBOL = '€';
+    public const EURO_NUM_DIGITS = 2;
+    public const EURO_SYMBOL_PLACEMENT = CurrencyTypeInterface::AFTER_PLACEMENT;
 
-    const USD_ISO_CODE = 'USD';
-    const USD_NAME = 'dollar';
-    const USD_SYMBOL = '$';
-    const USD_NUM_DIGITS = 2;
-    const USD_SYMBOL_PLACEMENT = CurrencyTypeInterface::BEFORE_PLACEMENT;
+    public const USD_ISO_CODE = 'USD';
+    public const USD_NAME = 'dollar';
+    public const USD_SYMBOL = '$';
+    public const USD_NUM_DIGITS = 2;
+    public const USD_SYMBOL_PLACEMENT = CurrencyTypeInterface::BEFORE_PLACEMENT;
 
     public function test___construct_with_valid_params(): void
     {
