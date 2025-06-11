@@ -72,9 +72,7 @@ class BuildFromISOCodeTests extends TestCase
     public static function commonCurrenciesProvider(): array
     {
         return \array_map(
-            function (string $ISOCode) {
-                return [$ISOCode];
-            },
+            fn(string $ISOCode) => [$ISOCode],
             \array_keys(self::getCurrenciesData())
         );
     }
