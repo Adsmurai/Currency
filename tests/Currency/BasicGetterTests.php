@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Money;
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
 use PHPUnit\Framework\TestCase;
 
 class BasicGetterTests extends TestCase
@@ -16,14 +16,12 @@ class BasicGetterTests extends TestCase
      */
     public function test_basic_getters(): void
     {
-        // @todo: Improve the test to decouple from Decimal. It requires refactoring Decimal.
-
-        $amount = Decimal::fromString('34.56');
+        $amount = BigDecimal::of('34.56');
         $currencyType = CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType();
 
         $currency = Money::fromDecimal($amount, $currencyType);
 
-        $this->assertSame($amount, $currency->getAmountAsDecimal());
+        $this->assertTrue($amount->isEqualTo($currency->getAmountAsDecimal()));
         $this->assertSame($currencyType, $currency->getCurrency());
     }
 }

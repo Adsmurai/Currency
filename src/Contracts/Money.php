@@ -2,7 +2,7 @@
 
 namespace Adsmurai\Currency\Contracts;
 
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
 
 interface Money
 {
@@ -14,7 +14,7 @@ interface Money
      * This method returns the monetary amount as a string representing a decimal number. Its meant to be used in
      * fixed precision mathematical operations, like the ones that can be done with libraries like BCMath.
      */
-    public function getAmountAsDecimal(): Decimal;
+    public function getAmountAsDecimal(): BigDecimal;
 
     /**
      * WARNING: This method is not meant to be used in currency formatting code nor currency representation code.

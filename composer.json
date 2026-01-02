@@ -17,7 +17,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=8.1",
-        "litipk/php-bignumbers": "^0.8"
+        "brick/math": "^0.12"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",

@@ -7,10 +7,9 @@ namespace Adsmurai\Currency;
 use Adsmurai\Currency\Contracts\Money as MoneyContract;
 use Adsmurai\Currency\Contracts\MoneyFormat as MoneyFormatInterface;
 use Adsmurai\Currency\Contracts\Currency as CurrencyContract;
+use Brick\Math\BigDecimal;
+use Brick\Math\RoundingMode;
 use InvalidArgumentException;
-use Litipk\BigNumbers\Decimal;
-use Litipk\BigNumbers\Errors\InfiniteInputError;
-use Litipk\BigNumbers\Errors\NaNInputError;
 
 final class Money implements MoneyContract
 {
@@ -18,30 +17,33 @@ final class Money implements MoneyContract
     public const SIMPLE_CURRENCY_PATTERN = '/^'.self::DECIMAL_NUMBER_REGEXP.'$/x';
     public const INNER_FRACTIONAL_DIGITS = 8;
 
-    private function __construct(private readonly Decimal $amount, private readonly CurrencyContract $currency)
+    private function __construct(private readonly BigDecimal $amount, private readonly CurrencyContract $currency)
     {
     }
 
     public static function fromFloat(float $amount, CurrencyContract $currency): Money
     {
-        try {
-            return new self(
-                Decimal::fromFloat($amount, self::INNER_FRACTIONAL_DIGITS),
-                $currency
-            );
-        } catch (InfiniteInputError $e) {
-            throw new InvalidArgumentException('Currency amounts must be finite', 0, $e);
-        } catch (NaNInputError $e) {
-            throw new InvalidArgumentException('Currency amounts must be numbers', 0, $e);
+        if (!is_finite($amount)) {
+            throw new InvalidArgumentException('Currency amounts must be finite');
         }
+
+        if (is_nan($amount)) {
+            throw new InvalidArgumentException('Currency amounts must be numbers');
+        }
+
+        return new self(
+            BigDecimal::of($amount)->toScale(self::INNER_FRACTIONAL_DIGITS, RoundingMode::HALF_UP),
+            $currency
+        );
     }
 
     public static function fromFractionalUnits(int $amount, CurrencyContract $currency): Money
     {
-        $decimalAmount = Decimal::fromInteger($amount)
-            ->div(
-                Decimal::fromInteger(10 ** $currency->getNumFractionalDigits()),
-                self::INNER_FRACTIONAL_DIGITS
+        $decimalAmount = BigDecimal::of($amount)
+            ->dividedBy(
+                BigDecimal::of(10 ** $currency->getNumFractionalDigits()),
+                self::INNER_FRACTIONAL_DIGITS,
+                RoundingMode::HALF_UP
             );
 
         return new self($decimalAmount, $currency);
@@ -55,14 +57,14 @@ final class Money implements MoneyContract
         );
     }
 
-    private static function extractNumericAmount(string $amount, CurrencyContract $currency): Decimal
+    private static function extractNumericAmount(string $amount, CurrencyContract $currency): BigDecimal
     {
         if (
             1 === \preg_match(self::SIMPLE_CURRENCY_PATTERN, $amount, $matches) ||
             1 === \preg_match(self::getAmountPlusIsoCodePattern($currency), $amount, $matches) ||
             1 === \preg_match(self::getAmountPlusSymbolPattern($currency), $amount, $matches)
         ) {
-            return Decimal::fromString($matches['amount'], self::INNER_FRACTIONAL_DIGITS);
+            return BigDecimal::of($matches['amount'])->toScale(self::INNER_FRACTIONAL_DIGITS, RoundingMode::HALF_UP);
         }
 
         throw new InvalidArgumentException('Invalid currency value');
@@ -82,10 +84,10 @@ final class Money implements MoneyContract
             : '/^'.self::DECIMAL_NUMBER_REGEXP.'\s*'.$escapedSymbol.'$/x';
     }
 
-    public static function fromDecimal(Decimal $amount, CurrencyContract $currency): Money
+    public static function fromDecimal(BigDecimal $amount, CurrencyContract $currency): Money
     {
         return new self(
-            Decimal::fromDecimal($amount, self::INNER_FRACTIONAL_DIGITS),
+            $amount->toScale(self::INNER_FRACTIONAL_DIGITS, RoundingMode::HALF_UP),
             $currency
         );
     }
@@ -98,7 +100,7 @@ final class Money implements MoneyContract
     /**
      * {@inheritdoc}
      */
-    public function getAmountAsDecimal(): Decimal
+    public function getAmountAsDecimal(): BigDecimal
     {
         return $this->amount;
     }
@@ -109,11 +111,11 @@ final class Money implements MoneyContract
     public function getAmountAsFractionalUnits(): int
     {
         return $this->amount
-            ->mul(
-                Decimal::fromInteger(10 ** $this->currency->getNumFractionalDigits()),
-                self::INNER_FRACTIONAL_DIGITS
+            ->multipliedBy(
+                BigDecimal::of(10 ** $this->currency->getNumFractionalDigits())
             )
-            ->asInteger();
+            ->toScale(self::INNER_FRACTIONAL_DIGITS, RoundingMode::HALF_UP)
+            ->toInt();
     }
 
     /**
@@ -130,12 +132,12 @@ final class Money implements MoneyContract
             $nDecimals = $this->currency->getNumFractionalDigits() + $currencyFormat->getExtraPrecision();
         }
 
-        $amount = Decimal::fromDecimal($this->amount, $nDecimals);
+        $amount = $this->amount->toScale($nDecimals, RoundingMode::HALF_UP);
 
         $number = ('' === $currencyFormat->getThousandsSeparator())
             ? \str_replace('.', $currencyFormat->getDecimalsSeparator(), $amount->__toString())  // This is safer!
             : \number_format(
-                $amount->asFloat(),
+                $amount->toFloat(),
                 $nDecimals,
                 $currencyFormat->getDecimalsSeparator(),
                 $currencyFormat->getThousandsSeparator()
@@ -165,7 +167,7 @@ final class Money implements MoneyContract
     public function equals(MoneyContract $currency): bool
     {
         return $currency === $this || (
-            $this->amount->equals($currency->getAmountAsDecimal()) &&
+            $this->amount->isEqualTo($currency->getAmountAsDecimal()) &&
                 $this->currency->equals($currency->getCurrency())
         );
     }
