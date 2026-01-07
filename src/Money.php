@@ -23,7 +23,7 @@ final class Money implements MoneyContract
 
     public static function fromFloat(float $amount, CurrencyContract $currency): Money
     {
-        if (!is_finite($amount)) {
+        if (!is_finite($amount) && !is_nan($amount)) {
             throw new InvalidArgumentException('Currency amounts must be finite');
         }
 
