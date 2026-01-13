@@ -114,7 +114,7 @@ final class Money implements MoneyContract
             ->multipliedBy(
                 BigDecimal::of(10 ** $this->currency->getNumFractionalDigits())
             )
-            ->toScale(self::INNER_FRACTIONAL_DIGITS, RoundingMode::HALF_UP)
+            ->toScale(0, RoundingMode::DOWN)
             ->toInt();
     }
 

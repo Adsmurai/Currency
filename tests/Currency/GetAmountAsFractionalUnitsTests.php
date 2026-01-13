@@ -6,14 +6,15 @@ namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class GetAmountAsFractionalUnitsTests extends TestCase
 {
     /**
-     * @dataProvider stringParamsProvider
-     * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
+     * @covers \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
+    #[DataProvider('stringParamsProvider')]
     public function test_from_string(string $amount, Currency $currencyType, int $numFractionalUnits): void
     {
         $currency = Money::fromString($amount, $currencyType);
@@ -21,9 +22,9 @@ class GetAmountAsFractionalUnitsTests extends TestCase
     }
 
     /**
-     * @dataProvider floatParamsProvider
-     * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
+     * @covers \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
+    #[DataProvider('floatParamsProvider')]
     public function test_from_float(float $amount, Currency $currencyType, int $numFractionalUnits): void
     {
         $currency = Money::fromFloat($amount, $currencyType);
@@ -31,9 +32,9 @@ class GetAmountAsFractionalUnitsTests extends TestCase
     }
 
     /**
-     * @dataProvider fractionalUnitsProvider
-     * @covers       \Adsmurai\Currency\Money::getAmountAsFractionalUnits
+     * @covers \Adsmurai\Currency\Money::getAmountAsFractionalUnits
      */
+    #[DataProvider('fractionalUnitsProvider')]
     public function test_from_fractional_units(Currency $currencyType, int $numFractionalUnits): void
     {
         $currency = Money::fromFractionalUnits($numFractionalUnits, $currencyType);
@@ -50,6 +51,11 @@ class GetAmountAsFractionalUnitsTests extends TestCase
         yield ['100', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000];
         yield ['0.01', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10];
         yield ['12345678.50', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500];
+        // Zero decimal currencies (e.g., CLP) with decimal values should truncate
+        yield ['1000', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 1000];
+        yield ['1000.5', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 1000];
+        yield ['1000.9', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 1000];
+        yield ['999.99', CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 999];
     }
 
     public static function floatParamsProvider(): \Iterator
@@ -62,6 +68,11 @@ class GetAmountAsFractionalUnitsTests extends TestCase
         yield [100, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 100000];
         yield [0.01, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 10];
         yield [12345678.50, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(3), 12345678500];
+        // Zero decimal currencies (e.g., CLP) with decimal values should truncate
+        yield [1000.0, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 1000];
+        yield [1000.5, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 1000];
+        yield [1000.9, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 1000];
+        yield [999.99, CurrencyTypeMocks::getNDecimalDigitsCurrencyType(0), 999];
     }
 
     public static function fractionalUnitsProvider(): \Iterator

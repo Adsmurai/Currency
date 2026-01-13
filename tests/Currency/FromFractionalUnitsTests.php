@@ -7,15 +7,16 @@ namespace Adsmurai\Currency\Tests\Currency;
 use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FromFractionalUnitsTests extends TestCase
 {
     /**
-     * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromFractionalUnits
-     * @covers       \Adsmurai\Currency\Money::__construct
+     * @covers \Adsmurai\Currency\Money::fromFractionalUnits
+     * @covers \Adsmurai\Currency\Money::__construct
      */
+    #[DataProvider('validParamsProvider')]
     public function test_with_valid_params(int $amount, Currency $currencyType): void
     {
         $currency = Money::fromFractionalUnits($amount, $currencyType);

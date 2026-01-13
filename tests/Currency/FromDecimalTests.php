@@ -8,15 +8,16 @@ use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
 use Brick\Math\BigDecimal;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FromDecimalTests extends TestCase
 {
     /**
-     * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromDecimal
-     * @covers       \Adsmurai\Currency\Money::__construct
+     * @covers \Adsmurai\Currency\Money::fromDecimal
+     * @covers \Adsmurai\Currency\Money::__construct
      */
+    #[DataProvider('validParamsProvider')]
     public function test_with_valid_params(BigDecimal $amount, Currency $currencyType): void
     {
         $currency = Money::fromDecimal($amount, $currencyType);

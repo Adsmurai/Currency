@@ -7,15 +7,16 @@ namespace Adsmurai\Currency\Tests\Currency;
 use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FromFloatTests extends TestCase
 {
     /**
-     * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromFloat
-     * @covers       \Adsmurai\Currency\Money::__construct
+     * @covers \Adsmurai\Currency\Money::fromFloat
+     * @covers \Adsmurai\Currency\Money::__construct
      */
+    #[DataProvider('validParamsProvider')]
     public function test_with_valid_params(float $amount, Currency $currencyType): void
     {
         $currency = Money::fromFloat($amount, $currencyType);
@@ -25,10 +26,10 @@ class FromFloatTests extends TestCase
     }
 
     /**
-     * @dataProvider infiniteParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromFloat
-     * @covers       \Adsmurai\Currency\Money::__construct
+     * @covers \Adsmurai\Currency\Money::fromFloat
+     * @covers \Adsmurai\Currency\Money::__construct
      */
+    #[DataProvider('infiniteParamsProvider')]
     public function test_with_infinite_amounts(float $amount, Currency $currencyType): void
     {
         $this->expectException(\InvalidArgumentException::class);

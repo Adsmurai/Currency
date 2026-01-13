@@ -7,22 +7,19 @@ namespace Adsmurai\Currency\Tests\Currency;
 use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Money;
 use Brick\Math\BigDecimal;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class EqualsTests extends TestCase
 {
-    /**
-     * @dataProvider equalCurrenciesProvider
-     */
+    #[DataProvider('equalCurrenciesProvider')]
     public function test_equality(CurrencyInterface $c1, CurrencyInterface $c2): void
     {
         $this->assertTrue($c1->equals($c2));
         $this->assertTrue($c2->equals($c1));
     }
 
-    /**
-     * @dataProvider unequalCurrenciesProvider
-     */
+    #[DataProvider('unequalCurrenciesProvider')]
     public function test_inequality(CurrencyInterface $c1, CurrencyInterface $c2): void
     {
         $this->assertFalse($c1->equals($c2));

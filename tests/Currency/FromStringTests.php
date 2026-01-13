@@ -7,18 +7,19 @@ namespace Adsmurai\Currency\Tests\Currency;
 use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FromStringTests extends TestCase
 {
     /**
-     * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromString
-     * @covers       \Adsmurai\Currency\Money::extractNumericAmount
-     * @covers       \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
-     * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
-     * @covers       \Adsmurai\Currency\Money::__construct
+     * @covers \Adsmurai\Currency\Money::fromString
+     * @covers \Adsmurai\Currency\Money::extractNumericAmount
+     * @covers \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
+     * @covers \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
+     * @covers \Adsmurai\Currency\Money::__construct
      */
+    #[DataProvider('validParamsProvider')]
     public function test_with_valid_params(string $amount, Currency $currencyType): void
     {
         $currency = Money::fromString($amount, $currencyType);
@@ -83,12 +84,12 @@ class FromStringTests extends TestCase
     }
 
     /**
-     * @dataProvider invalidParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromString
-     * @covers       \Adsmurai\Currency\Money::extractNumericAmount
-     * @covers       \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
-     * @covers       \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
+     * @covers \Adsmurai\Currency\Money::fromString
+     * @covers \Adsmurai\Currency\Money::extractNumericAmount
+     * @covers \Adsmurai\Currency\Money::getAmountPlusIsoCodePattern
+     * @covers \Adsmurai\Currency\Money::getAmountPlusSymbolPattern
      */
+    #[DataProvider('invalidParamsProvider')]
     public function test_with_invalid_params(string $amount, Currency $currencyType): void
     {
         $this->expectException(\InvalidArgumentException::class);
