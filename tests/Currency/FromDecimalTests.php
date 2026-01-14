@@ -7,17 +7,18 @@ namespace Adsmurai\Currency\Tests\Currency;
 use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FromDecimalTests extends TestCase
 {
     /**
-     * @dataProvider validParamsProvider
-     * @covers       \Adsmurai\Currency\Money::fromDecimal
-     * @covers       \Adsmurai\Currency\Money::__construct
+     * @covers \Adsmurai\Currency\Money::fromDecimal
+     * @covers \Adsmurai\Currency\Money::__construct
      */
-    public function test_with_valid_params(Decimal $amount, Currency $currencyType): void
+    #[DataProvider('validParamsProvider')]
+    public function test_with_valid_params(BigDecimal $amount, Currency $currencyType): void
     {
         $currency = Money::fromDecimal($amount, $currencyType);
 
@@ -27,13 +28,13 @@ class FromDecimalTests extends TestCase
 
     public static function validParamsProvider(): \Iterator
     {
-        yield [Decimal::fromString('34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('-34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('-100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('-0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
-        yield [Decimal::fromString('-12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('-34.76'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('-100'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('-0.01'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
+        yield [BigDecimal::of('-12345678.50'), CurrencyTypeMocks::getTwoDecimalDigitsCurrencyType()];
     }
 }

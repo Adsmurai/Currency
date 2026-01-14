@@ -2,7 +2,7 @@
 
 namespace Adsmurai\Currency\Contracts;
 
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
 
 interface MoneyFactory
 {
@@ -12,5 +12,5 @@ interface MoneyFactory
 
     public function buildFromString(string $amount): Money;
 
-    public function buildFromDecimal(Decimal $amount): Money;
+    public function buildFromDecimal(BigDecimal $amount): Money;
 }

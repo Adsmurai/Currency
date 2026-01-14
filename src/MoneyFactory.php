@@ -7,7 +7,7 @@ namespace Adsmurai\Currency;
 use Adsmurai\Currency\Contracts\Money as MoneyContract;
 use Adsmurai\Currency\Contracts\MoneyFactory as MoneyFactoryContract;
 use Adsmurai\Currency\Contracts\Currency as CurrencyContract;
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
 
 final class MoneyFactory implements MoneyFactoryContract
 {
@@ -30,7 +30,7 @@ final class MoneyFactory implements MoneyFactoryContract
         return Money::fromString($amount, $this->currency);
     }
 
-    public function buildFromDecimal(Decimal $amount): MoneyContract
+    public function buildFromDecimal(BigDecimal $amount): MoneyContract
     {
         return Money::fromDecimal($amount, $this->currency);
     }

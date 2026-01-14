@@ -6,14 +6,15 @@ namespace Adsmurai\Currency\Tests\CurrencyTypeFactory;
 
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\CurrencyFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class BuildFromISOCodeTests extends TestCase
 {
     /**
-     * @dataProvider commonCurrenciesProvider
-     * @covers       \Adsmurai\Currency\CurrencyFactory
+     * @covers \Adsmurai\Currency\CurrencyFactory
      */
+    #[DataProvider('commonCurrenciesProvider')]
     public function test_with_common_currencies(string $ISOCode): void
     {
         /** @var array $currencyData */
@@ -38,9 +39,9 @@ class BuildFromISOCodeTests extends TestCase
     }
 
     /**
-     * @dataProvider commonCurrenciesProvider
-     * @covers       \Adsmurai\Currency\CurrencyFactory
+     * @covers \Adsmurai\Currency\CurrencyFactory
      */
+    #[DataProvider('commonCurrenciesProvider')]
     public function test_that_there_are_no_multiple_instances_for_same_currency_type(string $ISOCode): void
     {
         $currencyTypeFactory = CurrencyFactory::fromDataPath();

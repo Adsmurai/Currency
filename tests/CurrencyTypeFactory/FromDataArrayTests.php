@@ -6,6 +6,7 @@ namespace Adsmurai\Currency\Tests\CurrencyTypeFactory;
 
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\CurrencyFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FromDataArrayTests extends TestCase
@@ -46,10 +47,10 @@ class FromDataArrayTests extends TestCase
     }
 
     /**
-     * @dataProvider missingCurrencyInfoProvider
-     * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
-     * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
+     * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray
+     * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      */
+    #[DataProvider('missingCurrencyInfoProvider')]
     public function test_with_missing_currency_data(array $incompleteCurrencyInfo): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);
@@ -58,10 +59,10 @@ class FromDataArrayTests extends TestCase
     }
 
     /**
-     * @dataProvider incorrectlyTypedCurrencyInfoProvider
-     * @covers       \Adsmurai\Currency\CurrencyFactory::fromDataArray
-     * @covers       \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
+     * @covers \Adsmurai\Currency\CurrencyFactory::fromDataArray
+     * @covers \Adsmurai\Currency\CurrencyFactory::validateCurrenciesData
      */
+    #[DataProvider('incorrectlyTypedCurrencyInfoProvider')]
     public function test_with_incorrectly_typed_currency_data(array $invalidCurrencyInfo): void
     {
         $this->expectException(\Adsmurai\Currency\Errors\InvalidCurrenciesDataError::class);

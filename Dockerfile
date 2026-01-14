@@ -1,15 +1,22 @@
-FROM ubuntu:latest
+FROM php:8.4-cli
 
-ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y \
+    curl \
+    libxml2-dev \
+    libzip-dev \
+    libonig-dev \
+    unzip
 
-RUN apt-get update
-RUN apt-get install curl php php-xml php-bcmath php-mbstring php-xdebug php-zip -y
+RUN docker-php-ext-install \
+    xml \
+    bcmath \
+    mbstring \
+    zip
+
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN curl -sS https://getcomposer.org/installer | php \
-		&& mv composer.phar /usr/local/bin/ \
-		&& ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod +x /usr/local/bin/composer
 
-COPY . /app
 WORKDIR /app
-
-RUN composer install

@@ -8,7 +8,7 @@ use Adsmurai\Currency\Contracts\Money;
 use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\MoneyFactory;
 use Adsmurai\Currency\CurrencyFactory;
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
 use PHPUnit\Framework\TestCase;
 
 class CurrencyFactoryTests extends TestCase
@@ -68,7 +68,7 @@ class CurrencyFactoryTests extends TestCase
         $currencyType = $this->getCurrencyType();
         $currencyFactory = new MoneyFactory($currencyType);
 
-        $currency = $currencyFactory->buildFromDecimal(Decimal::fromFloat(1.0));
+        $currency = $currencyFactory->buildFromDecimal(BigDecimal::of(1.0));
 
         $this->assertInstanceOf(Money::class, $currency);
         $this->assertSame($currencyType, $currency->getCurrency());

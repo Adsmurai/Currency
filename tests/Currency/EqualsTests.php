@@ -6,23 +6,20 @@ namespace Adsmurai\Currency\Tests\Currency;
 
 use Adsmurai\Currency\Contracts\Money as CurrencyInterface;
 use Adsmurai\Currency\Money;
-use Litipk\BigNumbers\Decimal;
+use Brick\Math\BigDecimal;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class EqualsTests extends TestCase
 {
-    /**
-     * @dataProvider equalCurrenciesProvider
-     */
+    #[DataProvider('equalCurrenciesProvider')]
     public function test_equality(CurrencyInterface $c1, CurrencyInterface $c2): void
     {
         $this->assertTrue($c1->equals($c2));
         $this->assertTrue($c2->equals($c1));
     }
 
-    /**
-     * @dataProvider unequalCurrenciesProvider
-     */
+    #[DataProvider('unequalCurrenciesProvider')]
     public function test_inequality(CurrencyInterface $c1, CurrencyInterface $c2): void
     {
         $this->assertFalse($c1->equals($c2));
@@ -46,7 +43,7 @@ class EqualsTests extends TestCase
         yield [
             Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             Money::fromDecimal(
-                Decimal::fromString('34.75'),
+                BigDecimal::of('34.75'),
                 CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
             ),
         ];
@@ -69,7 +66,7 @@ class EqualsTests extends TestCase
         yield [
             Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()),
             Money::fromDecimal(
-                Decimal::fromString('34.76'),
+                BigDecimal::of('34.76'),
                 CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType()
             ),
         ];
@@ -91,7 +88,7 @@ class EqualsTests extends TestCase
         yield [
             Money::fromString('34.75', CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)),
             Money::fromDecimal(
-                Decimal::fromString('34.75'),
+                BigDecimal::of('34.75'),
                 CurrencyTypeMocks::getComparableTwoDecimalDigitsCurrencyType(false)
             ),
         ];

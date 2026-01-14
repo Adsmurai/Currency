@@ -8,15 +8,16 @@ use Adsmurai\Currency\Contracts\Currency;
 use Adsmurai\Currency\Money;
 use Adsmurai\Currency\MoneyFormat;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FormatTests extends TestCase
 {
     /**
-     * @dataProvider simpleParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('simpleParamsProvider')]
     public function test_format_without_custom_parameters(
         string $amount,
         Currency $currencyType,
@@ -27,10 +28,10 @@ class FormatTests extends TestCase
     }
 
     /**
-     * @dataProvider customizedParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('customizedParamsProvider')]
     public function test_format_with_custom_separators(
         string $amount,
         Currency $currencyType,
@@ -44,10 +45,10 @@ class FormatTests extends TestCase
     }
 
     /**
-     * @dataProvider extraPrecisionParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('extraPrecisionParamsProvider')]
     public function test_format_with_extra_precision(
         string $amount,
         Currency $currencyType,
@@ -60,10 +61,10 @@ class FormatTests extends TestCase
     }
 
     /**
-     * @dataProvider precisionParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('precisionParamsProvider')]
     public function test_format_with_custom_precision(
         string $amount,
         Currency $currencyType,
@@ -76,10 +77,10 @@ class FormatTests extends TestCase
     }
 
     /**
-     * @dataProvider noDecorationParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('noDecorationParamsProvider')]
     public function test_format_with_no_decoration(
         string $amount,
         Currency $currencyType,
@@ -95,10 +96,10 @@ class FormatTests extends TestCase
     }
 
     /**
-     * @dataProvider isoCodeDecorationParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('isoCodeDecorationParamsProvider')]
     public function test_format_with_decoration_iso_code(
         string $amount,
         Currency $currencyType,
@@ -114,10 +115,10 @@ class FormatTests extends TestCase
     }
 
     /**
-     * @dataProvider spaceDecorationParamsProvider
-     * @covers       \Adsmurai\Currency\Money::format
-     * @covers       \Adsmurai\Currency\Money::decorate
+     * @covers \Adsmurai\Currency\Money::format
+     * @covers \Adsmurai\Currency\Money::decorate
      */
+    #[DataProvider('spaceDecorationParamsProvider')]
     public function test_format_with_separator(
         string $amount,
         Currency $currencyType,
